@@ -20,10 +20,13 @@ export const DataProvider = ({ children }) => {
                 }
                 const rawData = await response.json();
 
-                console.log("[ Onloaded Data ] - ", rawData)
+                console.log("[ JSON Data - Onloaded ]", rawData)
 
+                // =============================
                 // ====== add more fields ======
-                const updateRawData = Object.entries(rawData).reduce(
+                // =============================
+
+                const addFields = Object.entries(rawData).reduce(
                     (acc, [key, value], index) => {
                         acc[key] = value.map((item, i) => ({
                             id: `${index + 1}`,
@@ -36,8 +39,43 @@ export const DataProvider = ({ children }) => {
                     }, {}
                 )
 
+                console.log("[ JSON Data - Added Fields ] - ", addFields)
+
+                // ==========================
+                // ====== updateByRank ======
+                // ==========================
+
+                const updateByRank = (data) => {
+                    const allCounts = Object.values(data).flatMap(entries => entries.map(entry => parseInt(entry.count)))
+
+                    const topCount = [...new Set(allCounts)].sort((a, b) => b - a).slice(0, 3)
+
+                    const rankMap = {
+                        [topCount[0]]: "firstPlace",
+                        [topCount[1]]: "secondPlace",
+                        [topCount[2]]: "thirdPlace"
+                    }
+
+                    const rankedData = {}
+
+                    Object.entries(data).forEach(([key, value]) => {
+                        rankedData[key] = value.map(entry => {
+                            const countValue = parseInt(entry.count)
+                            const rank = rankMap[countValue] || ""
+                            return {
+                                ...entry,
+                                rank
+                            }
+                        })
+                    })
+
+                    console.log("[ JSON Data - Rank Assignment ] - ", rankedData)
+
+                    return rankedData
+                }
+
                 if (isMounted) {
-                    setData(updateRawData)
+                    setData(updateByRank(addFields))
                 }
 
             } catch (error) {
@@ -57,8 +95,6 @@ export const DataProvider = ({ children }) => {
             isMounted = false
         }
     },[])
-
-    console.log("[ Added Fields to Raw Data ] - ", data)
 
     return (
         <DataContext.Provider
