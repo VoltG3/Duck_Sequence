@@ -2,7 +2,7 @@ import { GlobalStyles } from "./GlobalStyles"
 import SectionHeader from "./sections/section.header"
 import SectionBody from "./sections/section.body"
 import SectionFooter from "./sections/section.footer"
-import {DataProvider} from "./context/DataProvider";
+import {DataProvider} from "./context/DataProvider"
 
 function App() {
 

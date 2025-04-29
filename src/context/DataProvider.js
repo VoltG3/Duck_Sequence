@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from "react"
+import { createContext, useEffect, useState } from "react"
 
 const DataContext = createContext({
     data: {},
@@ -8,6 +8,11 @@ const DataContext = createContext({
 export const DataProvider = ({ children }) => {
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
+    const [logs, setLogs] = useState({
+        onloaded: [],
+        newFields: [],
+        rankAssignment: []
+    })
 
     useEffect(() => {
         let isMounted = true
@@ -18,28 +23,38 @@ export const DataProvider = ({ children }) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`)
                 }
-                const rawData = await response.json();
+                const rawData = await response.json()
 
-                console.log("[ JSON Data - Onloaded ]", rawData)
+                if (isMounted) {    
+                    setLogs(prevLogs => ({
+                            ...prevLogs,
+                        onloaded: [...prevLogs.onloaded, rawData]
+                    }))
+                }
 
                 // =============================
                 // ====== add more fields ======
                 // =============================
 
-                const addFields = Object.entries(rawData).reduce(
+                const newFields = Object.entries(rawData).reduce(
                     (acc, [key, value], index) => {
                         acc[key] = value.map((item, i) => ({
                             id: `${index + 1}`,
                             name: item.name,
-                            image: "",
                             count: item.count,
                             rank: ""
                         }))
+
                         return acc
                     }, {}
                 )
 
-                console.log("[ JSON Data - Added Fields ] - ", addFields)
+                if (isMounted) {
+                    setLogs(prevLogs => ({
+                        ...prevLogs,
+                        newFields: [...prevLogs.newFields, newFields]
+                    }))
+                }
 
                 // ==========================
                 // ====== updateByRank ======
@@ -69,13 +84,18 @@ export const DataProvider = ({ children }) => {
                         })
                     })
 
-                    console.log("[ JSON Data - Rank Assignment ] - ", rankedData)
+                    if (isMounted) {
+                        setLogs(prevLogs => ({
+                            ...prevLogs,
+                            rankAssignment: [...prevLogs.rankAssignment, rankedData]
+                        }))
+                    }
 
                     return rankedData
                 }
 
                 if (isMounted) {
-                    setData(updateByRank(addFields))
+                    setData(updateByRank(newFields))
                 }
 
             } catch (error) {
@@ -88,13 +108,17 @@ export const DataProvider = ({ children }) => {
         }
 
         loadData().catch(error => {
-            console.error("Unexpected error:", error);
+            console.error("Unexpected error:", error)
         })
 
         return () => {
             isMounted = false
         }
     },[])
+
+    console.log("[ JSON Data - Onloaded        ] - ", logs.onloaded)
+    console.log("[ JSON Data - Added Fields    ] - ", logs.newFields)
+    console.log("[ JSON Data - Rank Assignment ] - ", logs.rankAssignment)
 
     return (
         <DataContext.Provider
