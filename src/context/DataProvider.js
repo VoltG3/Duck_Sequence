@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 
-const DataContext = createContext({
+export const DataContext = createContext({
     data: {},
     loading: true
 })

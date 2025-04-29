@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { useContext } from "react"
+import { DataContext } from "../context/DataProvider"
 
 const StyledSectionLosers = styled.div`
     display: flex;
@@ -8,13 +10,30 @@ const StyledSectionLosers = styled.div`
     width: 100%;
     height: auto;
     border: 1px solid var(--border--color);
+    
+    & div { border: 1px solid red; }
 `
 
 export default function SectionLosers() {
+    const { data, loading } = useContext(DataContext)
+
+    if (loading) return <p>Loading...</p>
 
     return (
         <StyledSectionLosers>
-            <p>Losers</p>
+            <div>
+                {Object.entries(data).map(([key, records]) => (
+                    <div key={key}>
+                        {records.map((item, index) =>
+                            item.rank === "" ? (
+                                <p key={index}>
+                                    {item.name} – Count: {item.count} – Rank: {item.rank}
+                                </p>
+                            ) : null
+                        )}
+                    </div>
+                ))}
+            </div>
         </StyledSectionLosers>
     )
 }
