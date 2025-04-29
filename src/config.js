@@ -11,6 +11,9 @@ const config = {
         URL_person_08: process.env.PUBLIC_URL + "/assets/img/person_08.png",
         URL_person_09: process.env.PUBLIC_URL + "/assets/img/person_09.png",
         URL_person_10: process.env.PUBLIC_URL + "/assets/img/person_10.png",
+    },
+    background : {
+        URL_background: process.env.PUBLIC_URL + "/assets/img/background.jpg",
     }
 }
 

@@ -5,16 +5,18 @@ const StyledFooter = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     height: 40px;
-    border: 1px solid var(--border--color);
+    background: #282c34;
+    color: white;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.6);
 `
 
 export default function SectionFooter() {
 
     return (
         <StyledFooter>
-            <p>Self-Sabotage team  © 2025 CodeHode</p>
+            <p>Self-Sabotage <b><i style={{ color: "yellow" }}>team</i></b>  © 2025 CodeHode</p>
         </StyledFooter>
     )
 }
