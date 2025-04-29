@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import SectionWinnersFirst from "./section.body.winners.first"
-import SectionWinnersSecond from "./section.body.winners.second";
-import SectionWinnersThird from "./section.body.winners.third";
+import SectionWinnersSecond from "./section.body.winners.second"
+import SectionWinnersThird from "./section.body.winners.third"
 
 const StyledSectionWinners = styled.div`
     display: flex;

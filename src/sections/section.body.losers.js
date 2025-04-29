@@ -1,17 +1,26 @@
 import styled from "styled-components"
 import { useContext } from "react"
 import { DataContext } from "../context/DataProvider"
+import { Card } from "../components/card"
 
 const StyledSectionLosers = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-content: center;
     width: 100%;
     height: auto;
     border: 1px solid var(--border--color);
     
-    & div { border: 1px solid red; }
+    .losersCollection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: auto;
+        //border: 10px solid red;
+    }
 `
 
 export default function SectionLosers() {
@@ -21,19 +30,22 @@ export default function SectionLosers() {
 
     return (
         <StyledSectionLosers>
-            <div>
+            <>
                 {Object.entries(data).map(([key, records]) => (
-                    <div key={key}>
+                    <div className={"losersCollection"} key={key}>
                         {records.map((item, index) =>
                             item.rank === "" ? (
-                                <p key={index}>
-                                    {item.name} – Count: {item.count} – Rank: {item.rank}
-                                </p>
+                                <Card
+                                    id={ item.id }
+                                    name={ item.name}
+                                    count={ item.count }
+                                    rank={ item.rank }
+                                />
                             ) : null
                         )}
                     </div>
                 ))}
-            </div>
+            </>
         </StyledSectionLosers>
     )
 }

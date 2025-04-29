@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import SectionWinners from "./section.body.winners"
+import SectionWinners from "./section.body.winner"
 import SectionLosers from "./section.body.losers"
 
 const StyledBody = styled.div`
