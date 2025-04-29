@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState} from "react"
+import {createContext, useEffect, useState} from "react"
 
 const DataContext = createContext({
     data: {},
@@ -20,9 +20,26 @@ export const DataProvider = ({ children }) => {
                 }
                 const rawData = await response.json();
 
+                console.log("[ Onloaded Data ] - ", rawData)
+
+                // ====== add more fields ======
+                const updateRawData = Object.entries(rawData).reduce(
+                    (acc, [key, value], index) => {
+                        acc[key] = value.map((item, i) => ({
+                            id: `${index + 1}`,
+                            name: item.name,
+                            image: "",
+                            count: item.count,
+                            rank: ""
+                        }))
+                        return acc
+                    }, {}
+                )
+
                 if (isMounted) {
-                    setData(prev => ({ ...prev, rawData }));
+                    setData(updateRawData)
                 }
+
             } catch (error) {
                 console.error("Error loading databases:", error)
             } finally {
@@ -41,7 +58,7 @@ export const DataProvider = ({ children }) => {
         }
     },[])
 
-    console.log("[ Raw Data ] - ", data)
+    console.log("[ Added Fields to Raw Data ] - ", data)
 
     return (
         <DataContext.Provider
