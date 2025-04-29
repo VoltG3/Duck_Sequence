@@ -7,7 +7,7 @@ const StyledHeader = styled.div`
     align-content: center;
     width: 100%;
     height: 100px;
-    border: 1px solid red;
+    border: 1px solid var(--border--color);
 `
 
 export default function SectionHeader() {

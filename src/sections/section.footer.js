@@ -2,12 +2,12 @@ import styled from "styled-components"
 
 const StyledFooter = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     width: 100%;
     height: 40px;
-    border: 1px solid red;
+    border: 1px solid var(--border--color);
 `
 
 export default function SectionFooter() {
