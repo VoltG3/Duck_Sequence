@@ -10,7 +10,7 @@ const StyledSectionLosers = styled.div`
     align-content: center;
     width: 100%;
     height: auto;
-    border: 1px solid var(--border--color);
+    //border: 1px solid var(--border--color);
     
     .losersCollection {
         display: flex;

@@ -8,11 +8,11 @@ const StyledSectionWinners = styled.div`
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    width: 100%;
+    width: auto;
     height: auto;
-    border: 1px solid var(--border--color);
+    //border: 1px solid var(--border--color);
     
-    & div { border: 1px solid red; }
+    //& div { border: 1px solid red; }
 `
 
 export default function SectionWinners() {

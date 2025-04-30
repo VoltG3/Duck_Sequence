@@ -1,29 +1,10 @@
-import styled from "styled-components"
+import { StyledCardContainer as CardContainer} from "./style.card.container"
+import { StyledCardImage as CardImage } from "./style.card.image"
+import { StyledCardContent as CardContent } from "./style.card.content"
+import { StyledCardRank as CardRank } from "./style.card.rank"
+import { StyledCardCount as CardCount } from "./style.card.count"
 import config from "../config"
-
-const StyledCard = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    width: 200px;
-    height: 250px;
-    border: 1px solid black;
-`
-
-const StyledImage = styled.img`
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin: 0 auto;
-`
-
-const StyledRank = styled.img`
-    width: 20px;
-    height: 60px;
-    object-fit: cover;
-    margin: 0 auto;
-`
+import Crown from "./crown";
 
 export const Card = ({ id, name, count, rank }) => {
     const getPersonImage = (id) => {
@@ -73,36 +54,44 @@ export const Card = ({ id, name, count, rank }) => {
     }
 
     return (
-        <StyledCard>
-            <StyledImage
-                src={getPersonImage(id)}
-                alt={`Person ${id}`}
-                onError={(e) => {
-                    e.target.src = config.persons.URL_person_01;
-                }}
-            />
+        <>
+            { rank === "firstPlace" ? <Crown /> : null }
 
-            <div>
-                <div>
-                    <StyledRank
-                        src={getPersonRank(rank)}
-                        alt={`Person ${id}`}
-                        onError={(e) => {
-                            e.target.src = config.persons.URL_person_01;
-                        }}
-                    />
-                </div>
-                <div>
-                    <p>id { id }</p>
-                    <div>
-                        <p>rank { getPersonTitle(rank) }</p>
-                        <p>name { name }</p>
+            <CardContainer>
+                <CardImage
+                    src={getPersonImage(id)}
+                    alt={`Person ${id}`}
+                    onError={(e) => {
+                        e.target.src = config.default.URL_default;
+                    }}
+                />
+
+                <CardContent>
+                    <div className="card__content__info">
+                        {/* <p>id { id }</p> */}
+                        <div className="card__content__info__name">
+                            <p>{ getPersonTitle(rank) }</p>
+                            <p>{ name }</p>
+                        </div>
+
+                        {/* <p>rank { rank }</p> */}
                     </div>
 
-                    <p>count { count }</p>
-                    <p>rank { rank }</p>
-                </div>
-            </div>
-        </StyledCard>
+                    <div className="card__content__rank">
+                        <CardRank
+                            src={getPersonRank(rank)}
+                            alt={`Person ${id}`}
+                            onError={(e) => {
+                                e.target.src = config.default.URL_default;
+                            }}
+                        />
+                    </div>
+                </CardContent>
+
+                <CardCount>
+                    <p>{ count }</p>
+                </CardCount>
+            </CardContainer>
+        </>
     )
 }
