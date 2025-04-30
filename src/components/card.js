@@ -46,7 +46,7 @@ export const Card = ({ id, name, count, rank }) => {
             case "thirdPlace":
                 return "Rare";
             case "":
-                return "Standard";
+                return "Common";
             default:
                 return null;
         }
@@ -62,7 +62,13 @@ export const Card = ({ id, name, count, rank }) => {
             <CardContent>
                 <div className="card__content__info">
                     <div className="card__content__info__name">
-                        <p>{ getPersonTitle(rank) }</p>
+                        <p style={{
+                            fontWeight: "bold",
+                            color: rank === "firstPlace" ? "var(--range--color--01)" :
+                                   rank === "secondPlace" ? "var(--range--color--02)" :
+                                   rank === "thirdPlace" ? "var(--range--color--03)" : "var(--range--color--04)"
+                        }}>{ getPersonTitle(rank)}</p>
+
                         <p>{ name }</p>
                     </div>
 

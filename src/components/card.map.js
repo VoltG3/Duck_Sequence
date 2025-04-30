@@ -23,7 +23,7 @@ export const GetCards = ({ variant }) => {
                                         width: "auto",
                                         height: "60px"
                                 }}>
-                                    { variant === "firstPlace" ? <Crown /> : null }
+                                    { variant !== "" ? <Crown variant={variant} /> : null }
                                 </div>
 
                                 <Card

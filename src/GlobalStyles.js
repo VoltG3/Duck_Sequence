@@ -2,6 +2,14 @@ import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
     :root {
-        --border--color: black;
+
+        --color--primary: #282c34;
+
+        --card--color--01: rgba(36, 39, 34, 0.15);
+
+        --range--color--01: #FF8000;
+        --range--color--02: #027FC1;
+        --range--color--03: #8080C0;
+        --range--color--04: #7F8000;
     }
 `

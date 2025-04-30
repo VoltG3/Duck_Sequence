@@ -9,7 +9,7 @@ export const StyledCardContainer = styled.div`
     height: auto;
     //padding: 10px;
     margin: 10px;
-    background-color: #babaae;
+    background-color: var(--card--color--01);
     border-radius: 10px;
     overflow: hidden;
     

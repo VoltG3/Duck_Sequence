@@ -7,7 +7,7 @@ const StyledFooter = styled.div`
     align-items: center;
     width: 100vw;
     height: 40px;
-    background: #282c34;
+    background: var(--color--primary);
     color: white;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.6);
 `
