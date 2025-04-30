@@ -57,6 +57,21 @@ export const Card = ({ id, name, count, rank }) => {
         }
     }
 
+    const getPersonTitle = (rank) => {
+        switch(rank) {
+            case "firstPlace":
+                return "Legendary";
+            case "secondPlace":
+                return "Epic";
+            case "thirdPlace":
+                return "Rare";
+            case "":
+                return "Standard";
+            default:
+                return null;
+        }
+    }
+
     return (
         <StyledCard>
             <StyledImage
@@ -79,7 +94,11 @@ export const Card = ({ id, name, count, rank }) => {
                 </div>
                 <div>
                     <p>id { id }</p>
-                    <p>name { name }</p>
+                    <div>
+                        <p>rank { getPersonTitle(rank) }</p>
+                        <p>name { name }</p>
+                    </div>
+
                     <p>count { count }</p>
                     <p>rank { rank }</p>
                 </div>
