@@ -15,6 +15,12 @@ const config = {
     background : {
         URL_background: process.env.PUBLIC_URL + "/assets/img/background.jpg",
         URL_person_01: process.env.PUBLIC_URL + "/assets/img/person_01.jpg",
+    },
+    rank : {
+        URL_rank_01: process.env.PUBLIC_URL + "/assets/img/rank_01.jpg",
+        URL_rank_02: process.env.PUBLIC_URL + "/assets/img/rank_02.jpg",
+        URL_rank_03: process.env.PUBLIC_URL + "/assets/img/rank_03.jpg",
+        URL_rank_04: process.env.PUBLIC_URL + "/assets/img/rank_04.jpg",
     }
 }
 
