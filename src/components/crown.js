@@ -6,16 +6,13 @@ export const StyledCrown = styled.img`
     height: 60px;
 `
 
-export default function Crown() {
+export const Crown = () => {
 
     return (
         <div>
             <StyledCrown
                 src={config.crown.URL_crown_01}
                 alt={"crown"}
-                onError={(e) => {
-                    e.target.src = config.default.URL_default;
-                }}
             />
         </div>
     )

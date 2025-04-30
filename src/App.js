@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { GlobalStyles } from "./GlobalStyles"
 import SectionHeader from "./sections/section.header"
-import SectionBody from "./sections/section.body"
+import SectionContent from "./sections/section.content"
 import SectionFooter from "./sections/section.footer"
 import {DataProvider} from "./context/DataProvider"
 import config from "./config"
@@ -16,7 +16,7 @@ function App() {
                     <GlobalStyles />
                     <DataProvider>
                         <SectionHeader />
-                        <SectionBody />
+                        <SectionContent />
                         <SectionFooter />
                     </DataProvider>
                 </div>

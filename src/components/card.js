@@ -4,7 +4,6 @@ import { StyledCardContent as CardContent } from "./style.card.content"
 import { StyledCardRank as CardRank } from "./style.card.rank"
 import { StyledCardCount as CardCount } from "./style.card.count"
 import config from "../config"
-import Crown from "./crown";
 
 export const Card = ({ id, name, count, rank }) => {
     const getPersonImage = (id) => {
@@ -54,44 +53,33 @@ export const Card = ({ id, name, count, rank }) => {
     }
 
     return (
-        <>
-            { rank === "firstPlace" ? <Crown /> : null }
+        <CardContainer>
+            <CardImage
+                src={getPersonImage(id)}
+                alt={`Person ${id}`}
+            />
 
-            <CardContainer>
-                <CardImage
-                    src={getPersonImage(id)}
-                    alt={`Person ${id}`}
-                    onError={(e) => {
-                        e.target.src = config.default.URL_default;
-                    }}
-                />
-
-                <CardContent>
-                    <div className="card__content__info">
-                        {/* <p>id { id }</p> */}
-                        <div className="card__content__info__name">
-                            <p>{ getPersonTitle(rank) }</p>
-                            <p>{ name }</p>
-                        </div>
-
-                        {/* <p>rank { rank }</p> */}
+            <CardContent>
+                <div className="card__content__info">
+                    <div className="card__content__info__name">
+                        <p>{ getPersonTitle(rank) }</p>
+                        <p>{ name }</p>
                     </div>
 
-                    <div className="card__content__rank">
-                        <CardRank
-                            src={getPersonRank(rank)}
-                            alt={`Person ${id}`}
-                            onError={(e) => {
-                                e.target.src = config.default.URL_default;
-                            }}
-                        />
-                    </div>
-                </CardContent>
+                    {/* <p>rank { rank }</p> */}
+                </div>
 
-                <CardCount>
-                    <p>{ count }</p>
-                </CardCount>
-            </CardContainer>
-        </>
+                <div className="card__content__rank">
+                    <CardRank
+                        src={getPersonRank(rank)}
+                        alt={`Person ${id}`}
+                    />
+                </div>
+            </CardContent>
+
+            <CardCount>
+                <p>{ count }</p>
+            </CardCount>
+        </CardContainer>
     )
 }
