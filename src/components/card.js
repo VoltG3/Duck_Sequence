@@ -4,23 +4,11 @@ import { StyledCardContent as CardContent } from "./style.card.content"
 import { StyledCardRank as CardRank } from "./style.card.rank"
 import { StyledCardCount as CardCount } from "./style.card.count"
 import config from "../config"
+import { useSelector } from "react-redux";
 
-export const Card = ({ id, name, count, rank }) => {
-    const getPersonImage = (id) => {
-        switch(Number(id)) {
-            case 1: return config.persons.URL_person_01;
-            case 2: return config.persons.URL_person_02;
-            case 3: return config.persons.URL_person_03;
-            case 4: return config.persons.URL_person_04;
-            case 5: return config.persons.URL_person_05;
-            case 6: return config.persons.URL_person_06;
-            case 7: return config.persons.URL_person_07;
-            case 8: return config.persons.URL_person_08;
-            case 9: return config.persons.URL_person_09;
-            case 10: return config.persons.URL_person_10;
-            default: return null;
-        }
-    }
+export const Card = ({ id, name, count, rank, image }) => {
+    //const getAllFromStoredTables = useSelector(state => state.result_table)
+    //console.log("All from stored tables:", getAllFromStoredTables)
 
     const getPersonRank = (rank) => {
         switch(rank) {
@@ -55,7 +43,7 @@ export const Card = ({ id, name, count, rank }) => {
     return (
         <CardContainer>
             <CardImage
-                src={getPersonImage(id)}
+                src={ image }
                 alt={`Person ${id}`}
             />
 

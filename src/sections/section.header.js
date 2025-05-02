@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import { useContext } from "react"
-import { DataContext } from "../context/DataProvider"
+import {useSelector} from "react-redux";
 
 const StyledHeader = styled.div`
     display: flex;
@@ -20,17 +19,27 @@ const StyledHeader = styled.div`
 `
 
 export default function SectionHeader() {
-    const { data, loading } = useContext(DataContext)
+    const timeRecords = useSelector(state => state.time_table)
+    console.log("[ TIME TABLE ]: ", timeRecords)
 
-    if (loading) return <p>Loading...</p>
 
-    const totalCount = Object.entries(data).reduce((total, [key, records]) => {
-        return total + records.reduce((sum, item) => sum + parseInt(item.count, 10), 0)
-    }, 0) //console.log("Total count:", totalCount);
+
+   // const { data, loading } = useContext(DataContext)
+    //const createRoundsMap = useSelector(state => state.result_tables)
+    //console.log("createRoundsMap:", createRoundsMap)
+
+        //if (loading) return <p>Loading...</p>
+
+        //const totalCount = Object.entries(data).reduce((total, [key, records]) => {
+        //    return total + records.reduce((sum, item) => sum + parseInt(item.count, 10), 0)
+        //}, 0) //console.log("Total count:", totalCount);
 
     return (
         <StyledHeader>
-            <p>Duck Sequens: <span style={{ color: "yellow" }}>{ totalCount }</span></p>
+            <p>Duck Sequens: <span style={{ color: "yellow" }}> totalCount </span></p>
+            <ul>
+                <li><button>P</button></li>
+            </ul>
         </StyledHeader>
     )
 }

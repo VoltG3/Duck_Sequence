@@ -1,16 +1,13 @@
-import { useContext } from "react"
-import { DataContext } from "../context/DataProvider"
 import { Card } from "./card"
 import { Crown } from "./crown"
+import { useSelector } from "react-redux"
 
 export const GetCards = ({ variant }) => {
-    const { data, loading } = useContext(DataContext)
-
-    if (loading) return <p>Loading...</p>
+    const records = useSelector(state => state.result_table)
 
     return (
         <>
-            {Object.entries(data).map(([key, records]) => (
+            {Object.entries(records).map(([key, records]) => (
                 <div key={key}>
                     {records.map((item, index) =>
                         item.rank === variant ? (
@@ -32,6 +29,7 @@ export const GetCards = ({ variant }) => {
                                     name={ item.name}
                                     count={ item.count }
                                     rank={ item.rank }
+                                    image={ item.imageURL }
                                 />
                             </>
                         ) : null

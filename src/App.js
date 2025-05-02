@@ -3,8 +3,9 @@ import { GlobalStyles } from "./GlobalStyles"
 import SectionHeader from "./sections/section.header"
 import SectionContent from "./sections/section.content"
 import SectionFooter from "./sections/section.footer"
-import {DataProvider} from "./context/DataProvider"
+
 import config from "./config"
+import LoadData from "./LoadData";
 
 function App() {
 
@@ -14,11 +15,11 @@ function App() {
             <div className="styledDesktop_Mask">
                 <div className="styledDesktop_Content">
                     <GlobalStyles />
-                    <DataProvider>
+                    <LoadData />
                         <SectionHeader />
                         <SectionContent />
                         <SectionFooter />
-                    </DataProvider>
+
                 </div>
             </div>
         </div>
