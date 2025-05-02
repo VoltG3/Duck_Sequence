@@ -16,10 +16,18 @@ function App() {
                 <div className="styledDesktop_Content">
                     <GlobalStyles />
                     <LoadData />
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                            height: "100%",
+                            border: "1px solid red"
+                    }}> {/* this div preserve from z Index issue */}
                         <SectionHeader />
                         <SectionContent />
                         <SectionFooter />
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +51,17 @@ const StyledDesktop = styled.div`
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        z-index: -2; 
+        z-index: 0; 
+        
+        .discable_zIndex {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
     }
 
     .styledDesktop_Mask {
@@ -53,7 +71,7 @@ const StyledDesktop = styled.div`
         right: 0;
         bottom: 0;
         background-color: rgba(255, 255, 255, 0.8);
-        z-index: -1; 
+        z-index: 1;
     }
 
     .styledDesktop_Content {
@@ -64,7 +82,7 @@ const StyledDesktop = styled.div`
         align-items: center;
         height: 100vh;
         width: 100vw;
-        z-index: 0; 
+        z-index: 2; 
     }
 `
 

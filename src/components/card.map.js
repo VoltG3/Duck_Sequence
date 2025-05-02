@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 
 export const GetCards = ({ variant }) => {
     const records = useSelector(state => state.result_table)
+    const date = useSelector(state => state.target_date)
 
     return (
         <>
@@ -11,7 +12,7 @@ export const GetCards = ({ variant }) => {
                 <div key={key}>
                     {records.map((item, index) =>
                         item.rank === variant ? (
-                            <>
+                            <div key={`${key}-${item.id}`}>
                                 <div
                                     style={{
                                         display: "flex",
@@ -31,7 +32,7 @@ export const GetCards = ({ variant }) => {
                                     rank={ item.rank }
                                     image={ item.imageURL }
                                 />
-                            </>
+                            </div>
                         ) : null
                     )}
                 </div>

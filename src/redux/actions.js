@@ -1,5 +1,5 @@
 import {
-    RESULT_TABLE, TARGET_TABLE, TIME_TABLE
+    RESULT_TABLE, TARGET_DATE, DATE_TABLE
 } from "./actionTypes"
 
 export const storeResultTable = (result_table) => ({
@@ -7,12 +7,12 @@ export const storeResultTable = (result_table) => ({
     payload: result_table
 })
 
-export const storeTimeTable = (time_table) => ({
-    type: TIME_TABLE,
-    payload: time_table
+export const storeDateTable = (date_table) => ({
+    type: DATE_TABLE,
+    payload: date_table
 })
 
-export const storeTargetTable = (target_table) => ({
-    type: TARGET_TABLE,
+export const storeTargetDate = (target_table) => ({
+    type: TARGET_DATE,
     payload: target_table
 })

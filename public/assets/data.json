@@ -1,5 +1,17 @@
 [
-
+  {
+    "date": "2025-05-02",
+    "person01": { "count": "0", "name": "Alex" },
+    "person02": { "count": "10", "name": "Andreas" },
+    "person03": { "count": "2", "name": "Betina" },
+    "person04": { "count": "3", "name": "Hans" },
+    "person05": { "count": "0", "name": "Jørund" },
+    "person06": { "count": "0", "name": "Kristian" },
+    "person07": { "count": "0", "name": "Mido" },
+    "person08": { "count": "0", "name": "Marius" },
+    "person09": { "count": "0", "name": "Silje" },
+    "person10": { "count": "0", "name": "Gjest" }
+  },
   {
     "date": "2000-05-02",
     "person01": { "count": "5", "name": "Alex" },

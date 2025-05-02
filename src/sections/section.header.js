@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import {useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
+import { storeTargetDate } from "../redux/actions"
 
 const StyledHeader = styled.div`
     display: flex;
@@ -11,7 +12,6 @@ const StyledHeader = styled.div`
     background: var(--color--primary);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-    
     & p {
         font-size: 45px;
         font-variant: small-caps;
@@ -20,6 +20,8 @@ const StyledHeader = styled.div`
 
 export default function SectionHeader() {
     const timeRecords = useSelector(state => state.time_table)
+    const dispatch = useDispatch()
+
     console.log("[ TIME TABLE ]: ", timeRecords)
 
 
@@ -37,8 +39,21 @@ export default function SectionHeader() {
     return (
         <StyledHeader>
             <p>Duck Sequens: <span style={{ color: "yellow" }}> totalCount </span></p>
+
             <ul>
-                <li><button>P</button></li>
+                {Array.isArray(timeRecords) && timeRecords.map((item, index) => (
+                    <li key={index}>
+                        <button
+                            id={item}
+                            onClick={() => {
+                                console.log("Dispatching item: ", item);
+                                dispatch(storeTargetDate(item));
+                            }}
+                        >
+                            { item }
+                        </button>
+                    </li>
+                ))}
             </ul>
         </StyledHeader>
     )

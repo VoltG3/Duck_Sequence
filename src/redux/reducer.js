@@ -1,11 +1,11 @@
 import {
-    RESULT_TABLE, TIME_TABLE, TARGET_TABLE
+    RESULT_TABLE, DATE_TABLE, TARGET_DATE
 } from './actionTypes'
 
 const initialState = {
     result_table: {},
-    time_table: {},
-    target_table: {}
+    date_table: {},
+    target_date: []
 }
 
 export default function reducer(state = initialState, action) {
@@ -16,16 +16,16 @@ export default function reducer(state = initialState, action) {
                 result_table: action.payload
             }
 
-        case TIME_TABLE:
+        case DATE_TABLE:
             return {
                 ...state,
                 time_table: action.payload
             }
 
-        case TARGET_TABLE:
+        case TARGET_DATE:
             return {
                 ...state,
-                target_table: action.payload
+                target_date: action.payload
         }
 
         default:

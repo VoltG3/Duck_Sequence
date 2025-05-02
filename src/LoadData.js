@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import {storeResultTable, storeTimeTable} from "./redux/actions"
+import { storeDateTable, storeResultTable } from "./redux/actions"
 import config from "./config"
 
 const LoadData = () => {
@@ -8,7 +8,7 @@ const LoadData = () => {
         testData_onloaded: [],
         testData_newFields: [],
         testData_rankAssigment: [],
-        testData_timeTable: []
+        testData_dateTable: []
     })
 
     const dispatch = useDispatch()
@@ -117,12 +117,12 @@ const LoadData = () => {
                     // ===================================================
 
                     const finalTableData = finalData.person01?.map(entry => entry.date) || []
-                    dispatch(storeTimeTable(finalTableData))
+                    dispatch(storeDateTable(finalTableData))
 
                     if (isMounted) {
                         setLogs(prevLogs => ({
                             ...prevLogs,
-                            testData_timeTable: [...prevLogs.testData_timeTable, finalTableData]
+                            testData_dateTable: [...prevLogs.testData_dateTable, finalTableData]
                         }))
                     }
                     // console.log("[ Dates from person01 - finalTableData ]", finalTableData)
@@ -144,7 +144,7 @@ const LoadData = () => {
     console.log("[ JSON Data - Onloaded        ] - ", logs.testData_onloaded)
     console.log("[ JSON Data - New Fields      ] - ", logs.testData_newFields)
     console.log("[ JSON Data - Rank Assignment ] - ", logs.testData_rankAssigment)
-    console.log("[ JSON Data - Time Table      ] - ", logs.testData_timeTable)
+    console.log("[ JSON Data - Time Table      ] - ", logs.testData_dateTable)
 
     return null
 }

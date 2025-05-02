@@ -4,11 +4,11 @@ import { StyledCardContent as CardContent } from "./style.card.content"
 import { StyledCardRank as CardRank } from "./style.card.rank"
 import { StyledCardCount as CardCount } from "./style.card.count"
 import config from "../config"
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
 
 export const Card = ({ id, name, count, rank, image }) => {
-    //const getAllFromStoredTables = useSelector(state => state.result_table)
-    //console.log("All from stored tables:", getAllFromStoredTables)
+    //const targetTimeTable = useSelector(state => state.target_table)
+    //console.log("[ CARD ]: ", targetTimeTable)
 
     const getPersonRank = (rank) => {
         switch(rank) {
