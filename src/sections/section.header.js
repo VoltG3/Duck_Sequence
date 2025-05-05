@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { storeTargetDate } from "../redux/actions"
+import { storeDates, storeTargetDate } from "../redux/actions"
 
 const StyledHeader = styled.div`
     display: flex;
@@ -18,31 +18,34 @@ const StyledHeader = styled.div`
     }
 `
 
-export default function SectionHeader() {
-    const timeRecords = useSelector(state => state.time_table)
+export const SectionHeader = () => {
     const dispatch = useDispatch()
+    const timeRecordsObj = useSelector(state => state.dates)
+    const isDataLoaded = useSelector(state => state.isDataLoaded)
 
-    console.log("[ TIME TABLE ]: ", timeRecords)
+    if (!isDataLoaded || !timeRecordsObj || Object.keys(timeRecordsObj).length === 0) {
+        return <p>Loading dates…</p>;
+    }
 
+    const timeRecords = Object.keys(timeRecordsObj)
+    const totalCount = timeRecords.length
 
-
-   // const { data, loading } = useContext(DataContext)
-    //const createRoundsMap = useSelector(state => state.result_tables)
-    //console.log("createRoundsMap:", createRoundsMap)
-
-        //if (loading) return <p>Loading...</p>
-
-        //const totalCount = Object.entries(data).reduce((total, [key, records]) => {
-        //    return total + records.reduce((sum, item) => sum + parseInt(item.count, 10), 0)
-        //}, 0) //console.log("Total count:", totalCount);
+    if (totalCount === 0) {
+        return <p>No dates found.</p>
+    }
 
     return (
         <StyledHeader>
-            <p>Duck Sequens: <span style={{ color: "yellow" }}> totalCount </span></p>
+            <p>
+                Duck Sequens:{" "}
+                <span style={{ color: "yellow" }}>
+                    {totalCount}
+                </span>
+            </p>
 
             <ul>
-                {Array.isArray(timeRecords) && timeRecords.map((item, index) => (
-                    <li key={index}>
+                {timeRecords.map((item, index) => (
+                    <li key={`${item}-${index}`}>
                         <button
                             id={item}
                             onClick={() => {
@@ -50,7 +53,7 @@ export default function SectionHeader() {
                                 dispatch(storeTargetDate(item));
                             }}
                         >
-                            { item }
+                            {item}
                         </button>
                     </li>
                 ))}

@@ -1,150 +1,177 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { storeDateTable, storeResultTable } from "./redux/actions"
+import {storeDates, storeResultTable, storeSetDataLoaded} from "./redux/actions"
 import config from "./config"
 
 const LoadData = () => {
-    const [logs, setLogs] = useState({
-        testData_onloaded: [],
-        testData_newFields: [],
-        testData_rankAssigment: [],
-        testData_dateTable: []
-    })
-
+    const [jsonData, setJsonData] = useState(null)
+    const [newObjectDates, setNewObjectDates] = useState(null)
+    const [newObjectImages, setNewObjectImages] = useState(null)
+    const [newFieldsObject, setNewFieldsObject] = useState(null)
+    const [newRankAssigmentObject, setNewRankAssigmentData] = useState(null)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        let isMounted = true
-
-        const getPersonImage = (id) => {
-            switch(Number(id)) {
-                case 1: return config.persons.URL_person_01;
-                case 2: return config.persons.URL_person_02;
-                case 3: return config.persons.URL_person_03;
-                case 4: return config.persons.URL_person_04;
-                case 5: return config.persons.URL_person_05;
-                case 6: return config.persons.URL_person_06;
-                case 7: return config.persons.URL_person_07;
-                case 8: return config.persons.URL_person_08;
-                case 9: return config.persons.URL_person_09;
-                case 10: return config.persons.URL_person_10;
-                default: return null;
-            }
-        }
+        let isMounted = true;
 
         const loadData = async () => {
-            try {
-                const response = await fetch("/assets/data.json")
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+            const response = await fetch("/assets/data.json")
 
-                const rawData = await response.json()
+            if (!response.ok) {
+                console.error(`Error: HTTP status ${response.status}`)
 
-                if (isMounted) {
-                    setLogs(prevLogs => ({
-                        ...prevLogs,
-                        testData_onloaded: [...prevLogs.testData_onloaded, rawData]
-                    }))
-                }
+                return
+            }
 
-                // =============================
-                // ====== add more fields ======
-                // =============================
+            const data = await response.json();
+            console.log("[ jsonData onloaded       ]", data)
 
-                const newFields = rawData.reduce((acc, entry, index) => {
-                    Object.entries(entry).forEach(([key, value]) => {
-                        if (key.startsWith("person")) {
-                            if (!acc[key]) acc[key] = []
-                            acc[key].push({
-                                id: `${index + 1}`,
-                                date: entry.date,
-                                count: value.count,
-                                name: value.name,
-                                rank: "",
-                                imageURL: getPersonImage(parseInt(key.replace("person", ""), 10))
-                            })
-                        }
-                    })
-                    return acc
-                }, {})
-
-                if (isMounted) {
-                    setLogs(prevLogs => ({
-                        ...prevLogs,
-                        testData_newFields: [...prevLogs.testData_newFields, newFields]
-                    }))
-                }
-
-                // ==========================
-                // ====== updateByRank ======
-                // ==========================
-
-                const updateByRank = (data) => {
-                    const allCounts = Object.values(data).flatMap(entries => entries.map(entry => parseInt(entry.count)))
-                    const topCount = [...new Set(allCounts)].sort((a, b) => b - a).slice(0, 3)
-
-                    const rankMap = {
-                        [topCount[0]]: "firstPlace",
-                        [topCount[1]]: "secondPlace",
-                        [topCount[2]]: "thirdPlace"
-                    }
-
-                    const rankedData = {}
-                    Object.entries(data).forEach(([key, value]) => {
-                        rankedData[key] = value.map(entry => ({
-                            ...entry,
-                            rank: rankMap[parseInt(entry.count)] || ""
-                        }))
-                    })
-
-                    if (isMounted) {
-                        setLogs(prevLogs => ({
-                            ...prevLogs,
-                            testData_rankAssigment: [...prevLogs.testData_rankAssigment, rankedData]
-                        }))
-                    }
-
-                    return rankedData
-                }
-
-                const finalData = updateByRank(newFields)
-
-                if (isMounted) {
-                    dispatch(storeResultTable(finalData))
-                    console.log("[ Loaded and stored to Redux ]", finalData)
-
-                    // ===================================================
-                    // ====== construct time table from Obj.peron01 ======
-                    // ===================================================
-
-                    const finalTableData = finalData.person01?.map(entry => entry.date) || []
-                    dispatch(storeDateTable(finalTableData))
-
-                    if (isMounted) {
-                        setLogs(prevLogs => ({
-                            ...prevLogs,
-                            testData_dateTable: [...prevLogs.testData_dateTable, finalTableData]
-                        }))
-                    }
-                    // console.log("[ Dates from person01 - finalTableData ]", finalTableData)
-                }
-
-            } catch (error) {
-                console.error("Error loading databases:", error)
+            if (isMounted) {
+                setJsonData(data)
             }
         }
 
-        loadData()
+        loadData().catch(error => {
+            console.error("Error during loading data:", error)
+        })
 
         return () => {
             isMounted = false
         }
+    }, [])
 
-    }, [dispatch])
+    // ================
+    //  newObjectDates
+    // ================
 
-    console.log("[ JSON Data - Onloaded        ] - ", logs.testData_onloaded)
-    console.log("[ JSON Data - New Fields      ] - ", logs.testData_newFields)
-    console.log("[ JSON Data - Rank Assignment ] - ", logs.testData_rankAssigment)
-    console.log("[ JSON Data - Time Table      ] - ", logs.testData_dateTable)
+    useEffect(() => {
+        if (jsonData !== null) {
+
+            const dateObject = jsonData.reduce((acc, item) => {
+                acc[item.date] = { date: item.date }
+                return acc
+            }, {})
+
+            setNewObjectDates(dateObject)
+
+            console.log("[ newObjectDates created  ]", dateObject)
+        }
+    }, [jsonData])
+
+    // =================
+    //  newObjectImages
+    // =================
+
+    useEffect(() => {
+        if (jsonData !== null) {
+
+            const getPlayerImage = (id) => {
+                switch(Number(id)) {
+                    case 1: return config.persons.URL_person_01;
+                    case 2: return config.persons.URL_person_02;
+                    case 3: return config.persons.URL_person_03;
+                    case 4: return config.persons.URL_person_04;
+                    case 5: return config.persons.URL_person_05;
+                    case 6: return config.persons.URL_person_06;
+                    case 7: return config.persons.URL_person_07;
+                    case 8: return config.persons.URL_person_08;
+                    case 9: return config.persons.URL_person_09;
+                    case 10: return config.persons.URL_person_10;
+                    default: return null;
+                }
+            }
+
+            const imageObject = {}
+
+            jsonData.forEach(item => {
+                Object.keys(item).forEach(key => {
+                    if (key.startsWith("player")) {
+                        const id = parseInt(key.replace("player", ""), 10)
+                        imageObject[key] = { imageURL: getPlayerImage(id) }
+                    }
+                })
+            })
+
+            console.log("[ newObjectImages created ]", imageObject)
+            setNewObjectImages(imageObject)
+        }
+    }, [jsonData])
+
+    // =================
+    //  newFieldsObject
+    // =================
+
+    useEffect(() => {
+        if (jsonData !== null) {
+            const transformedData = jsonData.map(item => {
+                const newItem = { date: item.date }
+
+                Object.keys(item).forEach(key => {
+                    if (key.startsWith("player")) {
+                        const { count, name } = item[key]
+                        newItem[key] = {
+                            count,
+                            name,
+                            rank: ""
+                        }
+                    }
+                })
+
+                return newItem
+            })
+
+            console.log("[ newFieldsObject created ]", transformedData)
+            setNewFieldsObject(transformedData)
+        }
+    }, [jsonData])
+
+
+    // ========================
+    //  newRankAssigmentObject
+    // ========================
+
+    useEffect(() => {
+        if (jsonData !== null) {
+            const rankAssigment = jsonData.map(entry => {
+                const { date, ...players } = entry;
+
+                const counts = Object.values(players).map(p => parseInt(p.count, 10));
+                const uniqueCounts = [...new Set(counts)].sort((a, b) => b - a)
+
+                const countToRank = {}
+                if (uniqueCounts[0] !== undefined) countToRank[uniqueCounts[0]] = "place_first"
+                if (uniqueCounts[1] !== undefined) countToRank[uniqueCounts[1]] = "place_second"
+                if (uniqueCounts[2] !== undefined) countToRank[uniqueCounts[2]] = "place_third"
+
+                const newPlayers = Object.fromEntries(
+                    Object.entries(players).map(([key, value]) => {
+                        const numericCount = parseInt(value.count, 10)
+                        return [key, {
+                            ...value,
+                            rank: countToRank[numericCount] || ""
+                        }]
+                    })
+                )
+
+                return {
+                    date,
+                    ...newPlayers
+                }
+            })
+
+
+            console.log("[ newRankAssigmentObject  ]", rankAssigment)
+            setNewRankAssigmentData(rankAssigment)
+        }
+    }, [jsonData])
+
+    useEffect(() => {
+        if (jsonData !== null) {
+            dispatch(storeDates(newObjectDates))
+            dispatch(storeResultTable(newRankAssigmentObject))
+            dispatch(storeSetDataLoaded(true))
+        }
+    }, [jsonData, dispatch, newObjectDates, newRankAssigmentObject])
 
     return null
 }

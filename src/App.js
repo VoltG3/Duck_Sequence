@@ -1,13 +1,14 @@
 import styled from "styled-components"
 import { GlobalStyles } from "./GlobalStyles"
-import SectionHeader from "./sections/section.header"
+import LoadData from "./LoadData"
+import { SectionHeader } from "./sections/section.header"
 import SectionContent from "./sections/section.content"
 import SectionFooter from "./sections/section.footer"
-
+import { useSelector } from "react-redux"
 import config from "./config"
-import LoadData from "./LoadData";
 
 function App() {
+    const isDataLoaded = useSelector(state => state.isDataLoaded)
 
   return (
     <StyledDesktop>
@@ -23,9 +24,9 @@ function App() {
                             width: "100%",
                             height: "100%",
                             border: "1px solid red"
-                    }}> {/* this div preserve from z Index issue */}
-                        <SectionHeader />
-                        <SectionContent />
+                    }}> {/* this div preserve from z-index issue */}
+                        { isDataLoaded ? <SectionHeader /> : null}
+                        { isDataLoaded ? <SectionContent /> : null}
                         <SectionFooter />
                     </div>
                 </div>

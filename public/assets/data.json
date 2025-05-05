@@ -1,28 +1,41 @@
 [
   {
+    "date": "2025-01-01",
+    "player01": { "count": "0", "name": "Alex" },
+    "player02": { "count": "0", "name": "Andreas" },
+    "player03": { "count": "0", "name": "Betina" },
+    "player04": { "count": "0", "name": "Hans" },
+    "player05": { "count": "0", "name": "Jørund" },
+    "player06": { "count": "0", "name": "Kristian" },
+    "player07": { "count": "0", "name": "Mido" },
+    "player08": { "count": "0", "name": "Marius" },
+    "player09": { "count": "0", "name": "Silje" },
+    "player10": { "count": "0", "name": "Gjest" }
+  },
+  {
     "date": "2025-05-02",
-    "person01": { "count": "0", "name": "Alex" },
-    "person02": { "count": "10", "name": "Andreas" },
-    "person03": { "count": "2", "name": "Betina" },
-    "person04": { "count": "3", "name": "Hans" },
-    "person05": { "count": "0", "name": "Jørund" },
-    "person06": { "count": "0", "name": "Kristian" },
-    "person07": { "count": "0", "name": "Mido" },
-    "person08": { "count": "0", "name": "Marius" },
-    "person09": { "count": "0", "name": "Silje" },
-    "person10": { "count": "0", "name": "Gjest" }
+    "player01": { "count": "0", "name": "Alex" },
+    "player02": { "count": "10", "name": "Andreas" },
+    "player03": { "count": "2", "name": "Betina" },
+    "player04": { "count": "3", "name": "Hans" },
+    "player05": { "count": "0", "name": "Jørund" },
+    "player06": { "count": "0", "name": "Kristian" },
+    "player07": { "count": "0", "name": "Mido" },
+    "player08": { "count": "0", "name": "Marius" },
+    "player09": { "count": "0", "name": "Silje" },
+    "player10": { "count": "0", "name": "Gjest" }
   },
   {
     "date": "2000-05-02",
-    "person01": { "count": "5", "name": "Alex" },
-    "person02": { "count": "4", "name": "Andreas" },
-    "person03": { "count": "3", "name": "Betina" },
-    "person04": { "count": "3", "name": "Hans" },
-    "person05": { "count": "1", "name": "Jørund" },
-    "person06": { "count": "5", "name": "Kristian" },
-    "person07": { "count": "3", "name": "Mido" },
-    "person08": { "count": "1", "name": "Marius" },
-    "person09": { "count": "2", "name": "Silje" },
-    "person10": { "count": "0", "name": "Gjest" }
+    "player01": { "count": "5", "name": "Alex" },
+    "player02": { "count": "4", "name": "Andreas" },
+    "player03": { "count": "3", "name": "Betina" },
+    "player04": { "count": "3", "name": "Hans" },
+    "player05": { "count": "1", "name": "Jørund" },
+    "player06": { "count": "5", "name": "Kristian" },
+    "player07": { "count": "3", "name": "Mido" },
+    "player08": { "count": "1", "name": "Marius" },
+    "player09": { "count": "4", "name": "Silje" },
+    "player10": { "count": "0", "name": "Gjest" }
   }
 ]

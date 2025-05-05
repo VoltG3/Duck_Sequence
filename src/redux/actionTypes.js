@@ -1,3 +1,4 @@
+export const SET_DATA_LOADED = 'SET_DATA_LOADED'
 export const RESULT_TABLE = 'RESULT_TABLE'
-export const DATE_TABLE = 'DATE_TABLE'
+export const OBJECT_DATES = 'OBJECT_DATES'
 export const TARGET_DATE = 'TARGET_TABLE'

@@ -7,13 +7,13 @@ function SectionContent() {
         <StyledContent>
             <div className="innerSectionContent">
                 <div className="cardSet">
-                    <GetCards variant={"secondPlace"} />
-                    <GetCards variant={"firstPlace"} />
-                    <GetCards variant={"thirdPlace"} />
+                    <GetCards variant={"place_first"} />
+                    <GetCards variant={"place_second"} />
+                    <GetCards variant={"place_third"} />
                 </div>
 
                 <div className="cardSet">
-                    <GetCards variant={""} />
+                     <GetCards variant={""} />
                 </div>
             </div>
         </StyledContent>

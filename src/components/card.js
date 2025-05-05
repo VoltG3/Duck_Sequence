@@ -4,19 +4,16 @@ import { StyledCardContent as CardContent } from "./style.card.content"
 import { StyledCardRank as CardRank } from "./style.card.rank"
 import { StyledCardCount as CardCount } from "./style.card.count"
 import config from "../config"
-import { useSelector } from "react-redux"
 
 export const Card = ({ id, name, count, rank, image }) => {
-    //const targetTimeTable = useSelector(state => state.target_table)
-    //console.log("[ CARD ]: ", targetTimeTable)
 
     const getPersonRank = (rank) => {
         switch(rank) {
-            case "firstPlace":
+            case "place_first":
                 return config.rank.URL_rank_04;
-            case "secondPlace":
+            case "place_second":
                 return config.rank.URL_rank_03;
-            case "thirdPlace":
+            case "place_third":
                 return config.rank.URL_rank_02;
             case "":
                 return config.rank.URL_rank_01;
@@ -27,11 +24,11 @@ export const Card = ({ id, name, count, rank, image }) => {
 
     const getPersonTitle = (rank) => {
         switch(rank) {
-            case "firstPlace":
+            case "place_first":
                 return "Legendary";
-            case "secondPlace":
+            case "place_second":
                 return "Epic";
-            case "thirdPlace":
+            case "place_third":
                 return "Rare";
             case "":
                 return "Common";
@@ -52,9 +49,9 @@ export const Card = ({ id, name, count, rank, image }) => {
                     <div className="card__content__info__name">
                         <p style={{
                             fontWeight: "bold",
-                            color: rank === "firstPlace" ? "var(--range--color--01)" :
-                                   rank === "secondPlace" ? "var(--range--color--02)" :
-                                   rank === "thirdPlace" ? "var(--range--color--03)" : "var(--range--color--04)"
+                            color: rank === "place_first" ? "var(--range--color--01)" :
+                                   rank === "place_second" ? "var(--range--color--02)" :
+                                   rank === "place_third" ? "var(--range--color--03)" : "var(--range--color--04)"
                         }}>{ getPersonTitle(rank)}</p>
 
                         <p>{ name }</p>

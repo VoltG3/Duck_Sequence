@@ -11,9 +11,9 @@ export const Crown = ({ variant }) => {
 
     const getCrown = () => {
         switch(variant) {
-            case "firstPlace": return config.crown.URL_crown_01;
-            case "secondPlace": return config.crown.URL_crown_02;
-            case "thirdPlace": return config.crown.URL_crown_03;
+            case "place_first": return config.crown.URL_crown_01;
+            case "place_second": return config.crown.URL_crown_02;
+            case "place_third": return config.crown.URL_crown_03;
             default: return null;
         }
     }
