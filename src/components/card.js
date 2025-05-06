@@ -7,6 +7,22 @@ import config from "../config"
 
 export const Card = ({ id, name, count, rank, image }) => {
 
+    const getPlayerImage = (id) => {
+        switch(Number(id)) {
+            case 1: return config.persons.URL_person_01;
+            case 2: return config.persons.URL_person_02;
+            case 3: return config.persons.URL_person_03;
+            case 4: return config.persons.URL_person_04;
+            case 5: return config.persons.URL_person_05;
+            case 6: return config.persons.URL_person_06;
+            case 7: return config.persons.URL_person_07;
+            case 8: return config.persons.URL_person_08;
+            case 9: return config.persons.URL_person_09;
+            case 10: return config.persons.URL_person_10;
+            default: return null;
+        }
+    }
+
     const getPersonRank = (rank) => {
         switch(rank) {
             case "place_first":
@@ -40,7 +56,7 @@ export const Card = ({ id, name, count, rank, image }) => {
     return (
         <CardContainer>
             <CardImage
-                src={ image }
+                src={ getPlayerImage(image) }
                 alt={`Person ${id}`}
             />
 
@@ -55,6 +71,7 @@ export const Card = ({ id, name, count, rank, image }) => {
                         }}>{ getPersonTitle(rank)}</p>
 
                         <p>{ name }</p>
+                        <p style={{ fontSize: "12px"}}>More about this bird</p>
                     </div>
 
                     {/* <p>rank { rank }</p> */}

@@ -13,18 +13,18 @@ export const GetCards = ({ variant }) => {
         return <p>Loading cards…</p>
     }
 
-    const result = []
     const selectedEntry = records.find(entry => entry.date === selectedDate);
 
     if (!selectedEntry) {
         return <p>No data found for selected date.</p>;
     }
 
-    Object.entries(selectedEntry).forEach(([key, value]) => {
-        if (key.startsWith("player") && value.rank === variant) {
-            result.push({ ...value, id: key });
-        }
-    })
+    const result = Object.entries(selectedEntry)
+        .filter(([key, value]) => key.startsWith("player") && value.rank === variant)
+        .map(([key, value]) => ({
+            id: key,
+            ...value
+        }))
 
     if (result.length === 0) {
         return <p>No matching cards.</p>
