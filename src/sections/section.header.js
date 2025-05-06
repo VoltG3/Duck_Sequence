@@ -34,14 +34,13 @@ const StyledHeader = styled.div`
 
 export const SectionHeader = () => {
     const dispatch = useDispatch()
-    const timeRecordsObj = useSelector(state => state.dates)
+    const timeRecords = useSelector(state => state.dates)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
-    if (!isDataLoaded || !timeRecordsObj || Object.keys(timeRecordsObj).length === 0) {
+    if (!isDataLoaded || !timeRecords || Object.keys(timeRecords).length === 0) {
         return <p>Loading dates…</p>
     }
 
-    const timeRecords = Object.keys(timeRecordsObj)
     const totalCount = timeRecords.length
 
     if (totalCount === 0) {

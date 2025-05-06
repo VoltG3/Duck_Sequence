@@ -4,7 +4,8 @@ export const GlobalStyles = createGlobalStyle`
     :root {
 
         --color--primary: #282c34;
-        
+        --color--info--default: green;
+        --color--info--hover: blue;
 
         --card--color--01: rgba(36, 39, 34, 0.15);
 

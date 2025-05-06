@@ -1,82 +1,98 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { storeDates, storeResultTable, storeSetDataLoaded } from "../redux/actions"
+import { storeDates, storeResultTable, storeDescriptionsList, storeSetDataLoaded} from "../redux/actions"
 import { dataLoaderBuildDates } from "./dataloader.build.dates"
 import { dataLoaderBuildFields } from "./dataloader.build.fields"
 import { dataLoaderBuildRanks } from "./dataloader.build.ranks"
 
 /**
- * DataLoader is a React functional component responsible for loading JSON data
- * from a specified endpoint, processing the data, and dispatching it to the state management store.
+ * The DataLoader component is responsible for fetching and processing data
+ * from external JSON resources. It handles data fetching, state management,
+ * and dispatching to the Redux store for further use in the application.
  *
- * Features:
- * - Fetches data from a JSON file located at "/assets/data.json".
- * - Processes the retrieved data to generate derived objects such as dates, fields, and rank assignments.
- * - Dispatches the processed data and updated state flags to the Redux store.
+ * This component performs the following key functionalities:
+ * - Fetches two external JSON files (data.json and descriptions.json) from the public assets folder.
+ * - Parses and processes the fetched data to derive new objects such as dates and rank assignments.
+ * - Updates internal state variables with the processed data to manage the component's workflow.
+ * - Dispatches the processed data (dates, rank assignments, and descriptions) to the Redux store for
+ *   global state management across the application.
+ * - Displays loading or error messages during the data loading process.
  *
- * State Management:
- * - jsonData: Stores the raw JSON data fetched from the endpoint.
- * - newObjectDates: Stores an object representing processed dates derived from the JSON data.
- * - newRankAssigmentObject: Stores processing results related to rank assignments derived from the JSON data.
+ * State Variables:
+ * - `jsonData`: Holds the raw JSON data fetched from data.json.
+ * - `newObjectDates`: Stores processed dates derived from the JSON data.
+ * - `newRankAssignmentObject`: Stores rank assignment data generated from the processed fields of the JSON data.
+ * - `descriptionData`: Holds the description data fetched from descriptions.json.
+ * - `isLoading`: Indicates whether the data is currently being loaded.
+ * - `error`: Stores any errors encountered during the data fetching process.
  *
- * Side Effects:
- * - Fetches data on initial render through the `useEffect` hook and processes the data to create new states.
- * - Uses `useEffect` to respond to changes in jsonData, dispatching updated data and statuses to the Redux store.
+ * Effects:
+ * - The first useEffect handles data fetching, processing, and handles clean-up,
+ *   ensuring no further state updates occur if the component is unmounted.
+ * - The second useEffect monitors changes in the processed data and dispatches
+ *   the data to the Redux store if there are no errors and the data is fully loaded.
  *
- * Dependencies:
- * - `useState`: Manages multiple state variables within the component.
- * - `useEffect`: Executes side effects (e.g., data fetching or store updates) in response to component lifecycle events.
- * - `useDispatch`: Dispatches actions to the Redux store.
- * - Functions `dataLoaderBuildDates`, `dataLoaderBuildFields`, and `dataLoaderBuildRanks`:
- *   Helper functions invoked to process fetched JSON data into specific derived objects.
- * - Redux actions `storeDates`, `storeResultTable`, and `storeSetDataLoaded`:
- *   Redux actions used to store processed data and update relevant states.
- *
- * Returns:
- * This component does not render any UI and returns `null`.
+ * Display:
+ * - Renders an error message if any error occurs during the data fetching process.
+ * - Renders a loading message while data is being loaded.
+ * - Does not render any UI once the data is successfully loaded and stored into the Redux state.
  */
 
 export const DataLoader = () => {
     const [jsonData, setJsonData] = useState(null)
     const [newObjectDates, setNewObjectDates] = useState(null)
-    const [, setNewFieldsObject] = useState(null)
-    const [newRankAssigmentObject, setNewRankAssigmentData] = useState(null)
+    const [newRankAssignmentObject, setNewRankAssignmentData] = useState(null)
+    const [descriptionData, setDescriptionsData] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
     const dispatch = useDispatch()
 
     useEffect(() => {
         let isMounted = true;
 
-        const loadData = async () => {
-            const response = await fetch(`${process.env.PUBLIC_URL}/assets/data.json`)
+        const loadAllData = async () => {
+            try {
+                setIsLoading(true)
 
-            if (!response.ok) {
-                console.error(`Error: HTTP status ${response.status}`)
+                const [response, responseDesc] = await Promise.all([
+                    fetch(`${process.env.PUBLIC_URL}/assets/data.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`)
+                ])
 
-                return
-            }
+                if (!response.ok) throw new Error(`data.json fetch failed with status ${response.status}`)
+                if (!responseDesc.ok) throw new Error(`descriptions.json fetch failed with status ${responseDesc.status}`)
 
-            const JSONdata = await response.json()
-            console.log("[ jsonData onloaded       ]", JSONdata)
+                const [JSONdata, descData] = await Promise.all([
+                    response.json(),
+                    responseDesc.json()
+                ])
 
-            if (isMounted) {
-                setJsonData(JSONdata)
+                if (isMounted) {
+                    setJsonData(JSONdata)
+                    setDescriptionsData(descData)
 
-                const dates = dataLoaderBuildDates(JSONdata)
+                    const dates = dataLoaderBuildDates(JSONdata)
                     setNewObjectDates(dates)
-                    console.log("[ newObjectDates created  ]", dates)
 
-                const fields = dataLoaderBuildFields(JSONdata)
-                    setNewFieldsObject(fields)
-                    console.log("[ newFieldsObject created ]", fields)
-
-                const ranks = dataLoaderBuildRanks(fields)
-                    setNewRankAssigmentData(ranks)
-                    console.log("[ newRankAssigmentObject  ]", ranks)
+                    const fields = dataLoaderBuildFields(JSONdata)
+                    const ranks = dataLoaderBuildRanks(fields)
+                    setNewRankAssignmentData(ranks)
+                }
+            } catch (err) {
+                if (isMounted) {
+                    setError(err.message)
+                    console.error("Error during loading data:", err)
+                }
+            } finally {
+                if (isMounted) {
+                    setIsLoading(false)
+                }
             }
         }
 
-        loadData().catch(error => {
-            console.error("Error during loading data:", error)
+        loadAllData().then(() => {
+        }).catch(err => {
+            console.error("Unhandled error in loadAllData:", err)
         })
 
         return () => {
@@ -84,14 +100,22 @@ export const DataLoader = () => {
         }
     }, [])
 
-
     useEffect(() => {
-        if (jsonData !== null) {
+        if (jsonData !== null && !isLoading && !error) {
+
+            console.log("[ data loader    ] - jsonData               ", jsonData)
+            console.log("[ data loader    ] - newObjectDates         ", newObjectDates)
+            console.log("[ data loader    ] - newRankAssignmentObject", newRankAssignmentObject)
+            console.log("[ data loader    ] - descriptionData        ", descriptionData)
+
             dispatch(storeDates(newObjectDates))
-            dispatch(storeResultTable(newRankAssigmentObject))
+            dispatch(storeResultTable(newRankAssignmentObject))
+            dispatch(storeDescriptionsList(descriptionData))
             dispatch(storeSetDataLoaded(true))
         }
-    }, [jsonData, dispatch, newObjectDates, newRankAssigmentObject])
+    }, [jsonData, dispatch, newObjectDates, newRankAssignmentObject, descriptionData, isLoading, error])
 
+    if (error) return <div>Error: {error}</div>
+    if (isLoading) return <div>Loading...</div>
     return null
 }

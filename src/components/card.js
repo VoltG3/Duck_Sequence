@@ -3,9 +3,14 @@ import { StyledCardImage as CardImage } from "./style.card.image"
 import { StyledCardContent as CardContent } from "./style.card.content"
 import { StyledCardRank as CardRank } from "./style.card.rank"
 import { StyledCardCount as CardCount } from "./style.card.count"
+import { StyledCardInfo as CardInfo } from "./style.card.info"
+import { useDispatch } from "react-redux"
 import config from "../config"
+import {storeTargetDescription} from "../redux/actions";
 
 export const Card = ({ id, name, count, rank, image }) => {
+    const dispatch = useDispatch()
+
     const getPlayerImage = (id) => {
         switch(Number(id)) {
             case 1: return config.persons.URL_person_01
@@ -42,6 +47,27 @@ export const Card = ({ id, name, count, rank, image }) => {
         }
     }
 
+    const getHeroId = (id) => {
+        switch(id) {
+            case "1": return "hero_01"
+            case "2": return "hero_02"
+            case "3": return "hero_03"
+            case "4": return "hero_04"
+            case "5": return "hero_05"
+            case "6": return "hero_06"
+            case "7": return "hero_07"
+            case "8": return "hero_08"
+            case "9": return "hero_09"
+            case "10": return "hero_10"
+            default: return null
+        }
+    }
+
+    const onHandle = (id) => {
+        console.log("[ card component ] - SET target ID          ", id)
+        dispatch(storeTargetDescription(getHeroId(id)))
+    }
+
     return (
         <CardContainer>
             <CardImage
@@ -60,7 +86,7 @@ export const Card = ({ id, name, count, rank, image }) => {
                         }}>{ getPlayerTitle(rank)}</p>
 
                         <p>{ name }</p>
-                        <p style={{ fontSize: "12px", paddingTop: "12px"}}>More about this bird</p>
+                        <CardInfo onClick={()=> onHandle(id)}>More about this bird</CardInfo>
                     </div>
 
                     {/* <p>rank { rank }</p> */}

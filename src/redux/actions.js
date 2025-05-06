@@ -1,5 +1,10 @@
 import {
-    SET_DATA_LOADED, RESULT_TABLE, TARGET_DATE, OBJECT_DATES
+    SET_DATA_LOADED,
+    RESULT_TABLE,
+    STORE_DESCRIPTIONS,
+    TARGET_DESCRIPTION,
+    TARGET_DATE,
+    OBJECT_DATES
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -10,6 +15,22 @@ export const storeSetDataLoaded = (isDataLoaded) => ({
 export const storeResultTable = (result_table) => ({
     type: RESULT_TABLE,
     payload: result_table
+})
+
+export const storeDescriptionsList = (descriptionsArray) => {
+    const asObject = {}
+    descriptionsArray.forEach(hero => {
+        asObject[hero.id] = hero
+    })
+    return {
+        type: STORE_DESCRIPTIONS,
+        payload: asObject
+    }
+}
+
+export const storeTargetDescription = (target_description) => ({
+    type: TARGET_DESCRIPTION,
+    payload: target_description
 })
 
 export const storeDates = (dates) => ({

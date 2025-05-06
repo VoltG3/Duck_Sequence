@@ -1,10 +1,12 @@
 import {
-    SET_DATA_LOADED, RESULT_TABLE, OBJECT_DATES, TARGET_DATE
+    SET_DATA_LOADED, RESULT_TABLE, STORE_DESCRIPTIONS, TARGET_DESCRIPTION,  OBJECT_DATES, TARGET_DATE
 } from './actionTypes'
 
 const initialState = {
     isDataLoaded: false,
     result_table: {},
+    descriptions_list : {},
+    target_description: "",
     dates: {},
     target_date: "default"
 }
@@ -21,6 +23,18 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 result_table: action.payload
+            }
+
+        case STORE_DESCRIPTIONS:
+            return {
+                ...state,
+                descriptions_list: action.payload
+            }
+
+        case TARGET_DESCRIPTION:
+            return {
+                ...state,
+                target_description: action.payload
             }
 
         case OBJECT_DATES:

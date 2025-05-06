@@ -1,14 +1,22 @@
 /**
- * Processes an array of data objects to create a mapping of dates to corresponding objects.
+ * Extracts a unique set of dates from the provided data array.
  *
- * @function dataLoaderBuildDates
- * @param {Array} data - An array of objects, where each object contains a `date` property.
- * @returns {Object} An object where each key is a unique date from the given data, and the value is an object containing the `date` property.
+ * This function goes through an array of objects and collects all unique values
+ * of the `date` property found within the objects. The resulting unique dates
+ * are returned as an array.
+ *
+ * @param {Array<Object>} data - An array of objects, where each object may contain a `date` property.
+ * @returns {Array<string>} An array of unique date strings collected from the `date` property of the input objects.
  */
 
 export const dataLoaderBuildDates = (data) => {
-    return data.reduce((acc, item) => {
-        acc[item.date] = { date: item.date }
-        return acc
-    }, {})
+    const dateSet = new Set()
+
+    data.forEach(item => {
+        if (item.date) {
+            dateSet.add(item.date)
+        }
+    })
+
+    return Array.from(dateSet)
 }
