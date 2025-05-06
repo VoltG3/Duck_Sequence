@@ -6,7 +6,7 @@ const initialState = {
     isDataLoaded: false,
     result_table: {},
     dates: {},
-    target_date: []
+    target_date: "default"
 }
 
 export default function reducer(state = initialState, action) {
@@ -24,7 +24,6 @@ export default function reducer(state = initialState, action) {
             }
 
         case OBJECT_DATES:
-            //console.log("REDUX", action.payload)
             return {
                 ...state,
                 dates: action.payload

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { GlobalStyles } from "./GlobalStyles"
-import LoadData from "./LoadData"
+import { DataLoader } from "./dataloader/dataloader"
 import { SectionHeader } from "./sections/section.header"
 import SectionContent from "./sections/section.content"
 import SectionFooter from "./sections/section.footer"
@@ -16,7 +16,7 @@ function App() {
             <div className="styledDesktop_Mask">
                 <div className="styledDesktop_Content">
                     <GlobalStyles />
-                    <LoadData />
+                    <DataLoader />
                     <div
                         style={{
                             display: "flex",

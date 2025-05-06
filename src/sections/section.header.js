@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { storeDates, storeTargetDate } from "../redux/actions"
+import { storeTargetDate } from "../redux/actions"
 
 const StyledHeader = styled.div`
     display: flex;
@@ -37,10 +37,8 @@ export const SectionHeader = () => {
     return (
         <StyledHeader>
             <p>
-                Duck Sequens:{" "}
-                <span style={{ color: "yellow" }}>
-                    {totalCount}
-                </span>
+                Duck Sequence:{" "}
+                <span style={{ fontSize: "40px", color: "yellow" }}>{ totalCount - 1 }</span>
             </p>
 
             <ul>
@@ -53,7 +51,7 @@ export const SectionHeader = () => {
                                 dispatch(storeTargetDate(item));
                             }}
                         >
-                            {item}
+                            { item }
                         </button>
                     </li>
                 ))}

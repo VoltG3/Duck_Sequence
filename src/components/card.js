@@ -6,50 +6,39 @@ import { StyledCardCount as CardCount } from "./style.card.count"
 import config from "../config"
 
 export const Card = ({ id, name, count, rank, image }) => {
-
     const getPlayerImage = (id) => {
         switch(Number(id)) {
-            case 1: return config.persons.URL_person_01;
-            case 2: return config.persons.URL_person_02;
-            case 3: return config.persons.URL_person_03;
-            case 4: return config.persons.URL_person_04;
-            case 5: return config.persons.URL_person_05;
-            case 6: return config.persons.URL_person_06;
-            case 7: return config.persons.URL_person_07;
-            case 8: return config.persons.URL_person_08;
-            case 9: return config.persons.URL_person_09;
-            case 10: return config.persons.URL_person_10;
-            default: return null;
+            case 1: return config.persons.URL_person_01
+            case 2: return config.persons.URL_person_02
+            case 3: return config.persons.URL_person_03
+            case 4: return config.persons.URL_person_04
+            case 5: return config.persons.URL_person_05
+            case 6: return config.persons.URL_person_06
+            case 7: return config.persons.URL_person_07
+            case 8: return config.persons.URL_person_08
+            case 9: return config.persons.URL_person_09
+            case 10: return config.persons.URL_person_10
+            default: return null
         }
     }
 
-    const getPersonRank = (rank) => {
+    const getPlayerRank = (rank) => {
         switch(rank) {
-            case "place_first":
-                return config.rank.URL_rank_04;
-            case "place_second":
-                return config.rank.URL_rank_03;
-            case "place_third":
-                return config.rank.URL_rank_02;
-            case "":
-                return config.rank.URL_rank_01;
-            default:
-                return null;
+            case "place_first": return config.rank.URL_rank_04
+            case "place_second": return config.rank.URL_rank_03
+            case "place_third": return config.rank.URL_rank_02
+            case "": return config.rank.URL_rank_01
+            default: return null
         }
     }
 
-    const getPersonTitle = (rank) => {
+    const getPlayerTitle = (rank) => {
         switch(rank) {
-            case "place_first":
-                return "Legendary";
-            case "place_second":
-                return "Epic";
-            case "place_third":
-                return "Rare";
-            case "":
-                return "Common";
-            default:
-                return null;
+            case "place_first": return "Legendary"
+            case "place_second": return "Epic"
+            case "place_third": return "Rare"
+            case "": return "Common"
+            default: return null
         }
     }
 
@@ -57,7 +46,7 @@ export const Card = ({ id, name, count, rank, image }) => {
         <CardContainer>
             <CardImage
                 src={ getPlayerImage(image) }
-                alt={`Person ${id}`}
+                alt={`Player ${id}`}
             />
 
             <CardContent>
@@ -68,7 +57,7 @@ export const Card = ({ id, name, count, rank, image }) => {
                             color: rank === "place_first" ? "var(--range--color--01)" :
                                    rank === "place_second" ? "var(--range--color--02)" :
                                    rank === "place_third" ? "var(--range--color--03)" : "var(--range--color--04)"
-                        }}>{ getPersonTitle(rank)}</p>
+                        }}>{ getPlayerTitle(rank)}</p>
 
                         <p>{ name }</p>
                         <p style={{ fontSize: "12px"}}>More about this bird</p>
@@ -79,7 +68,7 @@ export const Card = ({ id, name, count, rank, image }) => {
 
                 <div className="card__content__rank">
                     <CardRank
-                        src={getPersonRank(rank)}
+                        src={getPlayerRank(rank)}
                         alt={`Person ${id}`}
                     />
                 </div>

@@ -7,8 +7,6 @@ export const GetCards = ({ variant }) => {
     const selectedDate = useSelector(state => state.target_date)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
-    console.log("target date", selectedDate)
-
     if (!isDataLoaded || !Array.isArray(records) || records.length === 0) {
         return <p>Loading cards…</p>
     }
@@ -25,10 +23,6 @@ export const GetCards = ({ variant }) => {
             id: key,
             ...value
         }))
-
-    if (result.length === 0) {
-        return <p>No matching cards.</p>
-    }
 
     return (
         <>
@@ -49,7 +43,7 @@ export const GetCards = ({ variant }) => {
                         name={item.name}
                         count={item.count}
                         rank={item.rank}
-                        image={item.imageURL}
+                        image={item.id}
                     />
                 </div>
             ))}
