@@ -4,7 +4,7 @@ import { storeTargetDate } from "../redux/actions"
 
 const StyledHeader = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -12,9 +12,23 @@ const StyledHeader = styled.div`
     background: var(--color--primary);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-    & p {
-        font-size: 45px;
+    
+    & p, span {
+        font-size: clamp(1.25rem, 5vw, 2.813rem);
         font-variant: small-caps;
+    }
+    
+    & span { 
+        color: yellow;
+    }
+    
+    & ul {
+        list-style: none;
+    }
+    
+    & li {
+        display: inline-block;
+        margin-right: var(--space);
     }
 `
 
@@ -24,7 +38,7 @@ export const SectionHeader = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
     if (!isDataLoaded || !timeRecordsObj || Object.keys(timeRecordsObj).length === 0) {
-        return <p>Loading dates…</p>;
+        return <p>Loading dates…</p>
     }
 
     const timeRecords = Object.keys(timeRecordsObj)
@@ -36,20 +50,17 @@ export const SectionHeader = () => {
 
     return (
         <StyledHeader>
-            <p>
-                Duck Sequence:{" "}
-                <span style={{ fontSize: "40px", color: "yellow" }}>{ totalCount - 1 }</span>
-            </p>
+            <p>Duck Sequence:{" "}<span>{ totalCount - 1 }</span></p>
 
             <ul>
                 {timeRecords.map((item, index) => (
-                    <li key={`${item}-${index}`}>
+                    <li key={`${ item }-${ index }`}>
                         <button
-                            id={item}
-                            onClick={() => {
-                                console.log("Dispatching item: ", item);
-                                dispatch(storeTargetDate(item));
+                            style={{
+
                             }}
+                            id={ item }
+                            onClick={() => { dispatch(storeTargetDate(item)) }}
                         >
                             { item }
                         </button>

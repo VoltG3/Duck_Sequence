@@ -47,7 +47,7 @@ export const DataLoader = () => {
         let isMounted = true;
 
         const loadData = async () => {
-            const response = await fetch("/assets/data.json")
+            const response = await fetch(`${process.env.PUBLIC_URL}/assets/data.json`)
 
             if (!response.ok) {
                 console.error(`Error: HTTP status ${response.status}`)

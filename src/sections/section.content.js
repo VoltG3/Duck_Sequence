@@ -5,16 +5,14 @@ function SectionContent() {
 
     return (
         <StyledContent>
-            <div className="innerSectionContent">
-                <div className="cardSet">
-                    <GetCards variant={"place_first"} />
-                    <GetCards variant={"place_second"} />
-                    <GetCards variant={"place_third"} />
-                </div>
+            <div className="cardSet">
+                <GetCards variant={"place_first"} />
+                <GetCards variant={"place_second"} />
+                <GetCards variant={"place_third"} />
+            </div>
 
-                <div className="cardSet">
-                     <GetCards variant={""} />
-                </div>
+            <div className="cardSet">
+                <GetCards variant={""} />
             </div>
         </StyledContent>
     )
@@ -25,22 +23,10 @@ const StyledContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    width: auto;
+    width: 100%;
     height: 100%;
-    
-    .innerSectionContent {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-        padding: 80px;
-        backdrop-filter: blur(6px);
-        border-radius: 15px;
-        box-shadow:
-                4px 0 6px rgba(0, 0, 0, 0.6),   /* right shadow  */
-                0 4px 6px rgba(0, 0, 0, 0.6);   /* bottom shadow */
-        background-color: rgba(255, 255, 255, 0.1);
-    }
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.1);
     
     .cardSet {
         display: flex;
@@ -49,6 +35,8 @@ const StyledContent = styled.div`
         align-content: center;
         width: auto;
         height: auto;
+        border: solid 1px red;
+        
     }
 `
 

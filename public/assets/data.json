@@ -26,7 +26,7 @@
     "player10": { "count": "1", "name": "Gjest" }
   },
   {
-    "date": "missing date 01",
+    "date": "??.01.2025",
     "player01": { "count": "3", "name": "Alex" },
     "player02": { "count": "2", "name": "Andreas" },
     "player03": { "count": "2", "name": "Betina" },
@@ -39,7 +39,7 @@
     "player10": { "count": "1", "name": "Gjest" }
   },
   {
-    "date": "missing date 02",
+    "date": "??.02.2025",
     "player01": { "count": "5", "name": "Alex" },
     "player02": { "count": "4", "name": "Andreas" },
     "player03": { "count": "3", "name": "Betina" },

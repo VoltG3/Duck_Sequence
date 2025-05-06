@@ -60,7 +60,7 @@ export const Card = ({ id, name, count, rank, image }) => {
                         }}>{ getPlayerTitle(rank)}</p>
 
                         <p>{ name }</p>
-                        <p style={{ fontSize: "12px"}}>More about this bird</p>
+                        <p style={{ fontSize: "12px", paddingTop: "12px"}}>More about this bird</p>
                     </div>
 
                     {/* <p>rank { rank }</p> */}

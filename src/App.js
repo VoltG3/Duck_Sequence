@@ -3,46 +3,37 @@ import { GlobalStyles } from "./GlobalStyles"
 import { DataLoader } from "./dataloader/dataloader"
 import { SectionHeader } from "./sections/section.header"
 import SectionContent from "./sections/section.content"
+import SectionInfo from "./sections/section.info"
 import SectionFooter from "./sections/section.footer"
-import { useSelector } from "react-redux"
 import config from "./config"
 
 function App() {
-    const isDataLoaded = useSelector(state => state.isDataLoaded)
 
   return (
-    <StyledDesktop>
-        <div className="styledDesktop_Background">
-            <div className="styledDesktop_Mask">
-                <div className="styledDesktop_Content">
+    <AppContainer>
+        <div className="background_img">
+            <div className="background_mask">
+                <div className="appSections">
                     <GlobalStyles />
                     <DataLoader />
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "100%",
-                            height: "100%",
-                            border: "1px solid red"
-                    }}> {/* this div preserve from z-index issue */}
-                        { isDataLoaded ? <SectionHeader /> : null}
-                        { isDataLoaded ? <SectionContent /> : null}
+                        <SectionHeader />
+                        <SectionContent />
+                    {/* <SectionInfo />*/}
                         <SectionFooter />
-                    </div>
                 </div>
             </div>
         </div>
-    </StyledDesktop>
+    </AppContainer>
   )
 }
 
-const StyledDesktop = styled.div`
+const AppContainer = styled.div`
     position: relative;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
 
-    .styledDesktop_Background {
+    .background_img {
         position: absolute;
         top: 0;
         left: 0;
@@ -52,20 +43,10 @@ const StyledDesktop = styled.div`
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        z-index: 0; 
-        
-        .discable_zIndex {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
+        z-index: 0;
     }
 
-    .styledDesktop_Mask {
+    .background_mask {
         position: absolute;
         top: 0;
         left: 0;
@@ -75,7 +56,7 @@ const StyledDesktop = styled.div`
         z-index: 1;
     }
 
-    .styledDesktop_Content {
+    .appSections {
         position: relative;
         display: flex;
         flex-direction: column;

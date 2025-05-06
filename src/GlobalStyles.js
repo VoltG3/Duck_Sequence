@@ -4,6 +4,7 @@ export const GlobalStyles = createGlobalStyle`
     :root {
 
         --color--primary: #282c34;
+        
 
         --card--color--01: rgba(36, 39, 34, 0.15);
 
@@ -11,5 +12,9 @@ export const GlobalStyles = createGlobalStyle`
         --range--color--02: #027FC1;
         --range--color--03: #8080C0;
         --range--color--04: #7F8000;
+        
+        --space: 0.625rem // 10px;
+        
+       
     }
 `
