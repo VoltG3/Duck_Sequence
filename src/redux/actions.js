@@ -1,6 +1,7 @@
 import {
     SET_DATA_LOADED,
     RESULT_TABLE,
+    PLAYER_IMAGES,
     STORE_DESCRIPTIONS,
     TARGET_DESCRIPTION,
     TARGET_DATE,
@@ -16,6 +17,19 @@ export const storeResultTable = (result_table) => ({
     type: RESULT_TABLE,
     payload: result_table
 })
+
+export const storePlayerImages = (player_images) => {
+    console.log("[ dispatch   GET ] - imagesData             ", player_images)
+
+    const asObject = {}
+    player_images.forEach(hero => {
+        asObject[hero.id] = hero
+    })
+    return {
+        type: PLAYER_IMAGES,
+        payload: asObject
+    }
+}
 
 export const storeDescriptionsList = (descriptionsArray) => {
     const asObject = {}

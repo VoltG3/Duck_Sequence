@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { storeDates, storeResultTable, storeDescriptionsList, storeSetDataLoaded} from "../redux/actions"
+import {
+    storeDates,
+    storeResultTable,
+    storeDescriptionsList,
+    storeSetDataLoaded,
+    storePlayerImages
+} from "../redux/actions"
 import { dataLoaderBuildDates } from "./dataloader.build.dates"
 import { dataLoaderBuildFields } from "./dataloader.build.fields"
 import { dataLoaderBuildRanks } from "./dataloader.build.ranks"
@@ -11,7 +17,7 @@ import { dataLoaderBuildRanks } from "./dataloader.build.ranks"
  * and dispatching to the Redux store for further use in the application.
  *
  * This component performs the following key functionalities:
- * - Fetches two external JSON files (data.json and descriptions.json) from the public assets folder.
+ * - Fetches two external JSON files (results.json and descriptions.json) from the public assets folder.
  * - Parses and processes the fetched data to derive new objects such as dates and rank assignments.
  * - Updates internal state variables with the processed data to manage the component's workflow.
  * - Dispatches the processed data (dates, rank assignments, and descriptions) to the Redux store for
@@ -19,7 +25,7 @@ import { dataLoaderBuildRanks } from "./dataloader.build.ranks"
  * - Displays loading or error messages during the data loading process.
  *
  * State Variables:
- * - `jsonData`: Holds the raw JSON data fetched from data.json.
+ * - `jsonData`: Holds the raw JSON data fetched from results.json.
  * - `newObjectDates`: Stores processed dates derived from the JSON data.
  * - `newRankAssignmentObject`: Stores rank assignment data generated from the processed fields of the JSON data.
  * - `descriptionData`: Holds the description data fetched from descriptions.json.
@@ -39,10 +45,11 @@ import { dataLoaderBuildRanks } from "./dataloader.build.ranks"
  */
 
 export const DataLoader = () => {
-    const [jsonData, setJsonData] = useState(null)
+    const [resultsData, setResultsData] = useState(null)
     const [newObjectDates, setNewObjectDates] = useState(null)
     const [newRankAssignmentObject, setNewRankAssignmentData] = useState(null)
     const [descriptionData, setDescriptionsData] = useState(null)
+    const [imagesData, setImagesData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
@@ -54,27 +61,35 @@ export const DataLoader = () => {
             try {
                 setIsLoading(true)
 
-                const [response, responseDesc] = await Promise.all([
-                    fetch(`${process.env.PUBLIC_URL}/assets/data.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`)
+                const [responseResultsJSON, responseImagesJSON, responseDescriptionsJSON] = await Promise.all([
+                    fetch(`${process.env.PUBLIC_URL}/assets/results.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/images.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`),
                 ])
 
-                if (!response.ok) throw new Error(`data.json fetch failed with status ${response.status}`)
-                if (!responseDesc.ok) throw new Error(`descriptions.json fetch failed with status ${responseDesc.status}`)
+                if (!responseResultsJSON.ok) throw new Error(`results.json fetch failed with status ${responseResultsJSON.status}`)
+                if (!responseImagesJSON.ok) throw new Error(`images.json fetch failed with status ${responseImagesJSON.status}`)
+                if (!responseDescriptionsJSON.ok) throw new Error(`descriptions.json fetch failed with status ${responseDescriptionsJSON.status}`)
 
-                const [JSONdata, descData] = await Promise.all([
-                    response.json(),
-                    responseDesc.json()
+
+                const [resultsJSON, imagesJSON, descriptionsJSON] = await Promise.all([
+                    responseResultsJSON.json(),
+                    responseImagesJSON.json(),
+                    responseDescriptionsJSON.json()
                 ])
 
                 if (isMounted) {
-                    setJsonData(JSONdata)
-                    setDescriptionsData(descData)
+                    setResultsData(resultsJSON)
+                    setImagesData(imagesJSON)
+                    setDescriptionsData(descriptionsJSON)
 
-                    const dates = dataLoaderBuildDates(JSONdata)
+
+
+
+                    const dates = dataLoaderBuildDates(resultsJSON)
                     setNewObjectDates(dates)
 
-                    const fields = dataLoaderBuildFields(JSONdata)
+                    const fields = dataLoaderBuildFields(resultsJSON)
                     const ranks = dataLoaderBuildRanks(fields)
                     setNewRankAssignmentData(ranks)
                 }
@@ -101,19 +116,43 @@ export const DataLoader = () => {
     }, [])
 
     useEffect(() => {
-        if (jsonData !== null && !isLoading && !error) {
+        if (resultsData !== null && !isLoading && !error) {
 
-            console.log("[ data loader    ] - jsonData               ", jsonData)
+            console.log("[ data loader    ] - results.json           ", resultsData)
+            console.log("[ data loader    ] - images.json            ", imagesData)
+            console.log("[ data loader    ] - descriptions.json      ", descriptionData)
+
             console.log("[ data loader    ] - newObjectDates         ", newObjectDates)
             console.log("[ data loader    ] - newRankAssignmentObject", newRankAssignmentObject)
-            console.log("[ data loader    ] - descriptionData        ", descriptionData)
 
             dispatch(storeDates(newObjectDates))
             dispatch(storeResultTable(newRankAssignmentObject))
+            dispatch(storePlayerImages(imagesData))
             dispatch(storeDescriptionsList(descriptionData))
             dispatch(storeSetDataLoaded(true))
+
+            //console.log("[ data loader    ] - results.json           ", resultsData)
+            //console.log("[ data loader    ] - newObjectDates         ", newObjectDates)
+            //console.log("[ data loader    ] - newRankAssignmentObject", newRankAssignmentObject)
+            //console.log("[ data loader    ] - descriptions.json      ", descriptionData)
+
+            //dispatch(storeDates(newObjectDates))
+            //dispatch(storeResultTable(newRankAssignmentObject))
+            //dispatch(storeDescriptionsList(descriptionData))
+            //dispatch(storeSetDataLoaded(true))
         }
-    }, [jsonData, dispatch, newObjectDates, newRankAssignmentObject, descriptionData, isLoading, error])
+    }, [
+        resultsData,
+        imagesData,
+        descriptionData,
+
+
+        dispatch,
+        newObjectDates,
+        newRankAssignmentObject,
+        isLoading,
+        error
+    ])
 
     if (error) return <div>Error: {error}</div>
     if (isLoading) return <div>Loading...</div>

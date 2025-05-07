@@ -7,6 +7,10 @@ export const GetCards = ({ variant }) => {
     const selectedDate = useSelector(state => state.target_date)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
+    //const heroImg = useSelector(state => state.player_images[targetKey])
+
+    //console.log("[ target key", heroImg)
+
     if (!isDataLoaded || !Array.isArray(records) || records.length === 0) {
         return <p>Loading cards…</p>
     }
