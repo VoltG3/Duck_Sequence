@@ -42,7 +42,7 @@
     "class": "C# Knight",
     "specialization": "+2 Damage to .NET Framework functions",
     "startingSkills": ["Basic OOP", "Basic Type Safety"],
-    "units": ["⚔Struct Squire", "Exception Paladin", "nterface Crusader"],
+    "units": ["Struct Squire", "Exception Paladin", "Interface Crusader"],
     "description": "Sir Quackalot never uses <span>dynamic</span>, and his interfaces are so strict that even Java bows. He is code with honor. His pull requests are accepted without comments. Each of his commits is like a knight’s oath — irrevocable.",
     "race": "Windows — his .NET sword glows atop Visual Studio tower.",
     "astrology": "When the Sun resides in the namespace sector, his <span>try-catch</span> blocks become immortal."

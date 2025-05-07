@@ -11,14 +11,10 @@ const StyledInfo = styled.div`
     height: auto;
     width: auto;
     z-index: 3;
-    //border: solid 1px green;
-    //backdrop-filter: blur(18px);
-    //background-color: rgba(220, 37, 37, 0.1);
-    //backdrop-filter: blur(3px);
     border-radius: 10px;
-    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.6), /* right shadow  */ 0 4px 6px rgba(0, 0, 0, 0.6); /* bottom shadow */
-    //background-color: rgba(255, 255, 255, 0.1);
-    //border: solid 1px red;
+    box-shadow: 
+            4px 0 6px rgba(0, 0, 0, 0.6), /* right shadow  */ 
+            0 4px 6px rgba(0, 0, 0, 0.6); /* bottom shadow */
     background-color: #5ebc5e;
     
     .innerInfo {
@@ -108,12 +104,6 @@ const StyledInfo = styled.div`
         margin-right: 6px;
         color: var(--color--primary); /* pēc vajadzības */
     }
-
-    .icon {
-        display: inline;
-        font-size: 18px;
-        margin-right: 10px; /* atstarpe starp p tagiem, ja vajag */
-    }
     
     .inline-p {
         display: inline;
@@ -162,7 +152,7 @@ export const SectionInfo = () => {
                 <div className={"info__item"}>
                     <p><span className="inline-heading">Units:</span></p>
                     <ul>
-                        <li><p className={"inline-p"}><span className={"icon"}>{ hero.icons[1]}</span></p><p className={"inline-p"}>{ hero.units[0] }</p></li>
+                        <li><p className={"inline-p"}>{ hero.icons[1]}</p><p className={"inline-p"}>{ hero.units[0] }</p></li>
                         <li><p className={"inline-p"}>{ hero.icons[2]}</p><p className={"inline-p"}>{ hero.units[1] }</p></li>
                         <li><p className={"inline-p"}>{ hero.icons[3]}</p><p className={"inline-p"}>{ hero.units[2] }</p></li>
                     </ul>
