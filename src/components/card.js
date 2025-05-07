@@ -5,8 +5,8 @@ import { StyledCardRank as CardRank } from "./style.card.rank"
 import { StyledCardCount as CardCount } from "./style.card.count"
 import { StyledCardInfo as CardInfo } from "./style.card.info"
 import { useDispatch } from "react-redux"
+import { storeTargetDescription } from "../redux/actions"
 import config from "../config"
-import {storeTargetDescription} from "../redux/actions";
 
 export const Card = ({ id, name, count, rank, image }) => {
     const dispatch = useDispatch()
