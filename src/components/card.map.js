@@ -7,26 +7,18 @@ export const GetCards = ({ variant }) => {
     const selectedDate = useSelector(state => state.target_date)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
-    //const heroImg = useSelector(state => state.player_images[targetKey])
-
-    //console.log("[ target key", heroImg)
-
     if (!isDataLoaded || !Array.isArray(records) || records.length === 0) {
         return <p>Loading cards…</p>
     }
 
-    const selectedEntry = records.find(entry => entry.date === selectedDate);
+    const selectedEntry = records.find(entry => entry.date === selectedDate)
 
-    if (!selectedEntry) {
-        return <p>No data found for selected date.</p>;
+    if (!selectedEntry || !Array.isArray(selectedEntry.heroes)) {
+        return <p>No data found for selected date.</p>
     }
 
-    const result = Object.entries(selectedEntry)
-        .filter(([key, value]) => key.startsWith("player") && value.rank === variant)
-        .map(([key, value]) => ({
-            id: key,
-            ...value
-        }))
+    const result = selectedEntry.heroes
+        .filter(hero => hero.rank === variant)
 
     return (
         <>

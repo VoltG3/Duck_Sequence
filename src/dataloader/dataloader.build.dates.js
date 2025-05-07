@@ -9,7 +9,7 @@
  * @returns {Array<string>} An array of unique date strings collected from the `date` property of the input objects.
  */
 
-export const dataLoaderBuildDates = (data) => {
+export const transformResultDataAllDates = (data) => {
     const dateSet = new Set()
 
     data.forEach(item => {

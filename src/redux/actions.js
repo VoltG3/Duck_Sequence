@@ -13,10 +13,14 @@ export const storeSetDataLoaded = (isDataLoaded) => ({
     payload: isDataLoaded
 })
 
-export const storeResultTable = (result_table) => ({
-    type: RESULT_TABLE,
-    payload: result_table
-})
+export const storeResultTable = (result_table) => {
+    console.log("adsasdsd", result_table)
+
+    return {
+        type: RESULT_TABLE,
+        payload: result_table
+    }
+}
 
 export const storePlayerImages = (player_images) => {
     console.log("[ dispatch   GET ] - imagesData             ", player_images)
@@ -52,7 +56,11 @@ export const storeDates = (dates) => ({
     payload: dates
 })
 
-export const storeTargetDate = (target_date) => ({
-    type: TARGET_DATE,
-    payload: target_date
-})
+export const storeTargetDate = (target_date) => {
+    console.log("[ dispatch   GET ] - target_date            ", target_date)
+
+    return {
+        type: TARGET_DATE,
+        payload: target_date
+    }
+}

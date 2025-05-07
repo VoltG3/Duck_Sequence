@@ -7,49 +7,21 @@ import {
     storeSetDataLoaded,
     storePlayerImages
 } from "../redux/actions"
-import { dataLoaderBuildDates } from "./dataloader.build.dates"
-import { dataLoaderBuildFields } from "./dataloader.build.fields"
-import { dataLoaderBuildRanks } from "./dataloader.build.ranks"
+import { transformResultDataAllDates } from "./dataloader.build.dates"
+import { transformResultDataNewFields } from "./dataloader.build.fields"
+import { transformResultDataRankAssigment } from "./dataloader.build.ranks"
 
-/**
- * The DataLoader component is responsible for fetching and processing data
- * from external JSON resources. It handles data fetching, state management,
- * and dispatching to the Redux store for further use in the application.
- *
- * This component performs the following key functionalities:
- * - Fetches two external JSON files (results.json and descriptions.json) from the public assets folder.
- * - Parses and processes the fetched data to derive new objects such as dates and rank assignments.
- * - Updates internal state variables with the processed data to manage the component's workflow.
- * - Dispatches the processed data (dates, rank assignments, and descriptions) to the Redux store for
- *   global state management across the application.
- * - Displays loading or error messages during the data loading process.
- *
- * State Variables:
- * - `jsonData`: Holds the raw JSON data fetched from results.json.
- * - `newObjectDates`: Stores processed dates derived from the JSON data.
- * - `newRankAssignmentObject`: Stores rank assignment data generated from the processed fields of the JSON data.
- * - `descriptionData`: Holds the description data fetched from descriptions.json.
- * - `isLoading`: Indicates whether the data is currently being loaded.
- * - `error`: Stores any errors encountered during the data fetching process.
- *
- * Effects:
- * - The first useEffect handles data fetching, processing, and handles clean-up,
- *   ensuring no further state updates occur if the component is unmounted.
- * - The second useEffect monitors changes in the processed data and dispatches
- *   the data to the Redux store if there are no errors and the data is fully loaded.
- *
- * Display:
- * - Renders an error message if any error occurs during the data fetching process.
- * - Renders a loading message while data is being loaded.
- * - Does not render any UI once the data is successfully loaded and stored into the Redux state.
- */
+
 
 export const DataLoader = () => {
     const [resultsData, setResultsData] = useState(null)
-    const [newObjectDates, setNewObjectDates] = useState(null)
-    const [newRankAssignmentObject, setNewRankAssignmentData] = useState(null)
-    const [descriptionData, setDescriptionsData] = useState(null)
     const [imagesData, setImagesData] = useState(null)
+    const [descriptionData, setDescriptionsData] = useState(null)
+
+    const [newDates, setNewDates] = useState(null)
+    const [newFields, setNewFields] = useState(null)
+    const [newRankAssignment, setNewRankAssignment] = useState(null)
+
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
@@ -83,15 +55,12 @@ export const DataLoader = () => {
                     setImagesData(imagesJSON)
                     setDescriptionsData(descriptionsJSON)
 
-
-
-
-                    const dates = dataLoaderBuildDates(resultsJSON)
-                    setNewObjectDates(dates)
-
-                    const fields = dataLoaderBuildFields(resultsJSON)
-                    const ranks = dataLoaderBuildRanks(fields)
-                    setNewRankAssignmentData(ranks)
+                    const newDates = transformResultDataAllDates(resultsJSON)
+                    setNewDates(newDates)
+                    const newFields = transformResultDataNewFields(resultsJSON)
+                    setNewFields(newFields)
+                    const newRanks = transformResultDataRankAssigment(newFields)
+                    setNewRankAssignment(newRanks)
                 }
             } catch (err) {
                 if (isMounted) {
@@ -121,12 +90,12 @@ export const DataLoader = () => {
             console.log("[ data loader    ] - results.json           ", resultsData)
             console.log("[ data loader    ] - images.json            ", imagesData)
             console.log("[ data loader    ] - descriptions.json      ", descriptionData)
+            console.log("[ data loader    ] - Arr newDates           ", newDates)
+            console.log("[ data loader    ] - Arr newFields          ", newFields)
+            console.log("[ data loader    ] - Arr newRankAssignment  ", newRankAssignment)
 
-            console.log("[ data loader    ] - newObjectDates         ", newObjectDates)
-            console.log("[ data loader    ] - newRankAssignmentObject", newRankAssignmentObject)
-
-            dispatch(storeDates(newObjectDates))
-            dispatch(storeResultTable(newRankAssignmentObject))
+            dispatch(storeDates(newDates))
+            dispatch(storeResultTable(newRankAssignment))
             dispatch(storePlayerImages(imagesData))
             dispatch(storeDescriptionsList(descriptionData))
             dispatch(storeSetDataLoaded(true))
@@ -148,8 +117,8 @@ export const DataLoader = () => {
 
 
         dispatch,
-        newObjectDates,
-        newRankAssignmentObject,
+        newDates,
+        newRankAssignment,
         isLoading,
         error
     ])
