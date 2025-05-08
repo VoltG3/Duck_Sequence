@@ -6,7 +6,6 @@ import { InfoTemplateAwards } from "./info/info.template.awards"
 import { useDispatch, useSelector } from "react-redux"
 import { storeTargetPlayer } from "../redux/actions"
 
-
 const StyledInfo = styled.div`
     position: absolute;
     display: ${({$visible}) => ($visible ? "flex" : "none")};
@@ -45,11 +44,7 @@ const StyledInfo = styled.div`
             font-size: 18px;
             color: var(--color--primary);
         }
-
-        h4 {
-            padding-right: 7px;
-        }
-
+        
         .info__item__header {
             min-width: 80px;
             max-width: 80px;
@@ -62,8 +57,6 @@ const StyledInfo = styled.div`
 
         }
     }
-
-   
     
     .inline-heading {
         font-size: 18px;
@@ -110,7 +103,7 @@ export const InfoController = () => {
     return (
         <StyledInfo $visible={ isVisible }>
             <div className="innerInfo">
-                <div className={"info__item"} style={{ justifyContent: "space-between", width: "100%" }}>
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", paddingBottom: "calc(var(--space) * 2)" }}>
                     <InfoTemplateName playerName={ hero.name } />
                     <button onClick={() => onHandle()}>Close</button>
                 </div>
