@@ -4,12 +4,12 @@
     "name": "Drekk",
     "icons": ["🦆","🔥", "🎭", "🧩"],
     "class": "JavaScript Raider",
-    "specialization": "Each <span>console.log()</span> reveals +10% more bugs",
+    "specialization": "Each <c>console.log()</c> reveals +10% more bugs",
     "startingSkills": ["Basic Async Handling", "Basic DOM Mastery"],
     "units": ["Hotfix Imp", "Callback Bandit", "React Hydra"],
     "description": "Drekk codes live while the browser is still loading. His weapons — unpredictability and React fragments. When others see chaos, he sees composition. He debugs to 8-bit music and drinks thawed RAM.",
     "race": "Linux — chaos controlled with npm.",
-    "astrology": "When Venus enters the TypeScript realm, Drekk’s <span>undefined</span> becomes <span>true</span>."
+    "astrology": "When Venus enters the TypeScript realm, Drekk’s <c>undefined</c> becomes <c>true</c>."
   },
   {
     "id": "hero_02",
@@ -42,10 +42,10 @@
     "class": "C# Knight",
     "specialization": "+2 Damage to .NET Framework functions",
     "startingSkills": ["Basic OOP", "Basic Type Safety"],
-    "units": ["⚔Struct Squire", "Exception Paladin", "nterface Crusader"],
-    "description": "Sir Quackalot never uses <span>dynamic</span>, and his interfaces are so strict that even Java bows. He is code with honor. His pull requests are accepted without comments. Each of his commits is like a knight’s oath — irrevocable.",
+    "units": ["Struct Squire", "Exception Paladin", "Interface Crusader"],
+    "description": "Sir Quackalot never uses <c>dynamic</c>, and his interfaces are so strict that even Java bows. He is code with honor. His pull requests are accepted without comments. Each of his commits is like a knight’s oath — irrevocable.",
     "race": "Windows — his .NET sword glows atop Visual Studio tower.",
-    "astrology": "When the Sun resides in the namespace sector, his <span>try-catch</span> blocks become immortal."
+    "astrology": "When the Sun resides in the namespace sector, his <c>try-catch</cn> blocks become immortal."
   },
   {
     "id": "hero_05",
@@ -55,7 +55,7 @@
     "specialization": "Finds +15% more bugs during testing",
     "startingSkills": ["Basic Test Writing", "Basic Assertion Rituals"],
     "units": ["Unit Imp", "Bugcatcher Fairy", "Regression Beast"],
-    "description": "Lilypaddle can spot a null pointer with a glance. Some say she communes with test coverage like a forest spirit. Her very presence raises <span>code coverage</span> like a blessing.",
+    "description": "Lilypaddle can spot a null pointer with a glance. Some say she communes with test coverage like a forest spirit. Her very presence raises <c>code coverage</c> like a blessing.",
     "race": "Windows — lives in a world that often crashes. She holds it together.",
     "astrology": "When Mars enters the testing phase, she finds bugs before the code is even written."
   },
@@ -66,7 +66,7 @@
     "class": "Legacy Systems Necromancer",
     "specialization": "+10% performance when working with ancient systems",
     "startingSkills": ["Basic Refactoring", "Basic Git Archaeology"],
-    "units": ["COBOL Phantom", "🕸Deprecated Daemon", "VHS Stackshade"],
+    "units": ["COBOL Phantom", "Deprecated Daemon", "VHS Stackshade"],
     "description": "Gribble can revive old ERP systems on modern servers without documentation. He breathes through deprecated methods. On his lap sleeps a 1986 mouse that still works. He smells of yellow paper and filesystem grease.",
     "race": "MS-DOS — alive, yet forgotten. He is darkness without GUI.",
     "astrology": "When Saturn crosses the relic constellation, Gribble gains the ability to refactor 1974 Fortran flawlessly."
@@ -93,19 +93,19 @@
     "units": ["Null Whisperer", "Schema Seer", "Predictive Golem"],
     "description": "Moonbill reads databases like ancient books. She can detect trends from chaos and find truth in every JSON line. Her <span>SELECT</span> queries are poetry. Even <span>NULL</span> values reveal the secrets of the universe to her.",
     "race": "Macintosh — beautiful charts, clever lies.",
-    "astrology": "When the Full Moon rises over the field of analytics, her <span>SELECT</span>s become prophetic voices."
+    "astrology": "When the Full Moon rises over the field of analytics, her <c>SELECT</c>s become prophetic voices."
   },
   {
     "id": "hero_09",
     "name": "Bogrot",
     "icons": ["🦆","🐚", "🕳️", "🔁"],
     "class": "Bash Shaman",
-    "specialization": "Each <span>sed</span> and <span>awk</span> performs 20% more accurately",
+    "specialization": "Each <c>sed</c> and <c>awk</c> performs 20% more accurately",
     "startingSkills": ["Basic Shell Magic", "Basic Cron Mastery"],
     "units": ["Log Pixie", "Pipe Wraith", "Loop Elemental"],
-    "description": "Bogrot speaks little, but automates the world in three lines. His scripts sing and spit logs. His <span>.bashrc</span> is a sacred tome none shall rewrite. Each time he uses <span>grep</span>, debuggers fall silent.",
+    "description": "Bogrot speaks little, but automates the world in three lines. His scripts sing and spit logs. His <c>.bashrc</c> is a sacred tome none shall rewrite. Each time he uses <c>grep</c>, debuggers fall silent.",
     "race": "Linux — his shell is his temple.",
-    "astrology": "When Uranus spins beneath the grep constellation, Bogrot’s scripts understand even the voices of <span>/dev/null</span>."
+    "astrology": "When Uranus spins beneath the grep constellation, Bogrot’s scripts understand even the voices of <c>/dev/null</c>."
   },
   {
     "id": "hero_10",
@@ -114,8 +114,8 @@
     "class": "DevOps Sentinel",
     "specialization": "+1 stability for each CI/CD cycle",
     "startingSkills": ["Basic Automation", "Basic Scripting"],
-    "units": ["Build Bot", "⚙Jenkins Golem", "Docker Knight"],
-    "description": "Quarn guards production infrastructure like a temple sentinel. If a deploy goes wrong — he knew it beforehand. Every script is tattooed in YAML sigils. He communicates with servers through sacred <span>.bash_history</span>.",
+    "units": ["Build Bot", "Jenkins Golem", "Docker Knight"],
+    "description": "Quarn guards production infrastructure like a temple sentinel. If a deploy goes wrong — he knew it beforehand. Every script is tattooed in YAML sigils. He communicates with servers through sacred <c>.bash_history</c>.",
     "race": "Linux — stability, control, and terminal magic.",
     "astrology": "When Pluto aspects the Kubernetes clusters, Quarn’s helm charts predict the future 72 deploys ahead."
   }

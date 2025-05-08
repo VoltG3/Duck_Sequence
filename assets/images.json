@@ -1,0 +1,42 @@
+[
+  {
+    "id": "hero_01",
+    "img_url": "/assets/img/player_01.jpg"
+  },
+  {
+    "id": "hero_02",
+    "img_url": "/assets/img/player_02.jpg"
+  },
+  {
+    "id": "hero_03",
+    "img_url": "/assets/img/player_03.jpg"
+  },
+  {
+    "id": "hero_04",
+    "img_url": "/assets/img/player_04.jpg"
+  },
+  {
+    "id": "hero_05",
+    "img_url": "/assets/img/player_05.jpg"
+  },
+  {
+    "id": "hero_06",
+    "img_url": "/assets/img/player_06.jpg"
+  },
+  {
+    "id": "hero_07",
+    "img_url": "/assets/img/player_07.jpg"
+  },
+  {
+    "id": "hero_08",
+    "img_url": "/assets/img/player_08.jpg"
+  },
+  {
+    "id": "hero_09",
+    "img_url": "/assets/img/player_09.jpg"
+  },
+  {
+    "id": "hero_10",
+    "img_url": "/assets/img/player_10.jpg"
+  }
+]
