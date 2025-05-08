@@ -1,26 +1,63 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import {
-    storeDates,
-    storeResultTable,
-    storeDescriptionsList,
+    storePlayerDates,
+    storePlayerResults,
+    storePlayerDescriptions,
     storeSetDataLoaded,
     storePlayerImages
 } from "../redux/actions"
 import { transformResultDataAllDates } from "./dataloader.build.dates"
 import { transformResultDataNewFields } from "./dataloader.build.fields"
 import { transformResultDataRankAssigment } from "./dataloader.build.ranks"
+import { transformResultDataTilteAssigment } from "./dataloader.build.titles"
 
-
+/**
+ * Represents a data loader component that manages fetching and processing of external JSON data
+ * and dispatches the processed data to the global store.
+ *
+ * This component fetches data from three JSON files: results.json, images.json,
+ * and descriptions.json, processes the data, and updates the application's state.
+ * It also handles loading and error states.
+ *
+ * State variables:
+ * - resultsData: Stores the fetched data from results.json.
+ * - imagesData: Stores the fetched data from images.json.
+ * - descriptionsData: Stores the fetched data from descriptions.json.
+ * - newDates: Stores transformed date-related data derived from results.json.
+ * - newFields: Stores transformed field data derived from results.json.
+ * - newRankAssignment: Stores rank assignment data based on the transformed fields.
+ * - newTitlesAssigment: Stores title assignment data based on the rank assignments.
+ * - isLoading: Indicates whether the data is currently being loaded.
+ * - error: Contains error messages if the data fetching or processing fails.
+ *
+ * Effects:
+ * - The first `useEffect` handles loading the JSON data, transforming it, and updating the relevant state variables.
+ * - The second `useEffect` watches the state variables, processes the retrieved data,
+ *   and dispatches it to update the global application store once the data is fully loaded without errors.
+ *
+ * Dispatch actions:
+ * - storePlayerDates: Stores the transformed date data.
+ * - storePlayerResults: Stores the title assignment data.
+ * - storePlayerImages: Stores the data from images.json.
+ * - storePlayerDescriptions: Stores the data from descriptions.json.
+ * - storeSetDataLoaded: Sets the state indicating that all required data is loaded.
+ *
+ * Return value:
+ * - Renders a loading message while data is being fetched.
+ * - Renders an error message in case an error occurs during data fetching or processing.
+ * - Returns null once the data is successfully loaded and dispatched.
+ */
 
 export const DataLoader = () => {
     const [resultsData, setResultsData] = useState(null)
     const [imagesData, setImagesData] = useState(null)
-    const [descriptionData, setDescriptionsData] = useState(null)
+    const [descriptionsData, setDescriptionsData] = useState(null)
 
     const [newDates, setNewDates] = useState(null)
     const [newFields, setNewFields] = useState(null)
     const [newRankAssignment, setNewRankAssignment] = useState(null)
+    const [newTitlesAssigment, setNewTitlesAssigment] = useState(null)
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -61,6 +98,8 @@ export const DataLoader = () => {
                     setNewFields(newFields)
                     const newRanks = transformResultDataRankAssigment(newFields)
                     setNewRankAssignment(newRanks)
+                    const newTitles = transformResultDataTilteAssigment(newRanks)
+                    setNewTitlesAssigment(newTitles)
                 }
             } catch (err) {
                 if (isMounted) {
@@ -89,39 +128,30 @@ export const DataLoader = () => {
 
             console.log("[ data loader    ] - results.json           ", resultsData)
             console.log("[ data loader    ] - images.json            ", imagesData)
-            console.log("[ data loader    ] - descriptions.json      ", descriptionData)
+            console.log("[ data loader    ] - descriptions.json      ", descriptionsData)
             console.log("[ data loader    ] - Arr newDates           ", newDates)
             console.log("[ data loader    ] - Arr newFields          ", newFields)
             console.log("[ data loader    ] - Arr newRankAssignment  ", newRankAssignment)
+            console.log("[ data loader    ] - Arr newTitlesAssigment ", newTitlesAssigment)
 
-            dispatch(storeDates(newDates))
-            dispatch(storeResultTable(newRankAssignment))
+            dispatch(storePlayerDates(newDates))
+            dispatch(storePlayerResults(newTitlesAssigment))
             dispatch(storePlayerImages(imagesData))
-            dispatch(storeDescriptionsList(descriptionData))
+            dispatch(storePlayerDescriptions(descriptionsData))
             dispatch(storeSetDataLoaded(true))
-
-            //console.log("[ data loader    ] - results.json           ", resultsData)
-            //console.log("[ data loader    ] - newObjectDates         ", newObjectDates)
-            //console.log("[ data loader    ] - newRankAssignmentObject", newRankAssignmentObject)
-            //console.log("[ data loader    ] - descriptions.json      ", descriptionData)
-
-            //dispatch(storeDates(newObjectDates))
-            //dispatch(storeResultTable(newRankAssignmentObject))
-            //dispatch(storeDescriptionsList(descriptionData))
-            //dispatch(storeSetDataLoaded(true))
         }
     }, [
+        isLoading,
+        newDates,
         resultsData,
         imagesData,
-        descriptionData,
-
-
-        dispatch,
-        newDates,
+        newFields,
         newRankAssignment,
-        isLoading,
+        newTitlesAssigment,
+        descriptionsData,
+        dispatch,
         error
-    ])
+       ])
 
     if (error) return <div>Error: {error}</div>
     if (isLoading) return <div>Loading...</div>

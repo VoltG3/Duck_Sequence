@@ -1,11 +1,11 @@
 import {
     SET_DATA_LOADED,
-    RESULT_TABLE,
+    PLAYER_DATES,
+    PLAYER_RESULTS,
     PLAYER_IMAGES,
-    STORE_DESCRIPTIONS,
-    TARGET_DESCRIPTION,
+    PLAYER_DESCRIPTIONS,
     TARGET_DATE,
-    OBJECT_DATES
+    TARGET_PLAYER
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -13,12 +13,21 @@ export const storeSetDataLoaded = (isDataLoaded) => ({
     payload: isDataLoaded
 })
 
-export const storeResultTable = (result_table) => {
-    console.log("adsasdsd", result_table)
+export const storePlayerDates = (player_dates) => {
+    console.log("[ dispatch   GET ] - newDates               ", player_dates)
 
     return {
-        type: RESULT_TABLE,
-        payload: result_table
+        type: PLAYER_DATES,
+        payload: player_dates
+    }
+}
+
+export const storePlayerResults = (player_results) => {
+    console.log("[ dispatch   GET ] - newRankAssigment       ", player_results)
+
+    return {
+        type: PLAYER_RESULTS,
+        payload: player_results
     }
 }
 
@@ -35,32 +44,33 @@ export const storePlayerImages = (player_images) => {
     }
 }
 
-export const storeDescriptionsList = (descriptionsArray) => {
+export const storePlayerDescriptions = (player_descriptions) => {
+    console.log("[ dispatch   GET ] - descriptionsData       ", player_descriptions)
+
     const asObject = {}
-    descriptionsArray.forEach(hero => {
+    player_descriptions.forEach(hero => {
         asObject[hero.id] = hero
     })
     return {
-        type: STORE_DESCRIPTIONS,
+        type: PLAYER_DESCRIPTIONS,
         payload: asObject
     }
 }
 
-export const storeTargetDescription = (target_description) => ({
-    type: TARGET_DESCRIPTION,
-    payload: target_description
-})
-
-export const storeDates = (dates) => ({
-    type: OBJECT_DATES,
-    payload: dates
-})
-
 export const storeTargetDate = (target_date) => {
-    console.log("[ dispatch   GET ] - target_date            ", target_date)
+    console.log("[ dispatch   GET ] - target date ID         ", target_date)
 
     return {
         type: TARGET_DATE,
         payload: target_date
+    }
+}
+
+export const storeTargetPlayer = (target_player) => {
+    console.log("[ dispatch   GET ] - BTN target player ID   ", target_player)
+
+    return {
+        type: TARGET_PLAYER,
+        payload: target_player
     }
 }

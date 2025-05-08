@@ -16,6 +16,5 @@ export const GlobalStyles = createGlobalStyle`
         
         --space: 0.625rem // 10px;
         
-       
     }
 `

@@ -1,18 +1,18 @@
 import styled from "styled-components"
-import { GetCards } from "../components/card.map"
+import { CardController } from "../components/controller.cards"
 
 function SectionContent() {
 
     return (
         <StyledContent>
             <div className="cardSet">
-                <GetCards variant={"place_first"} />
-                <GetCards variant={"place_second"} />
-                <GetCards variant={"place_third"} />
+                <CardController getPlayerCardsBySelectedRank={"1st"} />
+                <CardController getPlayerCardsBySelectedRank={"2nd"} />
+                <CardController getPlayerCardsBySelectedRank={"3rd"} />
             </div>
 
             <div className="cardSet">
-                <GetCards variant={""} />
+                <CardController getPlayerCardsBySelectedRank={""} />
             </div>
         </StyledContent>
     )

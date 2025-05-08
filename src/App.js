@@ -3,7 +3,7 @@ import { GlobalStyles } from "./GlobalStyles"
 import { DataLoader } from "./dataloader/dataloader"
 import { SectionHeader } from "./sections/section.header"
 import SectionContent from "./sections/section.content"
-import { SectionInfo } from "./sections/section.info"
+import { InfoController } from "./components/controller.info"
 import SectionFooter from "./sections/section.footer"
 import config from "./config"
 
@@ -18,7 +18,7 @@ function App() {
                     <DataLoader />
                         <SectionHeader />
                         <SectionContent />
-                        <SectionInfo />
+                        <InfoController />
                         <SectionFooter />
                 </div>
             </div>

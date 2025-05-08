@@ -23,6 +23,7 @@ const config = {
     },
     default : {
         URL_default: process.env.PUBLIC_URL + "/assets/img/default.jpg",
+        URL_placeholder: process.env.PUBLIC_URL + "/assets/img/placeholder.jpg"
     },
     crown : {
         URL_crown_01: process.env.PUBLIC_URL + "/assets/img/crown_01.png",

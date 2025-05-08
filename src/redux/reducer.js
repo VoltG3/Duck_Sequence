@@ -1,60 +1,80 @@
 import {
-    SET_DATA_LOADED, RESULT_TABLE, PLAYER_IMAGES, STORE_DESCRIPTIONS, TARGET_DESCRIPTION, OBJECT_DATES, TARGET_DATE
+    SET_DATA_LOADED,
+    PLAYER_DATES,
+    PLAYER_RESULTS,
+    PLAYER_IMAGES,
+    PLAYER_DESCRIPTIONS,
+    TARGET_DATE,
+    TARGET_PLAYER
 } from './actionTypes'
 
 const initialState = {
     isDataLoaded: false,
-    result_table: {},
+    player_dates: {},
+    player_results: {},
     player_images: {},
-    descriptions_list : {},
-    target_description: "",
-    dates: {},
-    target_date: "default"
+    player_descriptions: {},
+    target_date: "default",
+    target_player: ""
 }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_DATA_LOADED:
+            //console.log("[ reducer        ] - SET_DATA_LOADED        ", action.payload)
+
             return {
                 ...state,
                 isDataLoaded: action.payload,
             }
 
-        case RESULT_TABLE:
+        case PLAYER_DATES:
+            //console.log("[ reducer        ] - PLAYER_DATES           ", action.payload)
+
             return {
                 ...state,
-                result_table: action.payload
+                player_dates: action.payload
+            }
+
+        case PLAYER_RESULTS:
+            //console.log("[ reducer        ] - PLAYER_RESULTS         ", action.payload)
+
+            return {
+                ...state,
+                player_results: action.payload
             }
 
         case PLAYER_IMAGES:
+            //console.log("[ reducer        ] - PLAYER_IMAGES          ", action.payload)
+
             return {
                 ...state,
                 player_images: action.payload
             }
 
-        case STORE_DESCRIPTIONS:
-            return {
-                ...state,
-                descriptions_list: action.payload
-            }
+        case PLAYER_DESCRIPTIONS:
+            //console.log("[ reducer        ] - PLAYER_DESCRIPTIONS    ", action.payload)
 
-        case TARGET_DESCRIPTION:
             return {
                 ...state,
-                target_description: action.payload
-            }
-
-        case OBJECT_DATES:
-            return {
-                ...state,
-                dates: action.payload
+                player_descriptions: action.payload
             }
 
         case TARGET_DATE:
+            //console.log("[ reducer        ] - TARGET_DATE            ", action.payload)
+
             return {
                 ...state,
                 target_date: action.payload
-        }
+            }
+
+        case TARGET_PLAYER:
+            //console.log("[ reducer        ] - TARGET_PLAYER          ", action.payload)
+
+            return {
+                ...state,
+                target_player: action.payload
+            }
 
         default:
             return state

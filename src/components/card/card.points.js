@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const StyledCardCount = styled.div`
+export const StyledCardPoints = styled.div`
     background: #282c34;
 
     & p {
@@ -12,3 +12,12 @@ export const StyledCardCount = styled.div`
         color: white;
     }
 `
+
+export const CardPoints = ({ count }) => {
+
+    return (
+        <StyledCardPoints>
+            <p>{ count }</p>
+        </StyledCardPoints>
+    )
+}

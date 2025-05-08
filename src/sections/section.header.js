@@ -34,7 +34,7 @@ const StyledHeader = styled.div`
 
 export const SectionHeader = () => {
     const dispatch = useDispatch()
-    const timeRecords = useSelector(state => state.dates)
+    const timeRecords = useSelector(state => state.player_dates)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
     if (!isDataLoaded || !timeRecords || Object.keys(timeRecords).length === 0) {

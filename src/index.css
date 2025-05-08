@@ -28,6 +28,13 @@ p, h1, h2, h3, h4, h5, h6 {
     font-variant: small-caps;
 }
 
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* unused */
 @keyframes fadeIn {
     to {
         opacity: 1;

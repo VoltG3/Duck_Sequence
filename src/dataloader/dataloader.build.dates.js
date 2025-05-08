@@ -1,12 +1,13 @@
 /**
- * Extracts a unique set of dates from the provided data array.
+ * Extracts all unique dates from the provided dataset.
  *
- * This function goes through an array of objects and collects all unique values
- * of the `date` property found within the objects. The resulting unique dates
- * are returned as an array.
+ * This function processes an array of objects and collects all unique values
+ * associated with the `date` property of each object. The collected dates are
+ * returned as an array.
  *
- * @param {Array<Object>} data - An array of objects, where each object may contain a `date` property.
- * @returns {Array<string>} An array of unique date strings collected from the `date` property of the input objects.
+ * @param {Array<Object>} data - The array of objects containing date information.
+ * Each object is expected to have a `date` property.
+ * @returns {Array<String>} An array of unique date strings found in the dataset.
  */
 
 export const transformResultDataAllDates = (data) => {
