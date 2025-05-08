@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux"
 
 export const InfoTemplateAwards = ({ chapterHeader, chapterContent }) => {
+    const targetPlayerCount = useSelector(state => state.target_player_count)
+    const totalCount = Number(targetPlayerCount) || 0
 
     return (
         <div className={"info__item"}>
@@ -8,7 +11,7 @@ export const InfoTemplateAwards = ({ chapterHeader, chapterContent }) => {
             </div>
 
             <div>
-                <p>{ chapterContent }</p>
+                <p>{ chapterContent.repeat(totalCount) }</p>
             </div>
         </div>
     )

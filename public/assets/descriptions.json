@@ -49,7 +49,7 @@
   },
   {
     "id": "hero_04",
-    "name": "Sir Quackalot",
+    "name": "Quackalot",
     "icons": ["🦆", "⚔️", "🧱", "🛡️"],
     "class": "C# Knight",
     "perk": "+2 Damage to .NET Framework functions.",

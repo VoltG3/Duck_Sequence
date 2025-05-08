@@ -38,7 +38,7 @@ export const CardAssembly = ({ id, title, name, count, rank }) => {
                     marginRight: "10px"}}>
 
                     <CardName rank={ rank } title={ title } name={ name } />
-                    <CardInfo id={ id } rank={ rank }/>
+                    <CardInfo id={ id } name={ name } rank={ rank } title={ title } count={ count } />
                 </div>
 
                 <CardRank rank={ rank } />

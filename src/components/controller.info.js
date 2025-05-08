@@ -4,7 +4,12 @@ import { InfoTemplateText } from "./info/info.template.text"
 import { InfoTemplateUnits } from "./info/info.template.units"
 import { InfoTemplateAwards } from "./info/info.template.awards"
 import { useDispatch, useSelector } from "react-redux"
-import { storeTargetPlayer } from "../redux/actions"
+import {
+    storeTargetPlayer,
+    storeTargetPlayerCount, storeTargetPlayerName,
+    storeTargetPlayerRank,
+    storeTargetPlayerTitle
+} from "../redux/actions"
 
 const StyledInfo = styled.div`
     position: absolute;
@@ -91,7 +96,15 @@ export const InfoController = () => {
 
     const onHandle = () => {
         dispatch(storeTargetPlayer(""))
+        dispatch(storeTargetPlayerName(""))
+        dispatch(storeTargetPlayerRank(""))
+        dispatch(storeTargetPlayerTitle(""))
+        dispatch(storeTargetPlayerCount(0))
         console.log("[ info     CLOSE ] - BTN target player NULL ", "")
+        console.log("[ info     CLOSE ] - BTN target player name ", "")
+        console.log("[ info     CLOSE ] - BTN target player rank ", "")
+        console.log("[ info     CLOSE ] - BTN target player title", "")
+        console.log("[ info     CLOSE ] - BTN target player count", 0)
     }
 
     const isVisible = targetPlayer !== ""
@@ -104,7 +117,7 @@ export const InfoController = () => {
         <StyledInfo $visible={ isVisible }>
             <div className="innerInfo">
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", paddingBottom: "calc(var(--space) * 2)" }}>
-                    <InfoTemplateName playerName={ hero.name } />
+                    <InfoTemplateName playerId={ hero.id } playerSecondName={ hero.name } />
                     <button onClick={() => onHandle()}>Close</button>
                 </div>
 
