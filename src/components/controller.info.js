@@ -62,6 +62,21 @@ const StyledInfo = styled.div`
         }
     }
 
+    .info__item {
+        display: flex;
+        flex-direction: row;
+        border: solid 1px red;
+
+        & p {
+            font-size: 18px;
+            color: var(--color--primary);
+        }
+
+        h4 {
+            padding-right: 7px;
+        }
+    }
+
     .inline-heading {
         font-size: 18px;
         font-weight: bold;

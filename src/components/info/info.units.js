@@ -3,7 +3,7 @@
 export const InfoUnits = ({ playerUnitIcons, playerUnitNames }) => {
 
     return (
-        <div className={"info__item"}>
+        <div className={"info__items"}>
             <h4 className="inline-heading">Units:</h4>
             <ul>
                 <li>

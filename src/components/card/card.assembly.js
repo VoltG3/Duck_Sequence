@@ -15,6 +15,9 @@ const CardContainer = styled.div`
     margin: 10px;
     background-color: var(--card--color--01);
     border-radius: 10px;
+    box-shadow:
+            4px 0 6px rgba(0, 0, 0, 0.6), /* right shadow  */
+            0 4px 6px rgba(0, 0, 0, 0.6); /* bottom shadow */
     overflow: hidden;
 `
 
