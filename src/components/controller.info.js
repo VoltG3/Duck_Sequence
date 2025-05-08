@@ -1,15 +1,11 @@
 import styled from "styled-components"
-import { InfoName } from "./info/info.name"
-import { InfoClass } from "./info/info.class"
-import { InfoSpecialization } from "./info/info.specialization"
-import { InfoSkills } from "./info/info.skills"
-import { InfoUnits } from "./info/info.units"
-import { InfoDescription } from "./info/info.description"
-import { InfoRace } from "./info/info.race"
-import { InfoAstrology } from "./info/info.astrology"
-import { InfoAwards } from "./info/info.awards"
+import { InfoTemplateName } from "./info/info.template.name"
+import { InfoTemplateText } from "./info/info.template.text"
+import { InfoTemplateUnits } from "./info/info.template.units"
+import { InfoTemplateAwards } from "./info/info.template.awards"
 import { useDispatch, useSelector } from "react-redux"
 import { storeTargetPlayer } from "../redux/actions"
+
 
 const StyledInfo = styled.div`
     position: absolute;
@@ -31,26 +27,19 @@ const StyledInfo = styled.div`
         flex-direction: column;
         align-items: flex-start;
         max-width: 600px;
+        width: 100%;
         padding: calc(var(--space) * 2);
         margin: 5px;
         border-radius: 10px;
         border: solid 1px var(--color--primary);
-        
-        > .info__item:nth-child(1) { padding-bottom: var(--space); }    /* Name */
-        > .info__item:nth-child(2) {                               }    /* Close :btn */
-        > .info__item:nth-child(3) {                               }    /* Specialization */
-        > .info__item:nth-child(4) { padding-bottom: var(--space); }    /* Class */
-        > .info__item:nth-child(5) { padding-bottom: var(--space); }    /* Units */
-        > .info__item:nth-child(6) { padding-bottom: var(--space); }    /* Descriptions */
-        > .info__item:nth-child(7) { padding-bottom: var(--space); }    /* Race */
-        > .info__item:nth-child(8) { padding-bottom: var(--space); }    /* Astrology */
-        > .info__item:nth-child(9) {                               }    /* Awards */
     }
-
+    
     .info__item {
         display: flex;
         flex-direction: row;
-        border: solid 1px red;
+        //border: solid 1px red;
+        width: 100%;
+        //padding-bottom: 5px;
 
         & p {
             font-size: 18px;
@@ -60,23 +49,22 @@ const StyledInfo = styled.div`
         h4 {
             padding-right: 7px;
         }
-    }
 
-    .info__item {
-        display: flex;
-        flex-direction: row;
-        border: solid 1px red;
-
-        & p {
-            font-size: 18px;
-            color: var(--color--primary);
+        .info__item__header {
+            min-width: 80px;
+            max-width: 80px;
+            width: 100%;
+            //border: solid 1px black;
         }
 
-        h4 {
-            padding-right: 7px;
+        .info__item__content {
+            width: auto;
+
         }
     }
 
+   
+    
     .inline-heading {
         font-size: 18px;
         font-weight: bold;
@@ -105,7 +93,7 @@ const StyledInfo = styled.div`
 
 export const InfoController = () => {
     const targetPlayer = useSelector(state => state.target_player)
-    const targetPlayerDescription = useSelector(state => state.player_descriptions[targetPlayer])
+    const hero = useSelector(state => state.player_descriptions[targetPlayer])
     const dispatch = useDispatch()
 
     const onHandle = () => {
@@ -114,7 +102,7 @@ export const InfoController = () => {
     }
 
     const isVisible = targetPlayer !== ""
-    if (!targetPlayerDescription) return null
+    if (!hero) return null
 
     //console.log("[ info component ] - GET player ID          ", targetPlayer, targetPlayerDescription)
     //console.log("[ info component ] - GET record by ID       ", targetPlayerDescription)
@@ -123,18 +111,22 @@ export const InfoController = () => {
         <StyledInfo $visible={ isVisible }>
             <div className="innerInfo">
                 <div className={"info__item"} style={{ justifyContent: "space-between", width: "100%" }}>
-                    <InfoName playerName={ targetPlayerDescription.name } />
+                    <InfoTemplateName playerName={ hero.name } />
                     <button onClick={() => onHandle()}>Close</button>
                 </div>
 
-                <InfoClass playerClass={ targetPlayerDescription.class } />
-                <InfoSpecialization playerSpecialization={ targetPlayerDescription.specialization } />
-                <InfoSkills playerSkills={ targetPlayerDescription.startingSkills } />
-                <InfoUnits playerUnitIcons={ targetPlayerDescription.icons } playerUnitNames={ targetPlayerDescription.units } />
-                <InfoDescription playerDescription={ targetPlayerDescription.description } />
-                <InfoRace playerRace={ targetPlayerDescription.race } />
-                <InfoAstrology playerAstrology={ targetPlayerDescription.astrology } />
-                <InfoAwards playerAwards={ targetPlayerDescription.icons[0] } />
+                <InfoTemplateText chapterHeader={"Class"} chapterContent={ hero.class } />
+                <InfoTemplateText chapterHeader={"Perk"} chapterContent={ hero.perk } />
+                <InfoTemplateText chapterHeader={"Trait"} chapterContent={ hero.trait } />
+                <InfoTemplateText chapterHeader={"Bonus"} chapterContent={ hero.bonus } />
+                <InfoTemplateText chapterHeader={"Role"} chapterContent={ hero.role } />
+                <InfoTemplateText chapterHeader={"Edge"} chapterContent={ hero.edge } />
+                <InfoTemplateText chapterHeader={"Race"} chapterContent={ hero.race } />
+                <InfoTemplateText chapterHeader={"Skills"} chapterContent={ hero.skills } />
+                <InfoTemplateUnits unitsNames={ hero.units } unitsIcons={ hero.icons } />
+                <InfoTemplateText chapterHeader={"About"} chapterContent={ hero.about } />
+                <InfoTemplateText chapterHeader={"Fate"} chapterContent={ hero.fate} />
+                <InfoTemplateAwards chapterHeader={"Awards"} chapterContent={ hero.icons[0]} />
             </div>
         </StyledInfo>
     )

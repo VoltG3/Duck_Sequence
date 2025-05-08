@@ -10,7 +10,7 @@
     "role": "Mid-layer Chaos Caster",
     "edge": "Immune to UI flickering under pressure.",
     "race": "Linux — chaos controlled with npm.",
-    "skills": ["Basic Async Handling", "Basic DOM Mastery"],
+    "skills": "Basic Async Handling, Basic DOM Mastery",
     "units": ["Hotfix Imp", "Callback Bandit", "React Hydra"],
     "about": "Drekk codes live while the browser is still loading. His weapons — unpredictability and React fragments. When others see chaos, he sees composition. He debugs to 8-bit music and drinks thawed RAM.",
     "fate": "When Venus enters the TypeScript realm, Drekk’s <c>undefined</c> becomes <c>true</c>."
@@ -26,7 +26,7 @@
     "role": "Versatile Code Paladin",
     "edge": "Auto-generates hotfixes from muscle memory.",
     "race": "Windows — adapts to anything, but always demands restarts.",
-    "skills": ["Basic Debugging", "Basic Architecture"],
+    "skills": "Basic Debugging, Basic Architecture",
     "units": ["Junior Coder", "Middleware Golem", "Production Firebug"],
     "about": "Drakwaddle once fixed production bugs during wartime livestream. He doesn’t distinguish UI from DB — he just writes code that works. He hears the call of refactoring even in dreams. While others ask on Stack Overflow, he already types the answer IRL.",
     "fate": "When Mercury goes retrograde, Drakwaddle’s merge commands fuse pull requests from parallel realities."
@@ -42,7 +42,7 @@
     "role": "Visual Support Mage",
     "edge": "Sketches wireframes mid-battle to confuse enemies.",
     "race": "Macintosh — aesthetics, style, and intuitive clicks.",
-    "skills": ["Basic Prototyping", "Basic User Empathy"],
+    "skills": "Basic Prototyping, Basic User Empathy",
     "units": ["Pixel Sprite", "Wireframe Elemental", "Idea Spirit"],
     "about": "Feathra designs dream interfaces before ideas even reach the mind. Her Figma files include rails tailored for blind wizards. She hears user experience as music. All her designs pass WCAG tests before they even exist.",
     "fate": "When Virgo enters the design sector, her cursor becomes sentient and proposes UI improvements on its own."
@@ -58,7 +58,7 @@
     "role": "Defender of Clean Code",
     "edge": "Interfaces so strict, even Java bows.",
     "race": "Windows — his .NET sword glows atop Visual Studio tower.",
-    "skills": ["Basic OOP", "Basic Type Safety"],
+    "skills": "Basic OOP, Basic Type Safety",
     "units": ["Struct Squire", "Exception Paladin", "Interface Crusader"],
     "about": "Sir Quackalot never uses <c>dynamic</c>, and his interfaces are so strict that even Java bows. He is code with honor. His pull requests are accepted without comments. Each of his commits is like a knight’s oath — irrevocable.",
     "fate": "When the Sun resides in the namespace sector, his <c>try-catch</c> blocks become immortal."
@@ -74,7 +74,7 @@
     "role": "Bug Seeker & Coverage Healer",
     "edge": "Immune to flakiness in CI.",
     "race": "Windows — lives in a world that often crashes. She holds it together.",
-    "skills": ["Basic Test Writing", "Basic Assertion Rituals"],
+    "skills": "Basic Test Writing, Basic Assertion Rituals",
     "units": ["Unit Imp", "Bugcatcher Fairy", "Regression Beast"],
     "about": "Lilypaddle can spot a null pointer with a glance. Some say she communes with test coverage like a forest spirit. Her very presence raises <c>code coverage</c> like a blessing.",
     "fate": "When Mars enters the testing phase, she finds bugs before the code is even written."
@@ -90,7 +90,7 @@
     "role": "Dark Support Refactorer",
     "edge": "Can resurrect dead codebases with forgotten passwords.",
     "race": "MS-DOS — alive, yet forgotten. He is darkness without GUI.",
-    "skills": ["Basic Refactoring", "Basic Git Archaeology"],
+    "skills": "Basic Refactoring, Basic Git Archaeology",
     "units": ["COBOL Phantom", "Deprecated Daemon", "VHS Stackshade"],
     "about": "Gribble can revive old ERP systems on modern servers without documentation. He breathes through deprecated methods. On his lap sleeps a 1986 mouse that still works. He smells of yellow paper and filesystem grease.",
     "fate": "When Saturn crosses the relic constellation, Gribble gains the ability to refactor 1974 Fortran flawlessly."
@@ -106,7 +106,7 @@
     "role": "Tanky Techsmith",
     "edge": "Can overclock systems with a wink.",
     "race": "MS-DOS — his BIOS speaks directly to the stars.",
-    "skills": ["Basic Electronics", "Basic Embedded Debugging"],
+    "skills": "Basic Electronics, Basic Embedded Debugging",
     "units": ["Solderling", "Logic Core", "PCIe Golem"],
     "about": "Flapzor solders reality itself. Once he built AI from a calculator and a duck feather. He *is* an FPGA with a beak. His soldering iron hums in frequencies only robots understand. BIOS recognizes him as a deity.",
     "fate": "When Mars and Neptune align in the TTL skies, his PCBs become self-healing."
@@ -122,7 +122,7 @@
     "role": "Mystic Data Sorceress",
     "edge": "Null values whisper truths only she understands.",
     "race": "Macintosh — beautiful charts, clever lies.",
-    "skills": ["Basic SQL", "Basic Data Visualization"],
+    "skills": "Basic SQL, Basic Data Visualization",
     "units": ["Null Whisperer", "Schema Seer", "Predictive Golem"],
     "about": "Moonbill reads databases like ancient books. She can detect trends from chaos and find truth in every JSON line. Her <c>SELECT</c> queries are poetry. Even <c>NULL</c> values reveal the secrets of the universe to her.",
     "fate": "When the Full Moon rises over the field of analytics, her <c>SELECT</c>s become prophetic voices."
@@ -138,7 +138,7 @@
     "role": "Silent Script Mystic",
     "edge": "Can debug scripts by smell alone.",
     "race": "Linux — his shell is his temple.",
-    "skills": ["Basic Shell Magic", "Basic Cron Mastery"],
+    "skills": "Basic Shell Magic, Basic Cron Mastery",
     "units": ["Log Pixie", "Pipe Wraith", "Loop Elemental"],
     "about": "Bogrot speaks little, but automates the world in three lines. His scripts sing and spit logs. His <c>.bashrc</c> is a sacred tome none shall rewrite. Each time he uses <c>grep</c>, debuggers fall silent.",
     "fate": "When Uranus spins beneath the grep constellation, Bogrot’s scripts understand even the voices of <c>/dev/null</c>."
@@ -154,7 +154,7 @@
     "role": "Guardian of Infrastructure",
     "edge": "YAML incantations never fail in his hands.",
     "race": "Linux — stability, control, and terminal magic.",
-    "skills": ["Basic Automation", "Basic Scripting"],
+    "skills": "Basic Automation, Basic Scripting",
     "units": ["Build Bot", "Jenkins Golem", "Docker Knight"],
     "about": "Quarn guards production infrastructure like a temple sentinel. If a deploy goes wrong — he knew it beforehand. Every script is tattooed in YAML sigils. He communicates with servers through sacred <c>.bash_history</c>.",
     "fate": "When Pluto aspects the Kubernetes clusters, Quarn’s helm charts predict the future 72 deploys ahead."
