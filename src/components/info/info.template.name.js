@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux"
 
-
 export const InfoTemplateName = ({ playerId, playerSecondName }) => {
     const targetPlayerName = useSelector(state => state.target_player_name)
     const targetPlayerRank = useSelector(state => state.target_player_rank)
@@ -42,9 +41,9 @@ export const InfoTemplateName = ({ playerId, playerSecondName }) => {
                     fontWeight: "bold",
                     color:
                         targetPlayerRank === "1st" ? "var(--range--color--01)" :
-                            targetPlayerRank === "2nd" ? "var(--range--color--02)" :
-                                targetPlayerRank === "3rd" ? "var(--range--color--03)" :
-                                    "var(--range--color--04)"
+                        targetPlayerRank === "2nd" ? "var(--range--color--02)" :
+                        targetPlayerRank === "3rd" ? "var(--range--color--03)" :
+                                                     "var(--range--color--04)"
                 }}>
                     { getPrefix(playerId) }
                 </span>

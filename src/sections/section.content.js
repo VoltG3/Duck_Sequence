@@ -34,9 +34,8 @@ const StyledContent = styled.div`
         justify-content: center;
         align-content: center;
         width: auto;
-        height: auto;
+        height: 50%;
         border: solid 1px red;
-        
     }
 `
 
