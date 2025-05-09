@@ -5,11 +5,7 @@ import {
     PLAYER_IMAGES,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
-    TARGET_PLAYER,
-    TARGET_PLAYER_NAME,
-    TARGET_PLAYER_RANK,
-    TARGET_PLAYER_TITLE,
-    TARGET_PLAYER_COUNT,
+    TARGET_PLAYER
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -70,47 +66,11 @@ export const storeTargetDate = (target_date) => {
     }
 }
 
-export const storeTargetPlayer = (target_player) => {
-    console.log("[ dispatch   GET ] - BTN target player ID   ", target_player)
+export const storeTargetPlayer = (field, value) => {
+    console.log("[ dispatch   GET ] - BTN target player field", field, "value", value)
 
     return {
         type: TARGET_PLAYER,
-        payload: target_player
-    }
-}
-
-export const storeTargetPlayerName = (target_player_name) => {
-    console.log("[ dispatch   GET ] - BTN target player name", target_player_name)
-
-    return {
-        type: TARGET_PLAYER_NAME,
-        payload: target_player_name
-    }
-}
-
-export const storeTargetPlayerRank = (target_player_rank) => {
-    console.log("[ dispatch   GET ] - BTN target player rank ", target_player_rank)
-
-    return {
-        type: TARGET_PLAYER_RANK,
-        payload: target_player_rank
-    }
-}
-
-export const storeTargetPlayerTitle = (target_player_title) => {
-    console.log("[ dispatch   GET ] - BTN target player title", target_player_title)
-
-    return {
-        type: TARGET_PLAYER_TITLE,
-        payload: target_player_title
-    }
-}
-
-export const storeTargetPlayerCount = (target_player_count) => {
-    console.log("[ dispatch   GET ] - BTN target player count", target_player_count)
-
-    return {
-        type: TARGET_PLAYER_COUNT,
-        payload: target_player_count
+        payload: { field, value }
     }
 }

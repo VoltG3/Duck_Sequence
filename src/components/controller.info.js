@@ -4,12 +4,7 @@ import { InfoTemplateText } from "./info/info.template.text"
 import { InfoTemplateUnits } from "./info/info.template.units"
 import { InfoTemplateAwards } from "./info/info.template.awards"
 import { useDispatch, useSelector } from "react-redux"
-import {
-    storeTargetPlayer,
-    storeTargetPlayerCount, storeTargetPlayerName,
-    storeTargetPlayerRank,
-    storeTargetPlayerTitle
-} from "../redux/actions"
+import { storeTargetPlayer } from "../redux/actions"
 
 const StyledInfo = styled.div`
     position: absolute;
@@ -90,16 +85,22 @@ const StyledInfo = styled.div`
 `
 
 export const InfoController = () => {
-    const targetPlayer = useSelector(state => state.target_player)
-    const hero = useSelector(state => state.player_descriptions[targetPlayer])
+    const targetPlayer = useSelector(state => state.target_player.target_player_id)
+    const targetDescription = useSelector(state => state.player_descriptions)
     const dispatch = useDispatch()
 
+    const hero = targetPlayer && targetDescription
+        ? targetDescription[targetPlayer]
+        : null
+
+    if (!targetPlayer || !hero) return null;
+
     const onHandle = () => {
-        dispatch(storeTargetPlayer(""))
-        dispatch(storeTargetPlayerName(""))
-        dispatch(storeTargetPlayerRank(""))
-        dispatch(storeTargetPlayerTitle(""))
-        dispatch(storeTargetPlayerCount(0))
+        dispatch(storeTargetPlayer("target_player_id", ""))
+        dispatch(storeTargetPlayer("target_player_name",""))
+        dispatch(storeTargetPlayer("target_player_rank",""))
+        dispatch(storeTargetPlayer("target_player_title",""))
+        dispatch(storeTargetPlayer("target_player_count",0))
         console.log("[ info     CLOSE ] - BTN target player NULL ", "")
         console.log("[ info     CLOSE ] - BTN target player name ", "")
         console.log("[ info     CLOSE ] - BTN target player rank ", "")
@@ -108,10 +109,8 @@ export const InfoController = () => {
     }
 
     const isVisible = targetPlayer !== ""
-    if (!hero) return null
 
-    //console.log("[ info component ] - GET player ID          ", targetPlayer, targetPlayerDescription)
-    //console.log("[ info component ] - GET record by ID       ", targetPlayerDescription)
+    if (!hero) return null
 
     return (
         <StyledInfo $visible={ isVisible }>

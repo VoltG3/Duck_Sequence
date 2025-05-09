@@ -5,11 +5,7 @@ import {
     PLAYER_IMAGES,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
-    TARGET_PLAYER,
-    TARGET_PLAYER_NAME,
-    TARGET_PLAYER_RANK,
-    TARGET_PLAYER_TITLE,
-    TARGET_PLAYER_COUNT
+    TARGET_PLAYER
 } from './actionTypes'
 
 const initialState = {
@@ -19,11 +15,13 @@ const initialState = {
     player_images: {},
     player_descriptions: {},
     target_date: "default",
-    target_player: "",
-    target_player_name: "",
-    target_player_rank: "",
-    target_player_title: "",
-    target_player_count: ""
+    target_player: {
+        target_player_id: "",
+        target_player_name: "",
+        target_player_rank: "",
+        target_player_title: "",
+        target_player_count: "",
+    }
 }
 
 export default function reducer(state = initialState, action) {
@@ -81,39 +79,10 @@ export default function reducer(state = initialState, action) {
 
             return {
                 ...state,
-                target_player: action.payload
-            }
-
-        case TARGET_PLAYER_NAME:
-            //console.log("[ reducer        ] - TARGET_PLAYER_NAME     ", action.payload)
-
-            return {
-                ...state,
-                target_player_name: action.payload
-            }
-
-        case TARGET_PLAYER_RANK:
-            //console.log("[ reducer        ] - TARGET_PLAYER_RANK     ", action.payload)
-
-            return {
-                ...state,
-                target_player_rank: action.payload
-            }
-
-        case TARGET_PLAYER_TITLE:
-            //console.log("[ reducer        ] - TARGET_PLAYER_TITLE    ", action.payload)
-
-            return {
-                ...state,
-                target_player_title: action.payload
-            }
-
-        case TARGET_PLAYER_COUNT:
-            //console.log("[ reducer        ] - TARGET_PLAYER_COUNT    ", action.payload)
-
-            return {
-                ...state,
-                target_player_count: action.payload
+                target_player: {
+                    ...state.target_player,
+                    [action.payload.field]: action.payload.value
+                }
             }
 
         default:

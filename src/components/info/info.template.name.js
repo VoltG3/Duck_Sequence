@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
 
 export const InfoTemplateName = ({ playerId, playerSecondName }) => {
-    const targetPlayerName = useSelector(state => state.target_player_name)
-    const targetPlayerRank = useSelector(state => state.target_player_rank)
-    const targetPlayerTitle = useSelector(state => state.target_player_title)
+    const targetPlayerName = useSelector(state => state.target_player.target_player_name)
+    const targetPlayerRank = useSelector(state => state.target_player.target_player_rank)
+    const targetPlayerTitle = useSelector(state => state.target_player.target_player_title)
 
     const getPrefix = () => {
         switch(playerId) {

@@ -1,11 +1,5 @@
 import styled from "styled-components"
-import {
-    storeTargetPlayer,
-    storeTargetPlayerName,
-    storeTargetPlayerRank,
-    storeTargetPlayerTitle,
-    storeTargetPlayerCount
-} from "../../redux/actions"
+import { storeTargetPlayer } from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
 const StyledInfoButton = styled.div`
@@ -37,11 +31,11 @@ export const CardInfo = ({ id, rank, count, title, name }) => {
         console.log("[ card info  SET ] - BTN target player title", title)
         console.log("[ card info  SET ] - BTN target player count", count)
 
-        dispatch(storeTargetPlayer(id))
-        dispatch(storeTargetPlayerName(name))
-        dispatch(storeTargetPlayerRank(rank))
-        dispatch(storeTargetPlayerTitle(title))
-        dispatch(storeTargetPlayerCount(count))
+        dispatch(storeTargetPlayer("target_player_id", id))
+        dispatch(storeTargetPlayer("target_player_name", name))
+        dispatch(storeTargetPlayer("target_player_rank", rank))
+        dispatch(storeTargetPlayer("target_player_title", title))
+        dispatch(storeTargetPlayer("target_player_count", count))
 
     }
 

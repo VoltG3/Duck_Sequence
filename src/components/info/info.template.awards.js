@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 
 export const InfoTemplateAwards = ({ chapterHeader, chapterContent }) => {
-    const targetPlayerCount = useSelector(state => state.target_player_count)
+    const targetPlayerCount = useSelector(state => state.target_player.target_player_count)
     const totalCount = Number(targetPlayerCount) || 0
 
     return (
