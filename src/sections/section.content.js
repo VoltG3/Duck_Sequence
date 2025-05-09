@@ -6,13 +6,7 @@ function SectionContent() {
     return (
         <StyledContent>
             <div className="cardSet">
-                <CardController getPlayerCardsBySelectedRank={"1st"} />
-                <CardController getPlayerCardsBySelectedRank={"2nd"} />
-                <CardController getPlayerCardsBySelectedRank={"3rd"} />
-            </div>
-
-            <div className="cardSet">
-                <CardController getPlayerCardsBySelectedRank={""} />
+                <CardController />
             </div>
         </StyledContent>
     )
@@ -30,11 +24,12 @@ const StyledContent = styled.div`
     
     .cardSet {
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         justify-content: center;
         align-content: center;
         width: auto;
-        height: 50%;
+        height: auto;
         border: solid 1px red;
     }
 `

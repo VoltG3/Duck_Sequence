@@ -13,11 +13,11 @@ export const StyledCardPoints = styled.div`
     }
 `
 
-export const CardPoints = ({ count }) => {
+export const CardPoints = ({ count, id }) => {
 
     return (
         <StyledCardPoints>
-            <p>{ count }</p>
+            <p>{ count }{" "}{ id }</p>
         </StyledCardPoints>
     )
 }

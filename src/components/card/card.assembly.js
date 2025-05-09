@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { CardCrown } from "./card.crown"
 import { CardImage } from "./card.image"
 import { CardName } from "./card.name"
 import { CardInfo } from "./card.info"
@@ -24,27 +25,42 @@ const CardContainer = styled.div`
 export const CardAssembly = ({ id, title, name, count, rank }) => {
 
     return (
-        <CardContainer>
-            <CardImage id={ id } />
-
+        <>
             <div style={{
                 display: "flex",
-                flexDirection: "row",
-                padding: "10px"}}>
-                <div style={{
-                    flexDirection: "column",
-                    width: "100%",
-                    height: "auto",
-                    marginRight: "10px"}}>
-
-                    <CardName rank={ rank } title={ title } name={ name } />
-                    <CardInfo id={ id } name={ name } rank={ rank } title={ title } count={ count } />
-                </div>
-
-                <CardRank rank={ rank } />
+                justifyContent: "center",
+                alignItems: "center",
+                width: "auto",
+                height: "60px",
+            }}>
+                { rank !== ""
+                    ? <CardCrown rank={ rank } />
+                    : null
+                }
             </div>
 
-           <CardPoints count={ count } />
-        </CardContainer>
+            <CardContainer>
+                <CardImage id={ id } />
+
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    padding: "10px"}}>
+                    <div style={{
+                        flexDirection: "column",
+                        width: "100%",
+                        height: "auto",
+                        marginRight: "10px"}}>
+
+                        <CardName rank={ rank } title={ title } name={ name } />
+                        <CardInfo id={ id } name={ name } rank={ rank } title={ title } count={ count } />
+                    </div>
+
+                    <CardRank rank={ rank } />
+                </div>
+
+                <CardPoints count={ count } id={ id } />
+            </CardContainer>
+        </>
     )
 }
