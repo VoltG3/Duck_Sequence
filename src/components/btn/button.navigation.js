@@ -3,7 +3,7 @@ import { storeTargetAudio, storeTargetDate } from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
 const StyledBtnNavigation = styled.button`
-    padding: 10px;
+    padding: 2px;
 `
 
 export const BtnNavigation = ({ date }) => {

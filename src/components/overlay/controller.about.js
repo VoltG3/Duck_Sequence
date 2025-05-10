@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import {BtnCloseOverlay} from "./btn/button.overlay.close";
+import {BtnCloseOverlay} from "../btn/button.overlay.close";
 import {useSelector} from "react-redux";
 
 const StyledAbout = styled.div`

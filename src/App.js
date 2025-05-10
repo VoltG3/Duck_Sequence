@@ -3,11 +3,11 @@ import { GlobalStyles } from "./GlobalStyles"
 import { DataLoader } from "./dataloader/dataloader"
 import { SectionHeader } from "./sections/section.header"
 import SectionContent from "./sections/section.content"
-import { InfoController } from "./components/controller.info"
+import { InfoController } from "./components/overlay/controller.info"
 import SectionFooter from "./sections/section.footer"
 import config from "./config"
 import { AudioController } from "./components/controller.audio"
-import { AboutController } from "./components/controller.about"
+import { AboutController } from "./components/overlay/controller.about"
 
 function App() {
 
