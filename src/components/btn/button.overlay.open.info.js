@@ -21,7 +21,7 @@ const StyledInfoButton = styled.div`
     }
 `
 
-export const CardInfo = ({ id, rank, count, title, name }) => {
+export const BtnOpenOverlayInfo = ({ id, rank, count, title, name }) => {
     const dispatch = useDispatch()
 
     {/* FALSE VAR ?*/}

@@ -7,7 +7,7 @@ import { InfoController } from "./components/controller.info"
 import SectionFooter from "./sections/section.footer"
 import config from "./config"
 import { AudioController } from "./components/controller.audio"
-import {AboutController} from "./components/controller.about";
+import { AboutController } from "./components/controller.about"
 
 function App() {
 

@@ -2,9 +2,9 @@ import styled from "styled-components"
 import { CardCrown } from "./card.crown"
 import { CardImage } from "./card.image"
 import { CardName } from "./card.name"
-import { CardInfo } from "./card.info"
 import { CardRank } from "./card.rank"
 import { CardPoints } from "./card.points"
+import { BtnOpenOverlayInfo } from "../btn/button.overlay.open.info"
 
 const CardContainer = styled.div`
     display: flex;
@@ -53,7 +53,7 @@ export const CardAssembly = ({ id, title, name, count, rank }) => {
                         marginRight: "10px"}}>
 
                         <CardName rank={ rank } title={ title } name={ name } />
-                        <CardInfo id={ id } name={ name } rank={ rank } title={ title } count={ count } />
+                        <BtnOpenOverlayInfo id={ id } name={ name } rank={ rank } title={ title } count={ count } />
                     </div>
 
                     <CardRank rank={ rank } />

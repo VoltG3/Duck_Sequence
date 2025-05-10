@@ -3,8 +3,9 @@ import { InfoTemplateName } from "./info/info.template.name"
 import { InfoTemplateText } from "./info/info.template.text"
 import { InfoTemplateUnits } from "./info/info.template.units"
 import { InfoTemplateAwards } from "./info/info.template.awards"
-import { useDispatch, useSelector } from "react-redux"
-import {storeTargetAudio, storeTargetPlayer} from "../redux/actions"
+import { useSelector } from "react-redux"
+
+import {BtnCloseOverlay} from "./btn/button.overlay.close";
 
 const StyledInfo = styled.div`
     position: absolute;
@@ -87,27 +88,12 @@ const StyledInfo = styled.div`
 export const InfoController = () => {
     const targetPlayer = useSelector(state => state.target_player.target_player_id)
     const targetDescription = useSelector(state => state.player_descriptions)
-    const dispatch = useDispatch()
 
     const hero = targetPlayer && targetDescription
         ? targetDescription[targetPlayer]
         : null
 
     if (!targetPlayer || !hero) return null;
-
-    const onHandle = () => {
-        dispatch(storeTargetPlayer("target_player_id", ""))
-        dispatch(storeTargetPlayer("target_player_name",""))
-        dispatch(storeTargetPlayer("target_player_rank",""))
-        dispatch(storeTargetPlayer("target_player_title",""))
-        dispatch(storeTargetPlayer("target_player_count",0))
-        dispatch(storeTargetAudio("play_audio_button", true))
-        console.log("[ info     CLOSE ] - BTN target player NULL ", "")
-        console.log("[ info     CLOSE ] - BTN target player name ", "")
-        console.log("[ info     CLOSE ] - BTN target player rank ", "")
-        console.log("[ info     CLOSE ] - BTN target player title", "")
-        console.log("[ info     CLOSE ] - BTN target player count", 0)
-    }
 
     const isVisible = targetPlayer !== ""
 
@@ -118,7 +104,7 @@ export const InfoController = () => {
             <div className="innerInfo">
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", paddingBottom: "calc(var(--space) * 2)" }}>
                     <InfoTemplateName playerId={ hero.id } playerSecondName={ hero.name } />
-                    <button onClick={() => onHandle()}>Close</button>
+                    <BtnCloseOverlay closeTargetSection="closeInfoSection" />
                 </div>
 
                 <InfoTemplateText chapterHeader={"Class"} chapterContent={ hero.class } />

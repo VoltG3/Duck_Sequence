@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import {storeTargetAbout, storeTargetAudio, storeTargetDate} from "../redux/actions"
+import {storeTargetAbout, storeTargetAudio} from "../redux/actions"
+import {BtnNavigation} from "../components/btn/button.navigation";
+import {BtnOpenOverlayAbout} from "../components/btn/button.overlay.open.about";
 
 const StyledHeader = styled.div`
     display: flex;
@@ -12,6 +14,15 @@ const StyledHeader = styled.div`
     background: var(--color--primary);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    
+    .header__row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        justify-content: space-between;
+        border: solid 1px white;
+    }
     
     & p, span {
         font-size: clamp(1.25rem, 5vw, 2.813rem);
@@ -33,7 +44,6 @@ const StyledHeader = styled.div`
 `
 
 export const SectionHeader = () => {
-    const dispatch = useDispatch()
     const timeRecords = useSelector(state => state.player_dates)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
@@ -47,34 +57,25 @@ export const SectionHeader = () => {
         return <p>No dates found.</p>
     }
 
-    const handleClick = (item) => {
-        dispatch(storeTargetDate(item))
-        dispatch(storeTargetAudio("play_audio_button", true))
-    }
-
     return (
         <StyledHeader>
-            <p>Duck Sequence:{" "}<span>{ totalCount - 1 }</span></p>
+            <div className="header__row">
+                <div><p>1</p></div>
+                <div><p>Duck Sequence</p></div>
+                <div>
+                    <BtnOpenOverlayAbout />
+                </div>
+            </div>
 
-            <ul>
-                {timeRecords.map((item, index) => (
-                    <li key={`${ item }-${ index }`}>
-                        <button
-                            style={{
-
-                            }}
-                            id={ item }
-                            onClick={() => { handleClick(item) }}
-                        >
-                            { item }
-                        </button>
-                    </li>
-                ))}
-            </ul>
-
-            <button onClick={() => dispatch(storeTargetAbout(true), dispatch(storeTargetAudio("play_audio_about", true)))}>
-                About
-            </button>
+            <div className="header__row">
+                <ul>
+                    {timeRecords.map((date, id) => (
+                        <li key={`${ date }-${ id }`}>
+                            <BtnNavigation date={ date } />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </StyledHeader>
     )
 }
