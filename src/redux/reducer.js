@@ -24,7 +24,8 @@ const initialState = {
         target_player_count: "",
     },
     audio: {
-        play_audio_info : false
+        play_audio_button : false,
+        play_audio_info : false,
     }
 }
 

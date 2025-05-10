@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { storeTargetDate } from "../redux/actions"
+import {storeTargetAudio, storeTargetDate} from "../redux/actions"
 
 const StyledHeader = styled.div`
     display: flex;
@@ -47,6 +47,11 @@ export const SectionHeader = () => {
         return <p>No dates found.</p>
     }
 
+    const handleClick = (item) => {
+        dispatch(storeTargetDate(item))
+        dispatch(storeTargetAudio("play_audio_button", true))
+    }
+
     return (
         <StyledHeader>
             <p>Duck Sequence:{" "}<span>{ totalCount - 1 }</span></p>
@@ -59,7 +64,7 @@ export const SectionHeader = () => {
 
                             }}
                             id={ item }
-                            onClick={() => { dispatch(storeTargetDate(item)) }}
+                            onClick={() => { handleClick(item) }}
                         >
                             { item }
                         </button>

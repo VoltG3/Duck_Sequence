@@ -39,6 +39,7 @@ export const CardInfo = ({ id, rank, count, title, name }) => {
         dispatch(storeTargetPlayer("target_player_rank", rank))
         dispatch(storeTargetPlayer("target_player_title", title))
         dispatch(storeTargetPlayer("target_player_count", count))
+        dispatch(storeTargetAudio("play_audio_button", true))
         dispatch(storeTargetAudio("play_audio_info", true))
 
     }

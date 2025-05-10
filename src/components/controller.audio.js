@@ -1,10 +1,11 @@
 import config from "../config"
-import {useSelector} from "react-redux";
-import {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import {storeTargetAudio} from "../redux/actions";
 
 export const AudioController = () => {
     const activeAudio = useSelector(state => state.audio)
-
+    const dispatch = useDispatch()
 
     const playAudio = (url) => {
         const audio = new Audio(url)
@@ -16,18 +17,29 @@ export const AudioController = () => {
     useEffect(() => {
         if (!activeAudio) return
 
-        switch (true) {
-            case activeAudio.play_audio_info === true:
-                playAudio(config.audio.URL_obelisk_01)
-                break
-
-            default: return;
+        if (activeAudio.play_audio_button === true && activeAudio.play_audio_info === true) {
+            playAudio(config.audio.URL_button_01)
+            playAudio(config.audio.URL_obelisk_01)
+            dispatch(storeTargetAudio("play_audio_button", false))
+            dispatch(storeTargetAudio("play_audio_info", false))
+            return
         }
-    }, [activeAudio])
+
+        if (activeAudio.play_audio_button === true) {
+            playAudio(config.audio.URL_button_01)
+            dispatch(storeTargetAudio("play_audio_button", false))
+        }
+
+        if (activeAudio.play_audio_info === true) {
+            playAudio(config.audio.URL_obelisk_01)
+            dispatch(storeTargetAudio("play_audio_info", false))
+        }
+
+    }, [activeAudio, dispatch])
 
     return (
         <button onClick={playAudio}>
             Atskaņot skaņu
         </button>
-    );
+    )
 }

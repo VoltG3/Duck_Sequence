@@ -4,7 +4,7 @@ import { InfoTemplateText } from "./info/info.template.text"
 import { InfoTemplateUnits } from "./info/info.template.units"
 import { InfoTemplateAwards } from "./info/info.template.awards"
 import { useDispatch, useSelector } from "react-redux"
-import { storeTargetPlayer } from "../redux/actions"
+import {storeTargetAudio, storeTargetPlayer} from "../redux/actions"
 
 const StyledInfo = styled.div`
     position: absolute;
@@ -101,6 +101,7 @@ export const InfoController = () => {
         dispatch(storeTargetPlayer("target_player_rank",""))
         dispatch(storeTargetPlayer("target_player_title",""))
         dispatch(storeTargetPlayer("target_player_count",0))
+        dispatch(storeTargetAudio("play_audio_button", true))
         console.log("[ info     CLOSE ] - BTN target player NULL ", "")
         console.log("[ info     CLOSE ] - BTN target player name ", "")
         console.log("[ info     CLOSE ] - BTN target player rank ", "")
