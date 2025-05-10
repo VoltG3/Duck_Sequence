@@ -29,6 +29,9 @@ const config = {
         URL_crown_01: process.env.PUBLIC_URL + "/assets/img/crown_01.png",
         URL_crown_02: process.env.PUBLIC_URL + "/assets/img/crown_02.png",
         URL_crown_03: process.env.PUBLIC_URL + "/assets/img/crown_03.png",
+    },
+    audio : {
+        URL_obelisk_01: process.env.PUBLIC_URL + "/assets/audio/OBELISK.mp3",
     }
 }
 

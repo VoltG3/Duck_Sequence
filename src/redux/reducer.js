@@ -5,7 +5,8 @@ import {
     PLAYER_IMAGES,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
-    TARGET_PLAYER
+    TARGET_PLAYER,
+    TARGET_AUDIO
 } from './actionTypes'
 
 const initialState = {
@@ -21,6 +22,9 @@ const initialState = {
         target_player_rank: "",
         target_player_title: "",
         target_player_count: "",
+    },
+    audio: {
+        play_audio_info : false
     }
 }
 
@@ -82,6 +86,17 @@ export default function reducer(state = initialState, action) {
                 target_player: {
                     ...state.target_player,
                     [action.payload.field]: action.payload.value
+                }
+            }
+
+        case TARGET_AUDIO:
+            //console.log("[ reducer        ] - TARGET_AUDIO           ", action.payload)
+
+            return {
+                    ...state,
+                audio: {
+                    ...state.audio,
+                    [action.payload.field]: action.payload.value,
                 }
             }
 

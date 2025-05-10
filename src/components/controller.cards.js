@@ -130,7 +130,7 @@ export const CardController = () => {
                             id={hero.id}
                             name={hero.name}
                             title={hero.title}
-                            count={card.count} // count no pārrēķinātā
+                            count={hero.count} // count no pārrēķinātā
                             rank={hero.rank}
                         />
                     </motion.div>
@@ -140,4 +140,3 @@ export const CardController = () => {
         </>
     )
 }
-

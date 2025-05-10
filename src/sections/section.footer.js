@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import {AudioController} from "../components/controller.audio";
 
 const StyledFooter = styled.div`
     display: flex;
@@ -17,6 +18,7 @@ export default function SectionFooter() {
     return (
         <StyledFooter>
             <p>Self-Sabotage <b><i style={{ color: "yellow" }}>team</i></b>  © 2025 CodeHode</p>
+            <AudioController />
         </StyledFooter>
     )
 }

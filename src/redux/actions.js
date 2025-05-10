@@ -5,7 +5,8 @@ import {
     PLAYER_IMAGES,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
-    TARGET_PLAYER
+    TARGET_PLAYER,
+    TARGET_AUDIO
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -71,6 +72,15 @@ export const storeTargetPlayer = (field, value) => {
 
     return {
         type: TARGET_PLAYER,
+        payload: { field, value }
+    }
+}
+
+export const storeTargetAudio = (field, value) => {
+    console.log("[ dispatch   GET ] - BTN target audio field ", field, "value", value)
+
+    return {
+        type: TARGET_AUDIO,
         payload: { field, value }
     }
 }
