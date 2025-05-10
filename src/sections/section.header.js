@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { useSelector } from "react-redux"
-import { BtnNavigation } from "../components/btn/button.navigation"
+import { BtnNavigation } from "../components/btn/button.dates"
 import { BtnOpenOverlayAbout } from "../components/btn/button.overlay.open.about"
+import {DatesController} from "../components/controller.dates";
 
 const StyledHeader = styled.div`
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -21,17 +21,17 @@ const StyledHeader = styled.div`
         flex-direction: row;
         width: 100%;
         height: auto;
-        border: solid 1px red;
-        padding: var(--space);
+        //border: solid 1px red;
+        padding: calc(var(--space) * 2);
         
         > :nth-child(2) {  // Dates Navigation
             flex: 1;
-            padding-left: calc(var(--space) * 2);
+            padding-left: calc(var(--space) * 8);
             padding-right: calc(var(--space) * 2);
             display: flex;
             justify-content: flex-start;
-            align-items: center; /* This ensures items are aligned horizontally */
-            flex-direction: row; /* Ensures the items are laid out in a row */
+            align-items: center; 
+            flex-direction: row; 
         }
     }
     
@@ -42,30 +42,29 @@ const StyledHeader = styled.div`
         align-items: center;
         width: auto;
         height: auto;
-        border: solid 1px white;
+        //border: solid 1px white;
     }
-    
-    & p, span {
-        font-size: clamp(0.625rem, 3.75vw, 2.188rem); // 10px 37.5px 35px
-        font-variant: small-caps;
-    }
-    
-    & span { 
-        color: yellow;
-    }
-    
-    & ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex; 
-        flex-wrap: nowrap; 
-        gap: var(--space); 
-    }
-    
-    & li {
-        display: inline-flex;
-        align-items: center; 
+
+    .header__item__navigation {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        //border: solid 1px yellow;
+
+        & ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: var(--space);
+        }
+
+        & li {
+            display: inline-flex;
+            align-items: center;
+        }
     }
 `
 
@@ -87,17 +86,23 @@ export const SectionHeader = () => {
         <StyledHeader>
             <div className="innerHeader">
                 <div className="header__item">
-                    <p>Duck Sequence</p>
+                    <p style={{ fontSize:"clamp(0.625rem, 3.75vw, 2.188rem)" }}>Duck Sequence</p>
                 </div>
 
                 <div className="header__item" style={{ justifyContent: "center" }}>
-                    <ul>
-                        {timeRecords.map((date, id) => (
-                            <li key={`${ date }-${ id }`}>
-                                <BtnNavigation date={ date } />
-                            </li>
-                        ))}
-                    </ul>
+                    <DatesController />
+                    {/*
+                     <div className={"header__item__navigation"}>
+                        <ul>
+                            {timeRecords.map((date, id) => (
+                                <li key={`${ date }-${ id }`}>
+                                    <BtnNavigation date={ date } />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    */}
+
                 </div>
 
                 <div className="header__item">
