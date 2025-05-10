@@ -6,6 +6,8 @@ import SectionContent from "./sections/section.content"
 import { InfoController } from "./components/controller.info"
 import SectionFooter from "./sections/section.footer"
 import config from "./config"
+import { AudioController } from "./components/controller.audio"
+import {AboutController} from "./components/controller.about";
 
 function App() {
 
@@ -16,9 +18,11 @@ function App() {
                 <div className="appSections">
                     <GlobalStyles />
                     <DataLoader />
+                    <AudioController />
                         <SectionHeader />
                         <SectionContent />
                         <InfoController />
+                        <AboutController />
                         <SectionFooter />
                 </div>
             </div>

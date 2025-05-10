@@ -33,6 +33,7 @@ const config = {
     audio : {
         URL_obelisk_01: process.env.PUBLIC_URL + "/assets/audio/OBELISK.mp3",
         URL_button_01: process.env.PUBLIC_URL + "/assets/audio/BUTTON.mp3",
+        URL_playcome_01: process.env.PUBLIC_URL + "/assets/audio/PLAYCOME.mp3",
     }
 }
 

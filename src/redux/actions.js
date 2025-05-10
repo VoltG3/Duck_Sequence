@@ -6,7 +6,8 @@ import {
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
     TARGET_PLAYER,
-    TARGET_AUDIO
+    TARGET_AUDIO,
+    TARGET_ABOUT
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -82,5 +83,14 @@ export const storeTargetAudio = (field, value) => {
     return {
         type: TARGET_AUDIO,
         payload: { field, value }
+    }
+}
+
+export const storeTargetAbout = (target_about) => {
+    console.log("[ dispatch   GET ] - target section about   ", target_about)
+
+    return {
+        type: TARGET_ABOUT,
+        payload: target_about
     }
 }

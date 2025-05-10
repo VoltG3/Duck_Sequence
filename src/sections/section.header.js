@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import {storeTargetAudio, storeTargetDate} from "../redux/actions"
+import {storeTargetAbout, storeTargetAudio, storeTargetDate} from "../redux/actions"
 
 const StyledHeader = styled.div`
     display: flex;
@@ -71,6 +71,10 @@ export const SectionHeader = () => {
                     </li>
                 ))}
             </ul>
+
+            <button onClick={() => dispatch(storeTargetAbout(true), dispatch(storeTargetAudio("play_audio_about", true)))}>
+                About
+            </button>
         </StyledHeader>
     )
 }
