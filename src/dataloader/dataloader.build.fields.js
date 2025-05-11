@@ -19,7 +19,7 @@ export const transformResultDataNewFields = (data) => {
 
         const heroes = Object.entries(rest).map(([key, value]) => ({
             id: key,
-            title: "Common",
+            title: "Uncommon",
             name: value.name,
             count: value.count,
             rank: ""

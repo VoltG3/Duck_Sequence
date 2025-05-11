@@ -8,6 +8,7 @@ import SectionContent from "./sections/section.content"
 import SectionFooter from "./sections/section.footer"
 import { OverlayAbout }  from "./components/overlay/overlay.about"
 import { OverlayInfo } from "./components/overlay/overlay.info"
+import {LevelUpAnimation} from "./components/animations/animation.level.up";
 
 function App() {
 
@@ -19,11 +20,15 @@ function App() {
                     <GlobalStyles />
                     <DataLoader />
                     <AudioController />
-                        <SectionHeader />
+                    <LevelUpAnimation />
+                    {/*
+                     <SectionHeader />
                         <SectionContent />
                         <OverlayAbout />
                         <OverlayInfo />
                         <SectionFooter />
+                    */}
+
                 </div>
             </div>
         </div>
