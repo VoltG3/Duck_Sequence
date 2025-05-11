@@ -13,7 +13,8 @@ const config = {
         URL_person_10: process.env.PUBLIC_URL + "/assets/img/person_10.jpg",
     },
     background : {
-        URL_background: process.env.PUBLIC_URL + "/assets/img/background.jpg",
+        URL_background_01: process.env.PUBLIC_URL + "/assets/img/background_01.jpg",
+        URL_background_02: process.env.PUBLIC_URL + "/assets/img/background_02.jpg",
     },
     rank : {
         URL_rank_01: process.env.PUBLIC_URL + "/assets/img/rank_01.jpg",

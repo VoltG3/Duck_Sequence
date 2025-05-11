@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { InfoTemplateName } from "../info/info.template.name"
-import { InfoTemplateText } from "../info/info.template.text"
-import { InfoTemplateUnits } from "../info/info.template.units"
-import { InfoTemplateAwards } from "../info/info.template.awards"
+import { InfoTemplateName } from "./info/info.template.name"
+import { InfoTemplateText } from "./info/info.template.text"
+import { InfoTemplateUnits } from "./info/info.template.units"
+import { InfoTemplateAwards } from "./info/info.template.awards"
 import { useSelector } from "react-redux"
 
 import {BtnCloseOverlay} from "../btn/button.overlay.close";
@@ -85,7 +85,7 @@ const StyledInfo = styled.div`
     }
 `
 
-export const InfoController = () => {
+export const OverlayInfo = () => {
     const targetPlayer = useSelector(state => state.target_player.target_player_id)
     const targetDescription = useSelector(state => state.player_descriptions)
 

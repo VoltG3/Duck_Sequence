@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { CardAssembly } from "./card/card.assembly"
 import { useSelector } from "react-redux"
-import { motion } from "framer-motion";
 
 export const CardController = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
@@ -76,25 +75,24 @@ export const CardController = () => {
 
     return (
         <>
-
             <div className="mb-4 flex gap-4">
                 <button
                     className="px-4 py-2 bg-blue-600 text-white rounded"
                     onClick={handlePrepareSort}
                 >
-                    Sagatavot kārtošanu
+                    Sorting Card
                 </button>
                 <button
                     className="px-4 py-2 bg-green-600 text-white rounded"
                     onClick={handleNextStep}
                     disabled={currentStep >= sortedCards.length}
                 >
-                    Nākamā kārts
+                    Next Card
                 </button>
             </div>
 
 
-            {cards.map((card, index) => {
+            {cards.map((card) => {
                 const hero = playerResults
                     .find(entry => entry.date === selectedDate)
                     ?.heroes.find(h => h.id === card.id)
@@ -102,38 +100,16 @@ export const CardController = () => {
                 if (!hero) return null;
 
                 return (
-                    <motion.div
-                        key={card.id}
-                        layout
-                        animate={
-                            card.id === activeId
-                                ? {
-                                    scale: 1.1,
-                                    y: -30,
-                                    boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
-                                    zIndex: 10,
-                                }
-                                : {
-                                    scale: 1,
-                                    y: 0,
-                                    boxShadow: "none",
-                                    zIndex: 1,
-                                }
-                        }
-                        transition={{ duration: 0.7, ease: "easeInOut" }}
-                        className="card mb-4"
-                        style={{
-                            position: "relative",
-                        }}
-                    >
+                    <div key={card.id} className="card mb-4" style={{ position: "relative" }}>
                         <CardAssembly
                             id={hero.id}
                             name={hero.name}
                             title={hero.title}
-                            count={hero.count} // count no pārrēķinātā
+                            count={hero.count}
                             rank={hero.rank}
+                            isActive={card.id === activeId}
                         />
-                    </motion.div>
+                    </div>
                 )
             })}
 

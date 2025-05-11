@@ -3,8 +3,12 @@ import { useSelector } from "react-redux"
 import config from "../../config"
 
 const StyledCardImage = styled.img`
-    width: 180px;
-    height: 150px;
+    max-width: 180px;
+    min-width: 100px;
+    width: auto;
+    max-height: 150px;
+    min-height: 100px;
+    height: auto;
     object-fit: cover;
     margin: 10px;
     border-radius: 10px;

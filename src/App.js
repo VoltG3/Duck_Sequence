@@ -1,13 +1,13 @@
 import styled from "styled-components"
 import { GlobalStyles } from "./GlobalStyles"
+import config from "./config"
 import { DataLoader } from "./dataloader/dataloader"
+import { AudioController } from "./components/controller.audio"
 import { SectionHeader } from "./sections/section.header"
 import SectionContent from "./sections/section.content"
-import { InfoController } from "./components/overlay/controller.info"
 import SectionFooter from "./sections/section.footer"
-import config from "./config"
-import { AudioController } from "./components/controller.audio"
-import { AboutController } from "./components/overlay/controller.about"
+import { OverlayAbout }  from "./components/overlay/overlay.about"
+import { OverlayInfo } from "./components/overlay/overlay.info"
 
 function App() {
 
@@ -21,8 +21,8 @@ function App() {
                     <AudioController />
                         <SectionHeader />
                         <SectionContent />
-                        <InfoController />
-                        <AboutController />
+                        <OverlayAbout />
+                        <OverlayInfo />
                         <SectionFooter />
                 </div>
             </div>
@@ -43,7 +43,7 @@ const AppContainer = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url(${config.background.URL_background});
+        background-image: url(${config.background.URL_background_01});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

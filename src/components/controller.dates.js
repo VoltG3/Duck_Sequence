@@ -8,7 +8,8 @@ const StyledDatesController = styled.div`
     position: relative;
     display: inline-flex;
     //gap: 0.5rem;
-    padding: 1rem;
+    //padding: 1rem;
+    //border: solid 1px red;
 `
 const SlidingBackground = styled(motion.div)`
     position: absolute;
@@ -39,7 +40,7 @@ export const DatesController = () => {
             const width = btnRect.width
             setSliderStyle({ left, width })
         }
-    }, [activeIndex])
+    }, [activeIndex, isDataLoaded])
 
     if (!isDataLoaded || !timeRecords || Object.keys(timeRecords).length === 0) {
         return <p>Loading dates…</p>
