@@ -32,6 +32,8 @@ const initialState = {
     target_about: false,
     target_state: {
         play_animation_level_up : false,
+        play_animation_level_down : false,
+        play_animation_level_equal : false,
         sorting_cards: false,
         sorting_cards_next: false,
     }

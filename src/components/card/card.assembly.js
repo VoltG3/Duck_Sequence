@@ -8,6 +8,8 @@ import { motion } from "framer-motion"
 import config from "../../config"
 
 import {LevelUpAnimation} from "../animations/animation.level.up"
+import {LevelDownAnimation} from "../animations/animation.level.down";
+import {LevelEqualAnimation} from "../animations/animation.level.equal";
 
 const CardAssemblyContainer = styled.div`
     position: relative;
@@ -69,6 +71,11 @@ const CardContainer = styled(motion.div)`
 
 export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
     console.log("ANIMATION", animation)
+
+    const AnimateUp = <LevelUpAnimation />
+    const AnimateDown = <LevelDownAnimation />
+    const AnimateEqual = <LevelEqualAnimation />
+
     return (
         <CardAssemblyContainer>
             <CrownContainer
@@ -119,8 +126,16 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
 
                 <AnimationContainer>
                     <p>{animation}</p>
-                    <LevelUpAnimation />
-                </AnimationContainer>
+
+                    {
+                        animation === "animation_level_up"
+                            ? AnimateUp
+                                : animation === "animation_level_down"
+                                    ? AnimateDown
+                                    : AnimateEqual
+                    }
+
+                </AnimationContainer><p>{animation}</p>
 
         </CardAssemblyContainer>
     )

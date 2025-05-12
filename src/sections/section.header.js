@@ -61,6 +61,8 @@ export const SectionHeader = () => {
                 </div>
 
                 <div className="header__item">
+                    <button onClick={() => dispatch(storeTargetState("play_animation_level_equal", true)) }>play_animation_equal</button>
+                    <button onClick={() => dispatch(storeTargetState("play_animation_level_down", true)) }>play_animation_down</button>
                     <button onClick={() => dispatch(storeTargetState("play_animation_level_up", true)) }>play_animation_level_up</button>
                     <button onClick={() => dispatch(storeTargetState("sorting_cards", true)) }>sorting_cards</button>
                     <button onClick={() => dispatch(storeTargetState("sorting_cards_next", true)) }>sorting_cards_next</button>
