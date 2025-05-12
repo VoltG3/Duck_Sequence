@@ -7,6 +7,41 @@ import { BtnOpenOverlayInfo } from "../btn/button.overlay.open.info"
 import { motion } from "framer-motion"
 import config from "../../config"
 
+import {LevelUpAnimation} from "../animations/animation.level.up"
+
+const CardAssemblyContainer = styled.div`
+    position: relative;
+    //border: solid 1px black;
+    width: auto;  
+    height: auto;  
+    //margin: 10px; 
+    display: inline-block; 
+`
+
+const AnimationContainer = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const CrownContainer = styled(motion.div)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 60px;
+    position: relative;
+`
+
 const CardContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
@@ -32,27 +67,14 @@ const CardContainer = styled(motion.div)`
     //transition: box-shadow 0.6s ease, transform 0.6s ease;
 `
 
-const CrownContainer = styled(motion.div)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: auto;
-    height: 60px;
-    position: relative;
-`
-
 export const CardAssembly = ({ id, title, name, count, rank, isActive }) => {
     return (
-        <>
+        <CardAssemblyContainer>
             <CrownContainer
                 layout
-                style={{ zIndex: isActive ? 10 : 1 }}
                 animate={{
                     scale: isActive ? 1.1 : 1,
                     y: isActive ? -30 : 0,
-                    boxShadow: isActive
-                        ? "none"
-                        : "none",
                 }}
                 transition={{ duration: 0.7, ease: "easeInOut" }}
             >
@@ -89,11 +111,23 @@ export const CardAssembly = ({ id, title, name, count, rank, isActive }) => {
                         <CardName rank={rank} title={title} name={name} />
                         <BtnOpenOverlayInfo id={id} name={name} rank={rank} title={title} count={count} />
                     </div>
-                    {/* <CardRank rank={rank} /> */}
                 </div>
 
                 <CardPoints count={count} id={id} rank={rank} />
             </CardContainer>
-        </>
+
+                <AnimationContainer>
+                    <p>animation</p>
+                    <LevelUpAnimation />
+                </AnimationContainer>
+
+        </CardAssemblyContainer>
     )
 }
+
+
+//{isActive && (
+  //              <AnimationContainer>
+    //                <p>animation</p>
+      //          </AnimationContainer>
+        //    )}

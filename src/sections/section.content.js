@@ -30,7 +30,7 @@ const StyledContent = styled.div`
         align-content: center;
         width: auto;
         height: auto;
-        border: solid 1px red;
+        //border: solid 1px red;
     }
 `
 

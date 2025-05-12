@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react"
 import { CardAssembly } from "./card/card.assembly"
 import { useSelector, useDispatch } from "react-redux"
-import { LevelUpAnimation2 } from "./overlay/info/animation.level.up2"
 import { storeTargetState } from "../redux/actions"
 
 export const CardController = () => {
@@ -26,7 +25,7 @@ export const CardController = () => {
         console.log("Sorted data:", sorted)
     }, [cards])
 
-    // Handle next step (sorting)
+    // Handle the next step (sorting)
     const handleNextStep = useCallback(() => {
         if (!sortedCards.length || currentStep >= sortedCards.length) return
 
@@ -80,14 +79,14 @@ export const CardController = () => {
     useEffect(() => {
         if (ActionSortingCards) {
             handlePrepareSort();
-            dispatch(storeTargetState("sorting_cards", false)); // Reset sorting flag
+            dispatch(storeTargetState("sorting_cards", false))
         }
 
         if (ActionSortingNext) {
             handleNextStep()
-            dispatch(storeTargetState("sorting_cards_next", false)); // Reset the next step flag
+            dispatch(storeTargetState("sorting_cards_next", false))
         }
-    }, [ActionSortingCards, ActionSortingNext, handlePrepareSort, handleNextStep, dispatch]);
+    }, [ActionSortingCards, ActionSortingNext, handlePrepareSort, handleNextStep, dispatch])
 
     if (!isDataLoaded || !Array.isArray(cards) || cards.length === 0) {
         return <p>Loading cards…</p>
@@ -96,20 +95,7 @@ export const CardController = () => {
     return (
         <>
             <div className="mb-4 flex gap-4">
-                <button
-                    className="px-4 py-2 bg-blue-600 text-white rounded"
-                    onClick={handlePrepareSort}
-                >
-                    Sorting Card
-                </button>
-                <button
-                    className="px-4 py-2 bg-green-600 text-white rounded"
-                    onClick={handleNextStep}
-                    disabled={currentStep >= sortedCards.length}
-                >
-                    Next Card
-                </button>
-                <LevelUpAnimation2 />
+
             </div>
 
             {cards.map((card) => {

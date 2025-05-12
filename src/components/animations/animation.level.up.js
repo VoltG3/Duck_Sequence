@@ -1,43 +1,62 @@
-import { useState } from "react"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import config from "../../config"
+import { useDispatch, useSelector } from "react-redux"
+import { storeTargetState } from "../../redux/actions"
 
 export const LevelUpAnimation = () => {
-    const [frameIndex, setFrameIndex] = useState(0)
-    const [isPlaying, setIsPlaying] = useState(false)
-    const levelUpFrames = Object.values(config.level_up)            // Create an array of all level-up frames
+    const levelUpFrames = Object.values(config.level_up)
+    const [currentFrame, setCurrentFrame] = useState(0)
 
-    const startAnimation = () => {
-        if (isPlaying) return
+    const playAnimation = useSelector(state => state.target_state.play_animation_level_up)
+    const dispatch = useDispatch()
 
-        setIsPlaying(true)
-        let index = 0
+    useEffect(() => {
+        if (playAnimation) {
+            let index = 0
+            setCurrentFrame(index)
+            const interval = setInterval(() => {
+                setCurrentFrame(index)
+                index++
 
-        const interval = setInterval(() => {
-            setFrameIndex(index)
-            index++
+                if (index >= levelUpFrames.length) {
+                    clearInterval(interval)
+                    dispatch(storeTargetState("play_animation_level_up", false))
+                }
+            }, 80)
 
-            if (index >= levelUpFrames.length) {
-                clearInterval(interval)
-                setIsPlaying(false)
-            }
-        }, 80)
-    }
+            return () => clearInterval(interval)
+        }
+    }, [playAnimation, levelUpFrames.length, dispatch])
 
     return (
-        <div className="flex flex-col items-center space-y-2">
-            <button
-                onClick={startAnimation}
-                className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
-            >
-                🎉 Level Up!
-            </button>
-            {isPlaying && (
-                <img
-                    src={levelUpFrames[frameIndex]}
-                    alt="Level Up Animation"
-                    className="w-32 h-32"
+        <motion.div
+            style={{
+                position: "absolute",
+                top: "0",
+                width: "140px",
+                height: "190px",
+                zIndex: 9999,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+        >
+            {levelUpFrames.map((frame, index) => (
+                <motion.img
+                    key={index}
+                    src={frame}
+                    alt={`Frame ${index}`}
+                    style={{
+                        display: index === currentFrame ? "block" : "none",
+                        width: "100%",
+                        height: "100%",
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
                 />
-            )}
-        </div>
+            ))}
+        </motion.div>
     )
 }
