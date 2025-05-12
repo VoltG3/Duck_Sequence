@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { CardAssembly } from "./card/card.assembly"
 import { useSelector, useDispatch } from "react-redux"
 import { LevelUpAnimation2 } from "./overlay/info/animation.level.up2"
 import { storeTargetState } from "../redux/actions"
 
 export const CardController = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const isDataLoaded = useSelector(state => state.isDataLoaded)
     const playerResults = useSelector(state => state.player_results)
     const selectedDate = useSelector(state => state.target_date)
@@ -19,15 +19,15 @@ export const CardController = () => {
     const [activeId, setActiveId] = useState(null)
 
     // Prepare sorting
-    const handlePrepareSort = () => {
+    const handlePrepareSort = useCallback(() => {
         const sorted = [...cards].sort((a, b) => b.count - a.count)
         setSortedCards(sorted)
         setCurrentStep(0)
         console.log("Sorted data:", sorted)
-    };
+    }, [cards])
 
     // Handle next step (sorting)
-    const handleNextStep = () => {
+    const handleNextStep = useCallback(() => {
         if (!sortedCards.length || currentStep >= sortedCards.length) return
 
         const targetCard = sortedCards[currentStep]
@@ -56,10 +56,10 @@ export const CardController = () => {
             }, 800)
         } else {
             // If the card is already in place, immediately move to the next step
-            setCurrentStep(prev => prev + 1);
+            setCurrentStep(prev => prev + 1)
             console.log("Card is already in the right place, moving on to the next step...")
         }
-    }
+    }, [sortedCards, currentStep, cards, dispatch])
 
     // Fetch and initialize data from player results
     useEffect(() => {
@@ -73,24 +73,24 @@ export const CardController = () => {
             count: parseInt(hero.count, 10) || 0
         }))
 
-        setCards(initialCards);
+        setCards(initialCards)
     }, [isDataLoaded, playerResults, selectedDate])
 
     // Trigger sorting when action flags are true
     useEffect(() => {
         if (ActionSortingCards) {
             handlePrepareSort();
-            dispatch(storeTargetState("sorting_cards", false))
+            dispatch(storeTargetState("sorting_cards", false)); // Reset sorting flag
         }
 
         if (ActionSortingNext) {
-            handleNextStep();
-            dispatch(storeTargetState("sorting_cards_next", false));
+            handleNextStep()
+            dispatch(storeTargetState("sorting_cards_next", false)); // Reset the next step flag
         }
-    }, [ActionSortingCards, ActionSortingNext, dispatch, handleNextStep, handlePrepareSort])
+    }, [ActionSortingCards, ActionSortingNext, handlePrepareSort, handleNextStep, dispatch]);
 
     if (!isDataLoaded || !Array.isArray(cards) || cards.length === 0) {
-        return <p>Loading cards…</p>;
+        return <p>Loading cards…</p>
     }
 
     return (
