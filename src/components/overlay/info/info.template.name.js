@@ -32,10 +32,10 @@ export const InfoTemplateName = ({ playerId, playerSecondName }) => {
                         targetPlayerRank === "3rd" ? "var(--range--color--03)" :
                                                      "var(--range--color--04)"
                 }}>
-                    { targetPlayerTitle }
+                    { targetPlayerTitle }{" "}
                 </span>
 
-                { targetPlayerName }
+                { targetPlayerName }{" "}
 
                 <span style={{
                     fontWeight: "bold",
@@ -45,7 +45,7 @@ export const InfoTemplateName = ({ playerId, playerSecondName }) => {
                         targetPlayerRank === "3rd" ? "var(--range--color--03)" :
                                                      "var(--range--color--04)"
                 }}>
-                    { getPrefix(playerId) }
+                    { getPrefix(playerId) }{" "}
                 </span>
 
                 { playerSecondName }

@@ -7,7 +7,7 @@ import {
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT
+    TARGET_ABOUT, TARGET_STATES
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -92,5 +92,14 @@ export const storeTargetAbout = (target_about) => {
     return {
         type: TARGET_ABOUT,
         payload: target_about
+    }
+}
+
+export const storeTargetState = (field, value) => {
+    console.log("[ dispatch   GET ] - BTN target state field ", field, "value", value)
+
+    return {
+        type: TARGET_STATES,
+        payload: { field, value }
     }
 }

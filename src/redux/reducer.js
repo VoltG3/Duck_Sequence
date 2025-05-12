@@ -7,7 +7,7 @@ import {
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT
+    TARGET_ABOUT, TARGET_STATES
 } from './actionTypes'
 
 const initialState = {
@@ -29,7 +29,12 @@ const initialState = {
         play_audio_info : false,
         play_audio_about : false
     },
-    target_about: false
+    target_about: false,
+    target_state: {
+        play_animation_level_up : false,
+        sorting_cards: false,
+        sorting_cards_next: false,
+    }
 }
 
 export default function reducer(state = initialState, action) {
@@ -111,6 +116,17 @@ export default function reducer(state = initialState, action) {
             ...state,
             target_about: action.payload,
         }
+
+        case TARGET_STATES:
+            //console.log("[ reducer        ] - TARGET_STATES          ", action.payload)
+
+            return {
+                ...state,
+                target_state: {
+                    ...state.target_state,
+                    [action.payload.field]: action.payload.value,
+                }
+            }
 
         default:
             return state

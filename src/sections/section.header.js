@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { BtnOpenOverlayAbout } from "../components/btn/button.overlay.open.about"
 import { DatesController } from "../components/controller.dates"
+import {useDispatch} from "react-redux";
+import {storeTargetState} from "../redux/actions";
 
 const StyledHeader = styled.div`
     display: flex;
@@ -45,6 +47,8 @@ const StyledHeader = styled.div`
 
 export const SectionHeader = () => {
 
+    const dispatch = useDispatch()
+
     return (
         <StyledHeader>
             <div className="innerHeader">
@@ -57,6 +61,9 @@ export const SectionHeader = () => {
                 </div>
 
                 <div className="header__item">
+                    <button onClick={() => dispatch(storeTargetState("play_animation_level_up", true)) }>play_animation_level_up</button>
+                    <button onClick={() => dispatch(storeTargetState("sorting_cards", true)) }>sorting_cards</button>
+                    <button onClick={() => dispatch(storeTargetState("sorting_cards_next", true)) }>sorting_cards_next</button>
                     <BtnOpenOverlayAbout />
                 </div>
             </div>

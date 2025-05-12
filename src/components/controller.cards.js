@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react"
 import { CardAssembly } from "./card/card.assembly"
-import { useSelector } from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
+import {LevelUpAnimation} from "./animations/animation.level.up";
+import {LevelUpAnimation2} from "./overlay/info/animation.level.up2";
+import {storeTargetState} from "../redux/actions";
 
 export const CardController = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
     const playerResults = useSelector(state => state.player_results)
     const selectedDate = useSelector(state => state.target_date)
 
+    const ActionSortingCards = useSelector(state => state.target_state.sorting_cards)
+    const ActionSortingNext = useSelector(state => state.target_state.sorting_cards_next)
+    console.log("ActionSortingCards:", ActionSortingCards, "ActionSortingNext:", ActionSortingNext)
+
     const [cards, setCards] = useState([]) // Empty initial state
     const [sortedCards, setSortedCards] = useState([]); // Ordered list (by "count")
     const [currentStep, setCurrentStep] = useState(0); // Current step (which card to move)
     const [activeId, setActiveId] = useState(null); // Active (movable) card
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (!isDataLoaded || !Array.isArray(playerResults)) return;
@@ -24,13 +33,9 @@ export const CardController = () => {
             count: parseInt(hero.count, 10) || 0 // ensures that count is a number
         }));
 
-        setCards(initialCards) //  Iestata sākotnējo stāvokli
-    }, [isDataLoaded, playerResults, selectedDate])
+        setCards(initialCards) //  Set default State
+    }, [ActionSortingCards, ActionSortingNext, isDataLoaded, playerResults, selectedDate])
 
-    // Loading checks
-    if (!isDataLoaded || !Array.isArray(cards) || cards.length === 0) {
-        return <p>Loading cards…</p>
-    }
 
     // Prepares a sorted list of cards by count value (from highest to lowest)
     const handlePrepareSort = () => {
@@ -72,6 +77,23 @@ export const CardController = () => {
         }
     }
 
+    useEffect(() => {
+        if (ActionSortingCards) {
+            handlePrepareSort();
+            dispatch(storeTargetState("sorting_cards", false));
+            dispatch(storeTargetState("sorting_cards_next", false));
+        }
+
+        if (ActionSortingNext) {
+            handleNextStep();
+            //dispatch({ type: "SET_SORTING_CARDS_NEXT", payload: false });
+        }
+    }, [ActionSortingCards, ActionSortingNext, handleNextStep, handlePrepareSort]);
+
+    // Loading checks
+    if (!isDataLoaded || !Array.isArray(cards) || cards.length === 0) {
+        return <p>Loading cards…</p>
+    }
 
     return (
         <>
@@ -89,6 +111,7 @@ export const CardController = () => {
                 >
                     Next Card
                 </button>
+                <LevelUpAnimation2 />
             </div>
 
 
