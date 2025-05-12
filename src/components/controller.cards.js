@@ -1,98 +1,96 @@
 import { useEffect, useState } from "react"
 import { CardAssembly } from "./card/card.assembly"
-import {useDispatch, useSelector} from "react-redux"
-import {LevelUpAnimation} from "./animations/animation.level.up";
-import {LevelUpAnimation2} from "./overlay/info/animation.level.up2";
-import {storeTargetState} from "../redux/actions";
+import { useSelector, useDispatch } from "react-redux"
+import { LevelUpAnimation2 } from "./overlay/info/animation.level.up2"
+import { storeTargetState } from "../redux/actions"
 
 export const CardController = () => {
+    const dispatch = useDispatch();
     const isDataLoaded = useSelector(state => state.isDataLoaded)
     const playerResults = useSelector(state => state.player_results)
     const selectedDate = useSelector(state => state.target_date)
 
     const ActionSortingCards = useSelector(state => state.target_state.sorting_cards)
     const ActionSortingNext = useSelector(state => state.target_state.sorting_cards_next)
-    console.log("ActionSortingCards:", ActionSortingCards, "ActionSortingNext:", ActionSortingNext)
 
-    const [cards, setCards] = useState([]) // Empty initial state
-    const [sortedCards, setSortedCards] = useState([]); // Ordered list (by "count")
-    const [currentStep, setCurrentStep] = useState(0); // Current step (which card to move)
-    const [activeId, setActiveId] = useState(null); // Active (movable) card
+    const [cards, setCards] = useState([])
+    const [sortedCards, setSortedCards] = useState([])
+    const [currentStep, setCurrentStep] = useState(0)
+    const [activeId, setActiveId] = useState(null)
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        if (!isDataLoaded || !Array.isArray(playerResults)) return;
-
-        const selectedEntryDate = playerResults.find(entry => entry.date === selectedDate)
-        if (!selectedEntryDate || !Array.isArray(selectedEntryDate.heroes)) return;
-
-        // Creates an array with id and count
-        const initialCards = selectedEntryDate.heroes.map(hero => ({
-            id: hero.id,
-            count: parseInt(hero.count, 10) || 0 // ensures that count is a number
-        }));
-
-        setCards(initialCards) //  Set default State
-    }, [ActionSortingCards, ActionSortingNext, isDataLoaded, playerResults, selectedDate])
-
-
-    // Prepares a sorted list of cards by count value (from highest to lowest)
+    // Prepare sorting
     const handlePrepareSort = () => {
-        console.log("prepare to sorting...");
-        const sorted = [...cards].sort((a, b) => b.count - a.count);
-        setSortedCards(sorted);
-        setCurrentStep(0);
-        console.log("sorted data:", sorted);
+        const sorted = [...cards].sort((a, b) => b.count - a.count)
+        setSortedCards(sorted)
+        setCurrentStep(0)
+        console.log("Sorted data:", sorted)
     };
 
-    // Moves the next card to its correct place in the sorted order
+    // Handle next step (sorting)
     const handleNextStep = () => {
-        if (!sortedCards.length || currentStep >= sortedCards.length) return;
+        if (!sortedCards.length || currentStep >= sortedCards.length) return
 
-        const targetCard = sortedCards[currentStep];
-        const currentCardsCopy = [...cards];
-        const currentIndex = currentCardsCopy.findIndex(c => c.id === targetCard.id);
+        const targetCard = sortedCards[currentStep]
+        const currentCardsCopy = [...cards]
+        const currentIndex = currentCardsCopy.findIndex(c => c.id === targetCard.id)
 
-        // If the card is not already in the correct place, move it
+        // If the card is not already in the correct position, move it
         if (currentIndex !== currentStep) {
-            setActiveId(targetCard.id); // Mark the active card
-            console.log(`Moving card: ${targetCard.id} from pozition ${currentIndex} to ${currentStep}`);
+            setActiveId(targetCard.id)
+            console.log(`Moving card: ${targetCard.id} from position ${currentIndex} to ${currentStep}`)
 
-            currentCardsCopy.splice(currentIndex, 1); // Removes a card from the current position
-            currentCardsCopy.splice(currentStep, 0, targetCard); // Put in the right place
+            currentCardsCopy.splice(currentIndex, 1)
+            currentCardsCopy.splice(currentStep, 0, targetCard)
 
-            setCards(currentCardsCopy);
+            setCards(currentCardsCopy)
 
-            // After the animation is complete, remove the active and move on to the next step
+            // After the animation is complete, move on to the next step
             setTimeout(() => {
-                setActiveId(null);
-                setCurrentStep(prev => prev + 1);
-                console.log("The movement animation is complete, moving on to the next step...");
-            }, 800);
+                setActiveId(null)
+                setCurrentStep(prev => prev + 1)
+                console.log("Movement animation complete, moving on to the next step...")
+
+                // Reset action flags to false after completion
+                dispatch(storeTargetState("sorting_cards", false))
+                dispatch(storeTargetState("sorting_cards_next", false))
+            }, 800)
         } else {
             // If the card is already in place, immediately move to the next step
-            setCurrentStep(prev => prev + 1)
-            console.log("The card is already in the right place, move on to the next step...")
+            setCurrentStep(prev => prev + 1);
+            console.log("Card is already in the right place, moving on to the next step...")
         }
     }
 
+    // Fetch and initialize data from player results
+    useEffect(() => {
+        if (!isDataLoaded || !Array.isArray(playerResults)) return
+
+        const selectedEntryDate = playerResults.find(entry => entry.date === selectedDate)
+        if (!selectedEntryDate || !Array.isArray(selectedEntryDate.heroes)) return
+
+        const initialCards = selectedEntryDate.heroes.map(hero => ({
+            id: hero.id,
+            count: parseInt(hero.count, 10) || 0
+        }))
+
+        setCards(initialCards);
+    }, [isDataLoaded, playerResults, selectedDate])
+
+    // Trigger sorting when action flags are true
     useEffect(() => {
         if (ActionSortingCards) {
             handlePrepareSort();
-            dispatch(storeTargetState("sorting_cards", false));
-            dispatch(storeTargetState("sorting_cards_next", false));
+            dispatch(storeTargetState("sorting_cards", false))
         }
 
         if (ActionSortingNext) {
             handleNextStep();
-            //dispatch({ type: "SET_SORTING_CARDS_NEXT", payload: false });
+            dispatch(storeTargetState("sorting_cards_next", false));
         }
-    }, [ActionSortingCards, ActionSortingNext, handleNextStep, handlePrepareSort]);
+    }, [ActionSortingCards, ActionSortingNext, dispatch, handleNextStep, handlePrepareSort])
 
-    // Loading checks
     if (!isDataLoaded || !Array.isArray(cards) || cards.length === 0) {
-        return <p>Loading cards…</p>
+        return <p>Loading cards…</p>;
     }
 
     return (
@@ -114,13 +112,12 @@ export const CardController = () => {
                 <LevelUpAnimation2 />
             </div>
 
-
             {cards.map((card) => {
                 const hero = playerResults
                     .find(entry => entry.date === selectedDate)
-                    ?.heroes.find(h => h.id === card.id)
+                    ?.heroes.find(h => h.id === card.id);
 
-                if (!hero) return null;
+                if (!hero) return null
 
                 return (
                     <div key={card.id} className="card mb-4" style={{ position: "relative" }}>
@@ -135,7 +132,6 @@ export const CardController = () => {
                     </div>
                 )
             })}
-
         </>
     )
 }
