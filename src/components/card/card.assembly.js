@@ -67,7 +67,8 @@ const CardContainer = styled(motion.div)`
     //transition: box-shadow 0.6s ease, transform 0.6s ease;
 `
 
-export const CardAssembly = ({ id, title, name, count, rank, isActive }) => {
+export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
+    console.log("ANIMATION", animation)
     return (
         <CardAssemblyContainer>
             <CrownContainer
@@ -117,7 +118,7 @@ export const CardAssembly = ({ id, title, name, count, rank, isActive }) => {
             </CardContainer>
 
                 <AnimationContainer>
-                    <p>animation</p>
+                    <p>{animation}</p>
                     <LevelUpAnimation />
                 </AnimationContainer>
 
