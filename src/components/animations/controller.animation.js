@@ -1,14 +1,27 @@
-import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
 import config from "../../config"
-import { useDispatch, useSelector } from "react-redux"
-import { storeTargetState } from "../../redux/actions"
+import {useEffect, useMemo, useState} from "react"
+import {useDispatch, useSelector} from "react-redux"
+import {storeTargetState} from "../../redux/actions"
+import {motion} from "framer-motion";
 
-export const LevelEqualAnimation = () => {
-    const levelDownFrames = Object.values(config.level_equal)
+export const AnimationController = ({ id, animation }) => {
+
+    const levelUpFrames = useMemo(() => Object.values(config.level_up), [])
+    const levelEqualFrames = useMemo(() => Object.values(config.level_equal), [])
+    const levelDownFrames = useMemo(() => Object.values(config.level_down), [])
+
+    const animationFrames = () => {
+            switch (animation) {
+                case "animation_level_up": return levelUpFrames
+                case "animation_level_equal": return levelEqualFrames
+                case "animation_level_down": return levelDownFrames
+                default: return null
+            }
+        }
+
     const [currentFrame, setCurrentFrame] = useState(0)
 
-    const playAnimation = useSelector(state => state.target_state.play_animation_level_equal)
+    const playAnimation = useSelector(state => state.target_state.play_animation_level_down)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -21,13 +34,23 @@ export const LevelEqualAnimation = () => {
 
                 if (index >= levelDownFrames.length) {
                     clearInterval(interval)
-                    dispatch(storeTargetState("play_animation_level_equal", false))
+
+
+
+
+                    dispatch(storeTargetState("play_animation_level_down", false))
                 }
             }, 80)
 
             return () => clearInterval(interval)
         }
     }, [playAnimation, levelDownFrames.length, dispatch])
+
+    const frames = animationFrames()
+
+    if (!frames || frames.length === 0) {
+        return null;
+    }
 
     return (
         <motion.div
@@ -36,13 +59,13 @@ export const LevelEqualAnimation = () => {
                 top: "0",
                 width: "140px",
                 height: "190px",
-                zIndex: 18,
+                zIndex: 9999,
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            {levelDownFrames.map((frame, index) => (
+            {frames.map((frame, index) => (
                 <motion.img
                     key={index}
                     src={frame}

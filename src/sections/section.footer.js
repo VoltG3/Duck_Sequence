@@ -2,14 +2,19 @@ import styled from "styled-components"
 
 const StyledFooter = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 40px;
+        width: 100vw;
+        height: auto;
     background: var(--color--primary);
     color: white;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.6);
+    
+    & p {
+        font-size: var(--font--size--footer);
+        padding-top: 0.625rem;     /* 10px */
+        padding-bottom: 0.625rem;  /* 10px */
+    }
 `
 
 export default function SectionFooter() {

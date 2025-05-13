@@ -9,7 +9,7 @@ const StyledDatesController = styled.div`
     display: inline-flex;
     //gap: 0.5rem;
     //padding: 1rem;
-    //border: solid 1px red;
+    border: solid 1px red;
 `
 const SlidingBackground = styled(motion.div)`
     position: absolute;

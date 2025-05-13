@@ -1,11 +1,12 @@
 import styled from "styled-components"
+import { motion } from "framer-motion"
+import config from "../../config"
+
 import { CardCrown } from "./card.crown"
 import { CardImage } from "./card.image"
 import { CardName } from "./card.name"
 import { CardPoints } from "./card.points"
 import { BtnOpenOverlayInfo } from "../btn/button.overlay.open.info"
-import { motion } from "framer-motion"
-import config from "../../config"
 
 import {LevelUpAnimation} from "../animations/animation.level.up"
 import {LevelDownAnimation} from "../animations/animation.level.down";
@@ -13,11 +14,14 @@ import {LevelEqualAnimation} from "../animations/animation.level.equal";
 
 const CardAssemblyContainer = styled.div`
     position: relative;
-    //border: solid 1px black;
+    //max-width: 180px;
+    //max-height: 300px;
     width: auto;  
-    height: auto;  
-    //margin: 10px; 
-    display: inline-block; 
+    height: auto;
+    display: inline-block;
+    border: solid 1px black;
+    
+    // 210 x 402
 `
 
 const AnimationContainer = styled.div`
@@ -51,22 +55,17 @@ const CardContainer = styled(motion.div)`
     align-content: center;
     //width: 180px;
     //aspect-ratio: 5 / 7;
+    // 210 x 402
     margin: 10px;
-    //background-color: var(--card--color--01);
     
-    //background-color: lightgray;
     background-image: url(${config.background.URL_background_02});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     
     border-radius: 10px;
-    //box-shadow:
-    //        4px 0 6px rgba(0, 0, 0, 0.6), /* right shadow  */
-    //        0 4px 6px rgba(0, 0, 0, 0.6); /* bottom shadow */
     overflow: hidden;
     position: relative;
-    //transition: box-shadow 0.6s ease, transform 0.6s ease;
 `
 
 export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
@@ -124,7 +123,9 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
                 <CardPoints count={count} id={id} rank={rank} />
             </CardContainer>
 
-                <AnimationContainer>
+            {/*
+
+             <AnimationContainer>
                     <p>{animation}</p>
 
                     {
@@ -137,6 +138,7 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
 
                 </AnimationContainer><p>{animation}</p>
 
+            */}
         </CardAssemblyContainer>
     )
 }

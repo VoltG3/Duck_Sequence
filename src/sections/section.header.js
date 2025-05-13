@@ -3,17 +3,22 @@ import { BtnOpenOverlayAbout } from "../components/btn/button.overlay.open.about
 import { DatesController } from "../components/controller.dates"
 import {useDispatch} from "react-redux";
 import {storeTargetState} from "../redux/actions";
+import {NavigationController} from "../components/controller.navigation.assembly";
 
 const StyledHeader = styled.div`
+    position: fixed;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: auto;
+        width: 100%;
+        height: auto;
     background: var(--color--primary);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+        padding: 20px;
+    z-index: 20;
 
     .innerHeader {
         display: flex;
@@ -31,7 +36,7 @@ const StyledHeader = styled.div`
             justify-content: flex-start;
             align-items: center;
             flex-direction: row;
-
+            border: solid 1px white;
         }
     }
 
@@ -46,14 +51,20 @@ const StyledHeader = styled.div`
 `
 
 export const SectionHeader = () => {
-
     const dispatch = useDispatch()
 
     return (
         <StyledHeader>
-            <div className="innerHeader">
+            <NavigationController />
+        </StyledHeader>
+    )
+}
+
+
+{/*
+ <div className="innerHeader">
                 <div className="header__item">
-                    <p style={{ fontSize:"clamp(0.625rem, 3.75vw, 2.188rem)" }}>Duck Sequence</p>
+                    <p style={{ fontSize:"var(--font--size--header)" }}>Duck Sequence</p>
                 </div>
 
                 <div className="header__item">
@@ -61,14 +72,19 @@ export const SectionHeader = () => {
                 </div>
 
                 <div className="header__item">
-                    <button onClick={() => dispatch(storeTargetState("play_animation_level_equal", true)) }>play_animation_equal</button>
+
+                     <button onClick={() => dispatch(storeTargetState("play_animation_level_equal", true)) }>play_animation_equal</button>
                     <button onClick={() => dispatch(storeTargetState("play_animation_level_down", true)) }>play_animation_down</button>
                     <button onClick={() => dispatch(storeTargetState("play_animation_level_up", true)) }>play_animation_level_up</button>
                     <button onClick={() => dispatch(storeTargetState("sorting_cards", true)) }>sorting_cards</button>
                     <button onClick={() => dispatch(storeTargetState("sorting_cards_next", true)) }>sorting_cards_next</button>
+
+
+
+{/*
+  </div>
+                <div className={"header__item"}>
                     <BtnOpenOverlayAbout />
                 </div>
             </div>
-        </StyledHeader>
-    )
-}
+*/}

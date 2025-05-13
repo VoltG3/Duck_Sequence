@@ -36,7 +36,7 @@ export const LevelDownAnimation = () => {
                 top: "0",
                 width: "140px",
                 height: "190px",
-                zIndex: 9999,
+                zIndex: 18,
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

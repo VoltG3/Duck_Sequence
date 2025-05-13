@@ -14,7 +14,11 @@ export const GlobalStyles = createGlobalStyle`
         --range--color--03: #8080C0;
         --range--color--04: #7F8000;
         
-        --space: 0.625rem // 10px;
+        --space: 0.625rem ;// 10px;
+        
+        --font--size--header: clamp(1.675rem, 3.75vw, 2.188rem);    // 26.8px - 3.75% - 35px
+        --font--size--footer: clamp(0.75rem, 2vw, 1rem);            // 12px   -    2% - 16px
+
         
     }
 `
