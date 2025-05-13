@@ -3,20 +3,24 @@ import config from "../../config"
 
 export const StyledOverlay = styled.div`
     position: absolute;
+    top: 140px;
     display: ${({$visible}) => ($visible ? "flex" : "none")};
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
-    width: auto;
-    z-index: 3;
+        height: auto;
+        width: auto;
     border-radius: 10px;
-    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.6), /* right shadow  */ 0 4px 6px rgba(0, 0, 0, 0.6); /* bottom shadow */
+    box-shadow: 
+            4px 0 6px rgba(0, 0, 0, 0.6), /* right shadow  */ 
+            0 4px 6px rgba(0, 0, 0, 0.6); /* bottom shadow */
+    
     //background-color: #5ebc5e;
     background-image: url(${config.background.URL_background_02});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: 3;
 
     .innerOverlay {
         display: flex;

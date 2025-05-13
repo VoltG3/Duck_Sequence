@@ -21,7 +21,7 @@ function App() {
                 maxWidth: "100vw",
                 minHeight: "100vh",
                 width: "100%",
-                height: "auto",
+                height: "100%",
             zIndex: "1" }}>
             <GlobalStyles />
                 <SectionHeader />
