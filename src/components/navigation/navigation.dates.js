@@ -2,7 +2,7 @@ import styled from "styled-components"
 import React, {useEffect, useRef, useState} from "react"
 import { motion } from "framer-motion"
 import { useSelector } from "react-redux"
-import { BtnDates } from "./btn/button.dates"
+import { BtnDates } from "../btn/button.dates"
 
 const StyledDatesController = styled.div`
     position: relative;

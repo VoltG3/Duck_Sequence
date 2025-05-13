@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { BtnOpenOverlayAbout } from "../components/btn/button.overlay.open.about"
-import { DatesController } from "../components/controller.dates"
+import { DatesController } from "../components/navigation/navigation.dates"
 import {useDispatch} from "react-redux";
 import {storeTargetState} from "../redux/actions";
-import {NavigationController} from "../components/controller.navigation.assembly";
+import {NavigationController} from "../components/controller.navigation";
 
 const StyledHeader = styled.div`
     position: fixed;
@@ -17,7 +17,7 @@ const StyledHeader = styled.div`
     background: var(--color--primary);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-        padding: 20px;
+        //padding: 20px;
     z-index: 20;
 
     .innerHeader {

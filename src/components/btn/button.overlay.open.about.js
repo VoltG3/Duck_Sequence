@@ -6,7 +6,7 @@ const StyledBtnOpenOverlayAbout = styled.button`
     padding: 10px;
 `
 
-export const BtnOpenOverlayAbout = () => {
+export const ButtonOpenOverlayAbout = () => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
