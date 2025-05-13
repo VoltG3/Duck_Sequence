@@ -15,10 +15,9 @@ export const GlobalStyles = createGlobalStyle`
         --range--color--04: #7F8000;
         
         --space: 0.625rem ;// 10px;
-        
-        --font--size--header: clamp(1.675rem, 3.75vw, 2.188rem);    // 26.8px - 3.75% - 35px
-        --font--size--footer: clamp(0.75rem, 2vw, 1rem);            // 12px   -    2% - 16px
 
+        --font--size--header: clamp(1.275rem, 3.75vw, 2.188rem);    // 20.4px - 3.75vw - 35px 
+        --font--size--footer: clamp(0.75rem, 2vw, 1rem);            // 12px   -     2% - 16px
         
     }
 `

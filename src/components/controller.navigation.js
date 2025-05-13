@@ -1,6 +1,6 @@
 import { useMediaQuery } from "../utils/useMediaQuery"
-import { NavigationNavDesktop } from "./navigation/navigation.nav.desktop"
-import { NavigationNavMobile } from "./navigation/navigation.nav.mobile"
+import { NavigationDesktop } from "./navigation/navigation.assembly.desktop"
+import { NavigationMobile } from "./navigation/navigation.assembly.mobile"
 
 export const NavigationController = () => {
     const isMobile = useMediaQuery("(max-width: 768px)")
@@ -8,8 +8,8 @@ export const NavigationController = () => {
     return (
         <>
             { !isMobile
-                ? <NavigationNavDesktop />
-                : <NavigationNavMobile />
+                ? <NavigationDesktop />
+                : <NavigationMobile />
             }
         </>
     )

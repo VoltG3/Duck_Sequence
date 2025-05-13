@@ -2,25 +2,25 @@ import styled from "styled-components"
 import { storeTargetAudio, storeTargetDate } from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
-const StyledBtnDates = styled.button`
+const StyledButtonDates = styled.button`
     position: relative;
-    padding: 0.5rem 1.2rem;
     background: transparent;
     border: none;
-    width: auto;
-    height: 35px;
-    font-size: 1rem;
+        width: auto;
+        height: 30px;
+    font-size: 0.875rem; /* 14px */
+    padding-left: var(--space);
+    padding-right: var(--space);
     cursor: pointer;
     color: white;
     z-index: 4;
-    // border: solid 1px yellow;
     
     &:hover {
         color: yellow;
     }
 `
 
-export const BtnDates = ({ date }) => {
+export const ButtonDates = ({ date }) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
@@ -29,6 +29,6 @@ export const BtnDates = ({ date }) => {
     }
 
     return (
-        <StyledBtnDates onClick={() => handleClick() }>{ date }</StyledBtnDates>
+        <StyledButtonDates onClick={() => handleClick() }><p>{ date }</p></StyledButtonDates>
     )
 }

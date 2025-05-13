@@ -1,90 +1,23 @@
-import styled from "styled-components"
-import { BtnOpenOverlayAbout } from "../components/btn/button.overlay.open.about"
-import { DatesController } from "../components/navigation/navigation.dates"
-import {useDispatch} from "react-redux";
-import {storeTargetState} from "../redux/actions";
-import {NavigationController} from "../components/controller.navigation";
-
-const StyledHeader = styled.div`
-    position: fixed;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-        width: 100%;
-        height: auto;
-    background: var(--color--primary);
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-        //padding: 20px;
-    z-index: 20;
-
-    .innerHeader {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        width: 100%;
-        height: auto;
-        padding-left: calc(var(--space) * 2);
-        padding-right: calc(var(--space) * 2);
-
-        > :nth-child(2) { // Dates Controller
-            flex: 1;
-            padding: calc(var(--space) * 2) calc(var(--space) * 2) calc(var(--space) / 2) calc(var(--space) * 6);
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            flex-direction: row;
-            border: solid 1px white;
-        }
-    }
-
-    .header__item {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: auto;
-        height: auto;
-    }
-`
+import { NavigationController } from "../components/controller.navigation"
 
 export const SectionHeader = () => {
-    const dispatch = useDispatch()
 
     return (
-        <StyledHeader>
+        <div style={{
+            position: "fixed",
+            display: "flex",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "auto",
+            background: "var(--color--primary)",
+            color: "white",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)",
+            zIndex: "20"
+        }}>
             <NavigationController />
-        </StyledHeader>
+        </div>
     )
 }
-
-
-{/*
- <div className="innerHeader">
-                <div className="header__item">
-                    <p style={{ fontSize:"var(--font--size--header)" }}>Duck Sequence</p>
-                </div>
-
-                <div className="header__item">
-                    <DatesController />
-                </div>
-
-                <div className="header__item">
-
-                     <button onClick={() => dispatch(storeTargetState("play_animation_level_equal", true)) }>play_animation_equal</button>
-                    <button onClick={() => dispatch(storeTargetState("play_animation_level_down", true)) }>play_animation_down</button>
-                    <button onClick={() => dispatch(storeTargetState("play_animation_level_up", true)) }>play_animation_level_up</button>
-                    <button onClick={() => dispatch(storeTargetState("sorting_cards", true)) }>sorting_cards</button>
-                    <button onClick={() => dispatch(storeTargetState("sorting_cards_next", true)) }>sorting_cards_next</button>
-
-
-
-{/*
-  </div>
-                <div className={"header__item"}>
-                    <BtnOpenOverlayAbout />
-                </div>
-            </div>
-*/}

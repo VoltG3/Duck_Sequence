@@ -142,10 +142,3 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
         </CardAssemblyContainer>
     )
 }
-
-
-//{isActive && (
-  //              <AnimationContainer>
-    //                <p>animation</p>
-      //          </AnimationContainer>
-        //    )}

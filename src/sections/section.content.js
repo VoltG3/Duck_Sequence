@@ -1,50 +1,31 @@
-import styled from "styled-components"
 import { CardController } from "../components/controller.cards"
 
 function SectionContent() {
 
     return (
-        <StyledContent>
-
-
-            <div className="cardSet">
+        <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            flex: "1"
+        }}>
+            <div style={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "auto",
+                height: "auto",
+            }}>
                 <CardController />
             </div>
-
-
-
-        </StyledContent>
+        </div>
     )
 }
-
-const StyledContent = styled.div`
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    width: 100%;
-    height: 100%;
-    flex: 1;
-    
-    border: solid 1px black;
-  
-{/*
-// backdrop-filter: blur(3px);
-    // background-color: rgba(255, 255, 255, 0.1);
-*/}
-    
-    
-    .cardSet {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        align-content: center;
-        width: auto;
-        height: auto;
-        //border: solid 1px red;
-    }
-`
 
 export default SectionContent

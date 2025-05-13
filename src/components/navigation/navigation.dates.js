@@ -1,28 +1,26 @@
 import styled from "styled-components"
-import React, {useEffect, useRef, useState} from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
+import { ButtonDates } from "../btn/button.dates"
 import { useSelector } from "react-redux"
-import { BtnDates } from "../btn/button.dates"
 
-const StyledDatesController = styled.div`
+const StyledNavigationDates = styled.div`
     position: relative;
     display: inline-flex;
-    //gap: 0.5rem;
-    //padding: 1rem;
-    border: solid 1px red;
+    margin-bottom: calc(var(--space) / 2);
 `
 const SlidingBackground = styled(motion.div)`
     position: absolute;
     width: auto;
-    height: 35px;
-    background: #08e;
-    //border-radius: 0.5rem;
+    height: 30px;
+    //background: #08e;
+    background: #027FC1;
     z-index: 3;
 `
 
-export const DatesController = () => {
-    const timeRecords = useSelector(state => state.player_dates)
+export const NavigationDates = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
+    const sessionDates = useSelector(state => state.player_dates)
 
     const [activeIndex, setActiveIndex] = useState(0)
     const containerRef = useRef(null)
@@ -42,18 +40,18 @@ export const DatesController = () => {
         }
     }, [activeIndex, isDataLoaded])
 
-    if (!isDataLoaded || !timeRecords || Object.keys(timeRecords).length === 0) {
+    if (!isDataLoaded || !sessionDates || Object.keys(sessionDates).length === 0) {
         return <p>Loading dates…</p>
     }
 
-    const totalCount = timeRecords.length
+    const totalCount = sessionDates.length
 
     if (totalCount === 0) {
         return <p>No dates found.</p>
     }
 
     return (
-        <StyledDatesController ref={containerRef}>
+        <StyledNavigationDates ref={containerRef}>
             <SlidingBackground
                 layout
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -63,15 +61,15 @@ export const DatesController = () => {
                 }}
             />
 
-            {timeRecords.map((tab, i) => (
+            {sessionDates.map((tab, i) => (
                 <div style={{ border: "none" }}
                     key={tab}
                     ref={el => (btnRefs.current[i] = el)}
                     onClick={() => setActiveIndex(i)}
                 >
-                    <BtnDates date={ tab } />
+                    <ButtonDates date={ tab } />
                 </div>
             ))}
-        </StyledDatesController>
+        </StyledNavigationDates>
     )
 }

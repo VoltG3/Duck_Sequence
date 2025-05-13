@@ -1,0 +1,80 @@
+import styled from "styled-components"
+import { useState } from "react"
+import { motion } from "framer-motion"
+import Logo from "./navigation.logo"
+
+const StyledNavigationMobile = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+        width: 100%;
+        height: 100%;
+    padding: var(--space);
+    
+    .burger-icon {
+        font-size: 30px;
+        background: none;
+        border: none;
+        position: absolute;
+        top: 3px;
+        right: 20px;
+        color: white;
+        z-index: 10;
+    }
+    
+    .menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 250px;
+        background-color: #333;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        z-index: 5;
+    }
+    
+    .menu a {
+        color: white;
+        text-decoration: none;
+        margin: 1rem 0;
+        font-size: 20px;
+    }
+    
+    .menu a:hover {
+        background-color: #444;
+    }
+`
+
+export const NavigationMobile = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
+    return (
+        <StyledNavigationMobile>
+            <Logo />
+
+            <motion.div
+                className="menu"
+                initial={{ x: "100%" }}
+                animate={{ x: isOpen ? 0 : "100%" }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+                <a href="/public">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/contact">Contact</a>
+            </motion.div>
+
+            <button onClick={ toggleMenu } className="burger-icon"><p>☰</p></button>
+        </StyledNavigationMobile>
+    )
+}
