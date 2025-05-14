@@ -71,7 +71,7 @@ const CardContainer = styled(motion.div)`
 export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
     console.log("ANIMATION", animation)
 
-    const AnimateUp = <LevelUpAnimation />
+    const AnimateUp = <LevelUpAnimation id={id}/>
     const AnimateDown = <LevelDownAnimation />
     const AnimateEqual = <LevelEqualAnimation />
 
@@ -123,22 +123,21 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
                 <CardPoints count={count} id={id} rank={rank} />
             </CardContainer>
 
-            {/*
 
-             <AnimationContainer>
-                    <p>{animation}</p>
 
-                    {
-                        animation === "animation_level_up"
-                            ? AnimateUp
-                                : animation === "animation_level_down"
-                                    ? AnimateDown
-                                    : AnimateEqual
-                    }
+            <AnimationContainer>
 
-                </AnimationContainer><p>{animation}</p>
 
-            */}
+                {
+                    animation === "animation_level_up"
+                        ? AnimateUp
+                        : animation === "animation_level_down"
+                            ? AnimateDown
+                            : AnimateEqual
+                }
+            </AnimationContainer>
+            <p>{ animation }</p>
+            <p>{ id }</p>
         </CardAssemblyContainer>
     )
 }

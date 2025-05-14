@@ -4,13 +4,13 @@ import config from "../../config"
 import { useDispatch, useSelector } from "react-redux"
 import { storeTargetState } from "../../redux/actions"
 
-export const LevelUpAnimation = () => {
+export const LevelUpAnimation = ({ id }) => {
     const levelUpFrames = Object.values(config.level_up)
     const [currentFrame, setCurrentFrame] = useState(0)
 
     const playAnimation = useSelector(state => state.target_state.play_animation_level_up)
     const dispatch = useDispatch()
-
+console.log("level up id", id)
     useEffect(() => {
         if (playAnimation) {
             let index = 0

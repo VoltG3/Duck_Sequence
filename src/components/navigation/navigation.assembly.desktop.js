@@ -2,12 +2,10 @@ import Logo from "./navigation.logo"
 import { NavigationDates } from "./navigation.dates"
 import { FakeNavigationDates } from "./navigation.dates.fake"
 import { ButtonOpenOverlayAbout } from "../btn/button.overlay.open.about"
-import {useDispatch, useSelector} from "react-redux"
-import {storeTargetState} from "../../redux/actions";
+import { useSelector} from "react-redux"
 
 export const NavigationDesktop = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
-    const dispatch = useDispatch()
 
     return (
         <div style={{
@@ -33,14 +31,6 @@ export const NavigationDesktop = () => {
                 paddingLeft: "calc(var(--space) * 4)",
             }}>
                 {!isDataLoaded ? <FakeNavigationDates /> : <NavigationDates />}
-            </div>
-
-            <div>
-                <button onClick={() => dispatch(storeTargetState("play_animation_level_equal", true)) }>l_equal</button>
-                <button onClick={() => dispatch(storeTargetState("play_animation_level_down", true)) }>l_down</button>
-                <button onClick={() => dispatch(storeTargetState("play_animation_level_up", true)) }>l_up</button>
-                <button onClick={() => dispatch(storeTargetState("sorting_cards", true)) }>sort</button>
-                <button onClick={() => dispatch(storeTargetState("sorting_cards_next", true)) }>next</button>
             </div>
 
             <ButtonOpenOverlayAbout />

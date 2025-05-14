@@ -17,13 +17,13 @@ import {transformResultDataStatistics} from "./dataloader.build.stats";
  * Represents a data loader component that manages fetching and processing of external JSON data
  * and dispatches the processed data to the global store.
  *
- * This component fetches data from three JSON files: results.json, images.json,
+ * This component fetches data from three JSON files: results.json, player_data.json,
  * and descriptions.json, processes the data, and updates the application's state.
  * It also handles loading and error states.
  *
  * State variables:
  * - resultsData: Stores the fetched data from results.json.
- * - imagesData: Stores the fetched data from images.json.
+ * - imagesData: Stores the fetched data from player_data.json.
  * - descriptionsData: Stores the fetched data from descriptions.json.
  * - newDates: Stores transformed date-related data derived from results.json.
  * - newFields: Stores transformed field data derived from results.json.
@@ -40,7 +40,7 @@ import {transformResultDataStatistics} from "./dataloader.build.stats";
  * Dispatch actions:
  * - storePlayerDates: Stores the transformed date data.
  * - storePlayerResults: Stores the title assignment data.
- * - storePlayerImages: Stores the data from images.json.
+ * - storePlayerImages: Stores the data from player_data.json.
  * - storePlayerDescriptions: Stores the data from descriptions.json.
  * - storeSetDataLoaded: Sets the state indicating that all required data is loaded.
  *
@@ -139,7 +139,7 @@ export const DataLoader = () => {
         if (resultsData !== null && !isLoading && !error) {
 
             console.log("[ data loader    ] - results.json           ", resultsData)
-            console.log("[ data loader    ] - images.json            ", imagesData)
+                console.log("[ data loader    ] - player_data.json            ", imagesData)
             console.log("[ data loader    ] - descriptions.json      ", descriptionsData)
             console.log("[ data loader    ] - Arr newDates           ", newDates)
             console.log("[ data loader    ] - Arr newFields          ", newFields)
