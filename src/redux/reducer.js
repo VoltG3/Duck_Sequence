@@ -7,7 +7,7 @@ import {
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS
+    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS, ABOUT
 } from './actionTypes'
 
 const initialState = {
@@ -40,7 +40,8 @@ const initialState = {
     sessions_statistics: {
         total_sessions: "",
         total_rounds: ""
-    }
+    },
+    about: {}
 }
 
 export default function reducer(state = initialState, action) {
@@ -142,6 +143,14 @@ export default function reducer(state = initialState, action) {
                     ...state.sessions_statistics,
                     [action.payload.field]: action.payload.value,
                 }
+            }
+
+        case ABOUT:
+            //console.log("[ reducer        ] - PLAYER_DATES           ", action.payload)
+
+            return {
+                ...state,
+                about: action.payload
             }
 
         default:

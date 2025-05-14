@@ -5,7 +5,7 @@ import {
     storePlayerResults,
     storePlayerDescriptions,
     storeSetDataLoaded,
-    storePlayerImages, storeSessionsStatistics
+    storePlayerImages, storeSessionsStatistics, storeAbout
 } from "../redux/actions"
 import { transformResultDataAllDates } from "./dataloader.build.dates"
 import { transformResultDataNewFields } from "./dataloader.build.fields"
@@ -54,12 +54,14 @@ export const DataLoader = () => {
     const [resultsData, setResultsData] = useState(null)
     const [imagesData, setImagesData] = useState(null)
     const [descriptionsData, setDescriptionsData] = useState(null)
+    const [aboutData, setAboutData] = useState(null)
 
     const [newDates, setNewDates] = useState(null)
     const [newFields, setNewFields] = useState(null)
     const [newRankAssignment, setNewRankAssignment] = useState(null)
     const [newTitlesAssigment, setNewTitlesAssigment] = useState(null)
     const [newSessionStatistics, setNewSessionStatistics] = useState(null)
+    const [newAbout, setNewAbout] = useState(null)
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -72,27 +74,31 @@ export const DataLoader = () => {
             try {
                 setIsLoading(true)
 
-                const [responseResultsJSON, responseImagesJSON, responseDescriptionsJSON] = await Promise.all([
+                const [responseResultsJSON, responseImagesJSON, responseDescriptionsJSON,  responseAboutJSON] = await Promise.all([
                     fetch(`${process.env.PUBLIC_URL}/assets/results.json`),
                     fetch(`${process.env.PUBLIC_URL}/assets/images.json`),
                     fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/about.json`)
                 ])
 
                 if (!responseResultsJSON.ok) throw new Error(`results.json fetch failed with status ${responseResultsJSON.status}`)
                 if (!responseImagesJSON.ok) throw new Error(`images.json fetch failed with status ${responseImagesJSON.status}`)
                 if (!responseDescriptionsJSON.ok) throw new Error(`descriptions.json fetch failed with status ${responseDescriptionsJSON.status}`)
+                if (!responseAboutJSON.ok) throw new Error(`about.json fetch failed with status ${responseAboutJSON.status}`)
 
 
-                const [resultsJSON, imagesJSON, descriptionsJSON] = await Promise.all([
+                const [resultsJSON, imagesJSON, descriptionsJSON, aboutJSON] = await Promise.all([
                     responseResultsJSON.json(),
                     responseImagesJSON.json(),
-                    responseDescriptionsJSON.json()
+                    responseDescriptionsJSON.json(),
+                    responseAboutJSON.json()
                 ])
 
                 if (isMounted) {
                     setResultsData(resultsJSON)
                     setImagesData(imagesJSON)
                     setDescriptionsData(descriptionsJSON)
+                    setAboutData(aboutJSON)
 
                     const newDates = transformResultDataAllDates(resultsJSON)
                     setNewDates(newDates)
@@ -104,6 +110,8 @@ export const DataLoader = () => {
                     setNewTitlesAssigment(newTitles)
                     const newStatistics = transformResultDataStatistics(resultsJSON)
                     setNewSessionStatistics(newStatistics)
+
+                    setNewAbout(aboutJSON)
                 }
             } catch (err) {
                 if (isMounted) {
@@ -138,6 +146,7 @@ export const DataLoader = () => {
             console.log("[ data loader    ] - Arr newRankAssignment  ", newRankAssignment)
             console.log("[ data loader    ] - Arr newTitlesAssigment ", newTitlesAssigment)
             console.log("[ data loader    ] - Arr newStatistics      ", "totalSessions:", newSessionStatistics[0], "totalRounds", newSessionStatistics[1])
+            console.log("[ data loader    ] - about.json             ", newAbout)
 
             dispatch(storePlayerDates(newDates))
             dispatch(storePlayerResults(newTitlesAssigment))
@@ -146,19 +155,9 @@ export const DataLoader = () => {
             dispatch(storeSetDataLoaded(true))
             dispatch(storeSessionsStatistics("total_sessions", newSessionStatistics[0]))
             dispatch(storeSessionsStatistics("total_rounds", newSessionStatistics[1]))
+            dispatch(storeAbout(newAbout))
         }
-    }, [
-        isLoading,
-        newDates,
-        resultsData,
-        imagesData,
-        newFields,
-        newRankAssignment,
-        newTitlesAssigment,
-        descriptionsData,
-        dispatch,
-        error,
-        newSessionStatistics])
+    }, [isLoading, newDates, resultsData, imagesData, newFields, newRankAssignment, newTitlesAssigment, descriptionsData, dispatch, error, newSessionStatistics, newAbout])
 
     if (error) return <div>Error: {error}</div>
     if (isLoading) return <div>Loading...</div>

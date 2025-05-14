@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 
 export const OverlayAbout = () => {
     const targetAbout = useSelector(state => state.target_about)
+    const aboutContent = useSelector(state => state.about)
     const isVisible = targetAbout !== false
 
     const statisticsTotalSessions = useSelector(state => state.sessions_statistics.total_sessions)
@@ -12,7 +13,7 @@ export const OverlayAbout = () => {
 
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
-        if (!isDataLoaded || !statisticsTotalSessions || !statisticsTotalRounds) {
+        if (!isDataLoaded || !statisticsTotalSessions || !statisticsTotalRounds || !aboutContent) {
             return <p>Loading dates…</p>
         }
 
@@ -41,7 +42,18 @@ export const OverlayAbout = () => {
                        </p>
                    </div>
 
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                   <div className="about-section">
+                       {aboutContent && aboutContent.map((lineObj, index) => {
+                           const key = Object.keys(lineObj)[0]
+                           const text = lineObj[key]
+
+                           return (
+                               <p key={index} className="about-line">
+                                   {text}
+                               </p>
+                           )
+                       })}
+                   </div>
                </div>
            </Overlay>
         </OverlayContainer>

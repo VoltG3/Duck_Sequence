@@ -7,7 +7,7 @@ import {
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS
+    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS, ABOUT
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -110,5 +110,14 @@ export const storeSessionsStatistics = (field, value) => {
     return {
         type: SESSIONS_STATISTICS,
         payload: { field, value }
+    }
+}
+
+export const storeAbout = (about) => {
+    console.log("[ dispatch   GET ] - About                ", about)
+
+    return {
+        type: ABOUT,
+        payload: about
     }
 }
