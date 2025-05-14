@@ -120,4 +120,19 @@ export const StyledOverlay = styled.div`
         border-radius: 4px;
         display: inline;
     }
+
+    .unit-icon {
+        display: inline-block;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease, filter 0.3s ease;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        will-change: transform;
+    }
+
+    .unit-icon:hover {
+        transform: scale(2.5) translateZ(20px);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        z-index: 5;
+    }
 `

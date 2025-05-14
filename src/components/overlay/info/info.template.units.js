@@ -9,15 +9,15 @@ export const InfoTemplateUnits = ({ unitsNames, unitsIcons }) => {
 
             <ul>
                 <li>
-                    <p className={"inline-p"}>{ unitsIcons[1]}</p>
+                    <p className={"inline-p unit-icon"}>{ unitsIcons[1]}</p>
                     <p className={"inline-p"}>{ unitsNames[0] }</p><
                     /li>
                 <li>
-                    <p className={"inline-p"}>{ unitsIcons[2]}</p>
+                    <p className={"inline-p unit-icon"}>{ unitsIcons[2]}</p>
                     <p className={"inline-p"}>{ unitsNames[1] }</p>
                 </li>
                 <li>
-                    <p className={"inline-p"}>{ unitsIcons[3]}</p>
+                    <p className={"inline-p unit-icon"}>{ unitsIcons[3]}</p>
                     <p className={"inline-p"}>{ unitsNames[2] }</p>
                 </li>
             </ul>
