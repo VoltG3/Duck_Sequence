@@ -19,5 +19,8 @@ export const GlobalStyles = createGlobalStyle`
         --font--size--header: clamp(1.275rem, 3.75vw, 2.188rem);    // 20.4px - 3.75vw - 35px 
         --font--size--footer: clamp(0.75rem, 2vw, 1rem);            // 12px   -     2% - 16px
         
+        --font--size--h2: clamp(1.275rem, 3.75vw, 1.5rem);          // 20.4px -  3.75% - 24px 
+
+
     }
 `

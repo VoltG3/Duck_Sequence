@@ -10,7 +10,7 @@ const StyledBtnCloseOverlay = styled.button`
     padding: 10px;
 `
 
-export const BtnCloseOverlay = ({ closeTargetSection }) => {
+export const ButtonCloseOverlay = ({ closeTargetSection }) => {
     const dispatch = useDispatch()
 
     const closeSection = () => {

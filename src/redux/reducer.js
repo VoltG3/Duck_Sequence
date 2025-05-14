@@ -7,7 +7,7 @@ import {
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES
+    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS
 } from './actionTypes'
 
 const initialState = {
@@ -36,6 +36,10 @@ const initialState = {
         play_animation_level_equal : false,
         sorting_cards: false,
         sorting_cards_next: false,
+    },
+    sessions_statistics: {
+        total_sessions: "",
+        total_rounds: ""
     }
 }
 
@@ -126,6 +130,16 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 target_state: {
                     ...state.target_state,
+                    [action.payload.field]: action.payload.value,
+                }
+            }
+
+        case SESSIONS_STATISTICS:
+            //console.log("[ reducer        ] - SESSIONS_STATISTICS    ", action.payload)
+            return {
+                ...state,
+                sessions_statistics: {
+                    ...state.sessions_statistics,
                     [action.payload.field]: action.payload.value,
                 }
             }

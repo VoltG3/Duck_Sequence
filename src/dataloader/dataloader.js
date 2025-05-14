@@ -5,12 +5,13 @@ import {
     storePlayerResults,
     storePlayerDescriptions,
     storeSetDataLoaded,
-    storePlayerImages
+    storePlayerImages, storeSessionsStatistics
 } from "../redux/actions"
 import { transformResultDataAllDates } from "./dataloader.build.dates"
 import { transformResultDataNewFields } from "./dataloader.build.fields"
 import { transformResultDataRankAssigment } from "./dataloader.build.ranks"
 import { transformResultDataTilteAssigment } from "./dataloader.build.titles"
+import {transformResultDataStatistics} from "./dataloader.build.stats";
 
 /**
  * Represents a data loader component that manages fetching and processing of external JSON data
@@ -58,6 +59,7 @@ export const DataLoader = () => {
     const [newFields, setNewFields] = useState(null)
     const [newRankAssignment, setNewRankAssignment] = useState(null)
     const [newTitlesAssigment, setNewTitlesAssigment] = useState(null)
+    const [newSessionStatistics, setNewSessionStatistics] = useState(null)
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -100,6 +102,8 @@ export const DataLoader = () => {
                     setNewRankAssignment(newRanks)
                     const newTitles = transformResultDataTilteAssigment(newRanks)
                     setNewTitlesAssigment(newTitles)
+                    const newStatistics = transformResultDataStatistics(resultsJSON)
+                    setNewSessionStatistics(newStatistics)
                 }
             } catch (err) {
                 if (isMounted) {
@@ -133,12 +137,15 @@ export const DataLoader = () => {
             console.log("[ data loader    ] - Arr newFields          ", newFields)
             console.log("[ data loader    ] - Arr newRankAssignment  ", newRankAssignment)
             console.log("[ data loader    ] - Arr newTitlesAssigment ", newTitlesAssigment)
+            console.log("[ data loader    ] - Arr newStatistics      ", "totalSessions:", newSessionStatistics[0], "totalRounds", newSessionStatistics[1])
 
             dispatch(storePlayerDates(newDates))
             dispatch(storePlayerResults(newTitlesAssigment))
             dispatch(storePlayerImages(imagesData))
             dispatch(storePlayerDescriptions(descriptionsData))
             dispatch(storeSetDataLoaded(true))
+            dispatch(storeSessionsStatistics("total_sessions", newSessionStatistics[0]))
+            dispatch(storeSessionsStatistics("total_rounds", newSessionStatistics[1]))
         }
     }, [
         isLoading,
@@ -150,8 +157,8 @@ export const DataLoader = () => {
         newTitlesAssigment,
         descriptionsData,
         dispatch,
-        error
-       ])
+        error,
+        newSessionStatistics])
 
     if (error) return <div>Error: {error}</div>
     if (isLoading) return <div>Loading...</div>
