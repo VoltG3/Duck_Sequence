@@ -9,8 +9,8 @@ import { CardPoints } from "./card.points"
 import { BtnOpenOverlayInfo } from "../btn/button.overlay.open.info"
 
 import {LevelUpAnimation} from "../animations/animation.level.up"
-import {LevelDownAnimation} from "../animations/animation.level.down";
-import {LevelEqualAnimation} from "../animations/animation.level.equal";
+import {LevelDownAnimation} from "../animations/animation.level.down"
+import {LevelEqualAnimation} from "../animations/animation.level.equal"
 
 const CardAssemblyContainer = styled.div`
     position: relative;
@@ -126,8 +126,6 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
 
 
             <AnimationContainer>
-
-
                 {
                     animation === "animation_level_up"
                         ? AnimateUp

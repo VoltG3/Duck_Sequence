@@ -2,7 +2,7 @@ import {
     SET_DATA_LOADED,
     PLAYER_DATES,
     PLAYER_RESULTS,
-    PLAYER_IMAGES,
+    PLAYER_DATA,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
     TARGET_PLAYER,
@@ -14,7 +14,7 @@ const initialState = {
     isDataLoaded: false,
     player_dates: {},
     player_results: {},
-    player_images: {},
+    player_data: {},
     player_descriptions: {},
     target_date: "default",
     target_player: {
@@ -70,12 +70,12 @@ export default function reducer(state = initialState, action) {
                 player_results: action.payload
             }
 
-        case PLAYER_IMAGES:
-            //console.log("[ reducer        ] - PLAYER_IMAGES          ", action.payload)
+        case PLAYER_DATA:
+            //console.log("[ reducer        ] - PLAYER_DATA          ", action.payload)
 
             return {
                 ...state,
-                player_images: action.payload
+                player_data: action.payload
             }
 
         case PLAYER_DESCRIPTIONS:

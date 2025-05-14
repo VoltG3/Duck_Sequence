@@ -10,7 +10,9 @@ export const LevelUpAnimation = ({ id }) => {
 
     const playAnimation = useSelector(state => state.target_state.play_animation_level_up)
     const dispatch = useDispatch()
+
 console.log("level up id", id)
+
     useEffect(() => {
         if (playAnimation) {
             let index = 0

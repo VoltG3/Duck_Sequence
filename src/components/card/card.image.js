@@ -16,12 +16,12 @@ const StyledCardImage = styled.img`
 
 export const CardImage = ({ id }) => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
-    const playerImages = useSelector(state => state.player_images)
+    const playerData = useSelector(state => state.player_data)
 
-    if (!isDataLoaded || typeof playerImages !== "object" || Object.keys(playerImages).length === 0) {
+    if (!isDataLoaded || typeof playerData !== "object" || Object.keys(playerData).length === 0) {
         return <p>Loading images</p>
     }
-    const selectedEntry = playerImages[id]
+    const selectedEntry = playerData[id]
     const targetPlayerImage = selectedEntry
         ? process.env.PUBLIC_URL + selectedEntry.img_url
         : config.default.URL_placeholder

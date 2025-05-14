@@ -2,7 +2,7 @@ import {
     SET_DATA_LOADED,
     PLAYER_DATES,
     PLAYER_RESULTS,
-    PLAYER_IMAGES,
+    PLAYER_DATA,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
     TARGET_PLAYER,
@@ -33,15 +33,15 @@ export const storePlayerResults = (player_results) => {
     }
 }
 
-export const storePlayerImages = (player_images) => {
-    console.log("[ dispatch   GET ] - imagesData             ", player_images)
+export const storePlayerData = (player_data) => {
+    console.log("[ dispatch   GET ] - palyerData             ", player_data)
 
     const asObject = {}
-    player_images.forEach(hero => {
+    player_data.forEach(hero => {
         asObject[hero.id] = hero
     })
     return {
-        type: PLAYER_IMAGES,
+        type: PLAYER_DATA,
         payload: asObject
     }
 }

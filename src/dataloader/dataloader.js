@@ -5,56 +5,21 @@ import {
     storePlayerResults,
     storePlayerDescriptions,
     storeSetDataLoaded,
-    storePlayerImages, storeSessionsStatistics, storeAbout
+    storePlayerImages, storeSessionsStatistics, storeAbout, storePlayerData
 } from "../redux/actions"
 import { transformResultDataAllDates } from "./dataloader.build.dates"
 import { transformResultDataNewFields } from "./dataloader.build.fields"
 import { transformResultDataRankAssigment } from "./dataloader.build.ranks"
 import { transformResultDataTilteAssigment } from "./dataloader.build.titles"
 import {transformResultDataStatistics} from "./dataloader.build.stats";
-
-/**
- * Represents a data loader component that manages fetching and processing of external JSON data
- * and dispatches the processed data to the global store.
- *
- * This component fetches data from three JSON files: results.json, player_data.json,
- * and descriptions.json, processes the data, and updates the application's state.
- * It also handles loading and error states.
- *
- * State variables:
- * - resultsData: Stores the fetched data from results.json.
- * - imagesData: Stores the fetched data from player_data.json.
- * - descriptionsData: Stores the fetched data from descriptions.json.
- * - newDates: Stores transformed date-related data derived from results.json.
- * - newFields: Stores transformed field data derived from results.json.
- * - newRankAssignment: Stores rank assignment data based on the transformed fields.
- * - newTitlesAssigment: Stores title assignment data based on the rank assignments.
- * - isLoading: Indicates whether the data is currently being loaded.
- * - error: Contains error messages if the data fetching or processing fails.
- *
- * Effects:
- * - The first `useEffect` handles loading the JSON data, transforming it, and updating the relevant state variables.
- * - The second `useEffect` watches the state variables, processes the retrieved data,
- *   and dispatches it to update the global application store once the data is fully loaded without errors.
- *
- * Dispatch actions:
- * - storePlayerDates: Stores the transformed date data.
- * - storePlayerResults: Stores the title assignment data.
- * - storePlayerImages: Stores the data from player_data.json.
- * - storePlayerDescriptions: Stores the data from descriptions.json.
- * - storeSetDataLoaded: Sets the state indicating that all required data is loaded.
- *
- * Return value:
- * - Renders a loading message while data is being fetched.
- * - Renders an error message in case an error occurs during data fetching or processing.
- * - Returns null once the data is successfully loaded and dispatched.
- */
+import {transformPlayerNewFields} from "./dataloader.build.playerFields";
 
 export const DataLoader = () => {
     const [resultsData, setResultsData] = useState(null)
     const [imagesData, setImagesData] = useState(null)
     const [descriptionsData, setDescriptionsData] = useState(null)
     const [aboutData, setAboutData] = useState(null)
+    const [player, setPlayer] = useState(null)
 
     const [newDates, setNewDates] = useState(null)
     const [newFields, setNewFields] = useState(null)
@@ -62,6 +27,7 @@ export const DataLoader = () => {
     const [newTitlesAssigment, setNewTitlesAssigment] = useState(null)
     const [newSessionStatistics, setNewSessionStatistics] = useState(null)
     const [newAbout, setNewAbout] = useState(null)
+    const [newPlayer, setNewPlayer] = useState(null)
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -74,24 +40,32 @@ export const DataLoader = () => {
             try {
                 setIsLoading(true)
 
-                const [responseResultsJSON, responseImagesJSON, responseDescriptionsJSON,  responseAboutJSON] = await Promise.all([
+                const [
+                    responseResultsJSON,
+                    responseImagesJSON,
+                    responseDescriptionsJSON,
+                    responseAboutJSON,
+                    responsePlayerJSON
+                ] = await Promise.all([
                     fetch(`${process.env.PUBLIC_URL}/assets/results.json`),
                     fetch(`${process.env.PUBLIC_URL}/assets/images.json`),
                     fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/about.json`)
+                    fetch(`${process.env.PUBLIC_URL}/assets/about.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/player.json`),
                 ])
 
-                if (!responseResultsJSON.ok) throw new Error(`results.json fetch failed with status ${responseResultsJSON.status}`)
-                if (!responseImagesJSON.ok) throw new Error(`images.json fetch failed with status ${responseImagesJSON.status}`)
-                if (!responseDescriptionsJSON.ok) throw new Error(`descriptions.json fetch failed with status ${responseDescriptionsJSON.status}`)
-                if (!responseAboutJSON.ok) throw new Error(`about.json fetch failed with status ${responseAboutJSON.status}`)
-
-
-                const [resultsJSON, imagesJSON, descriptionsJSON, aboutJSON] = await Promise.all([
+                const [
+                    resultsJSON,
+                    imagesJSON,
+                    descriptionsJSON,
+                    aboutJSON,
+                    playerJSON
+                ] = await Promise.all([
                     responseResultsJSON.json(),
                     responseImagesJSON.json(),
                     responseDescriptionsJSON.json(),
-                    responseAboutJSON.json()
+                    responseAboutJSON.json(),
+                    responsePlayerJSON.json()
                 ])
 
                 if (isMounted) {
@@ -99,6 +73,7 @@ export const DataLoader = () => {
                     setImagesData(imagesJSON)
                     setDescriptionsData(descriptionsJSON)
                     setAboutData(aboutJSON)
+                    setPlayer(playerJSON)
 
                     const newDates = transformResultDataAllDates(resultsJSON)
                     setNewDates(newDates)
@@ -112,6 +87,9 @@ export const DataLoader = () => {
                     setNewSessionStatistics(newStatistics)
 
                     setNewAbout(aboutJSON)
+
+                    const newPlayerFields = transformPlayerNewFields(playerJSON)
+                    setNewPlayer(newPlayerFields)
                 }
             } catch (err) {
                 if (isMounted) {
@@ -139,7 +117,7 @@ export const DataLoader = () => {
         if (resultsData !== null && !isLoading && !error) {
 
             console.log("[ data loader    ] - results.json           ", resultsData)
-                console.log("[ data loader    ] - player_data.json            ", imagesData)
+            console.log("[ data loader    ] - player_data.json            ", imagesData)
             console.log("[ data loader    ] - descriptions.json      ", descriptionsData)
             console.log("[ data loader    ] - Arr newDates           ", newDates)
             console.log("[ data loader    ] - Arr newFields          ", newFields)
@@ -147,17 +125,19 @@ export const DataLoader = () => {
             console.log("[ data loader    ] - Arr newTitlesAssigment ", newTitlesAssigment)
             console.log("[ data loader    ] - Arr newStatistics      ", "totalSessions:", newSessionStatistics[0], "totalRounds", newSessionStatistics[1])
             console.log("[ data loader    ] - about.json             ", newAbout)
+            console.log("[ data loader] - player.json            ", newPlayer)
 
             dispatch(storePlayerDates(newDates))
             dispatch(storePlayerResults(newTitlesAssigment))
-            dispatch(storePlayerImages(imagesData))
+            dispatch(storePlayerData(newPlayer))
             dispatch(storePlayerDescriptions(descriptionsData))
             dispatch(storeSetDataLoaded(true))
             dispatch(storeSessionsStatistics("total_sessions", newSessionStatistics[0]))
             dispatch(storeSessionsStatistics("total_rounds", newSessionStatistics[1]))
             dispatch(storeAbout(newAbout))
+            //dispatch player
         }
-    }, [isLoading, newDates, resultsData, imagesData, newFields, newRankAssignment, newTitlesAssigment, descriptionsData, dispatch, error, newSessionStatistics, newAbout])
+    }, [isLoading, newDates, resultsData, newPlayer, newFields, newRankAssignment, newTitlesAssigment, descriptionsData, dispatch, error, newSessionStatistics, newAbout, newPlayer])
 
     if (error) return <div>Error: {error}</div>
     if (isLoading) return <div>Loading...</div>
