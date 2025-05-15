@@ -4,14 +4,19 @@ import config from "../../config"
 import { useDispatch, useSelector } from "react-redux"
 import { storeTargetState } from "../../redux/actions"
 
-export const LevelUpAnimation = ({ id }) => {
-    const levelUpFrames = Object.values(config.level_up)
+export const Animations = ({ animation }) => {
+
+    const animationFrames = animation === "animation_level_up"
+        ? Object.values(config.level_up)
+        : animation === "animation_level_down"
+            ? Object.values(config.level_down)
+            : Object.values(config.level_equal)
+
+
     const [currentFrame, setCurrentFrame] = useState(0)
 
-    const playAnimation = useSelector(state => state.target_state.play_animation_level_up)
+    const playAnimation = useSelector(state => state.target_state.play_animation_level_down)
     const dispatch = useDispatch()
-
-console.log("level up id", id)
 
     useEffect(() => {
         if (playAnimation) {
@@ -21,15 +26,15 @@ console.log("level up id", id)
                 setCurrentFrame(index)
                 index++
 
-                if (index >= levelUpFrames.length) {
+                if (index >= animationFrames.length) {
                     clearInterval(interval)
-                    dispatch(storeTargetState("play_animation_level_up", false))
+                    dispatch(storeTargetState("play_animation_level_down", false))
                 }
             }, 80)
 
             return () => clearInterval(interval)
         }
-    }, [playAnimation, levelUpFrames.length, dispatch])
+    }, [playAnimation, dispatch, animation, animationFrames.length])
 
     return (
         <motion.div
@@ -44,7 +49,7 @@ console.log("level up id", id)
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            {levelUpFrames.map((frame, index) => (
+            {animationFrames.map((frame, index) => (
                 <motion.img
                     key={index}
                     src={frame}

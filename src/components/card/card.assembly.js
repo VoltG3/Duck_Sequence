@@ -6,11 +6,9 @@ import { CardCrown } from "./card.crown"
 import { CardImage } from "./card.image"
 import { CardName } from "./card.name"
 import { CardPoints } from "./card.points"
-import { BtnOpenOverlayInfo } from "../btn/button.overlay.open.info"
+import { ButtonOpenOverlayInfo } from "../btn/button.overlay.open.info"
 
-import {LevelUpAnimation} from "../animations/animation.level.up"
-import {LevelDownAnimation} from "../animations/animation.level.down"
-import {LevelEqualAnimation} from "../animations/animation.level.equal"
+import { Animations } from "../animations/animations"
 
 const CardAssemblyContainer = styled.div`
     position: relative;
@@ -71,10 +69,6 @@ const CardContainer = styled(motion.div)`
 export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
     console.log("ANIMATION", animation)
 
-    const AnimateUp = <LevelUpAnimation id={id}/>
-    const AnimateDown = <LevelDownAnimation />
-    const AnimateEqual = <LevelEqualAnimation />
-
     return (
         <CardAssemblyContainer>
             <CrownContainer
@@ -116,7 +110,7 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
                         zIndex: isActive ? 10 : 1
                     }}>
                         <CardName rank={rank} title={title} name={name} />
-                        <BtnOpenOverlayInfo id={id} name={name} rank={rank} title={title} count={count} />
+                        <ButtonOpenOverlayInfo id={id} name={name} rank={rank} title={title} count={count} />
                     </div>
                 </div>
 
@@ -126,13 +120,7 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
 
 
             <AnimationContainer>
-                {
-                    animation === "animation_level_up"
-                        ? AnimateUp
-                        : animation === "animation_level_down"
-                            ? AnimateDown
-                            : AnimateEqual
-                }
+                <Animations animation={animation} />
             </AnimationContainer>
             <p>{ animation }</p>
             <p>{ id }</p>

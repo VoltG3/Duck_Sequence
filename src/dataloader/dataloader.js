@@ -5,29 +5,28 @@ import {
     storePlayerResults,
     storePlayerDescriptions,
     storeSetDataLoaded,
-    storePlayerImages, storeSessionsStatistics, storeAbout, storePlayerData
+    storeSessionsStatistics, storeAbout, storePlayerData
 } from "../redux/actions"
-import { transformResultDataAllDates } from "./dataloader.build.dates"
-import { transformResultDataNewFields } from "./dataloader.build.fields"
-import { transformResultDataRankAssigment } from "./dataloader.build.ranks"
-import { transformResultDataTilteAssigment } from "./dataloader.build.titles"
-import {transformResultDataStatistics} from "./dataloader.build.stats";
-import {transformPlayerNewFields} from "./dataloader.build.playerFields";
+
+import { transformPlayerDataNewFields, transformScoresDataNewFields } from "./dataloader.build.fields"
+import { transformScoresDataRankAssigmentPlace, transformScoresDataRankAssigmentTitle } from "./dataloader.build.ranks"
+import { transformStatisticsData } from "./dataloader.build.slice"
 
 export const DataLoader = () => {
-    const [resultsData, setResultsData] = useState(null)
-    const [imagesData, setImagesData] = useState(null)
-    const [descriptionsData, setDescriptionsData] = useState(null)
+    // for onloaded *.json files
+    const [playerData, setPlayerData] = useState(null)
+    const [scoresData, setScoresData] = useState(null)
     const [aboutData, setAboutData] = useState(null)
-    const [player, setPlayer] = useState(null)
-
-    const [newDates, setNewDates] = useState(null)
-    const [newFields, setNewFields] = useState(null)
-    const [newRankAssignment, setNewRankAssignment] = useState(null)
-    const [newTitlesAssigment, setNewTitlesAssigment] = useState(null)
-    const [newSessionStatistics, setNewSessionStatistics] = useState(null)
-    const [newAbout, setNewAbout] = useState(null)
-    const [newPlayer, setNewPlayer] = useState(null)
+    const [descriptionsData, setDescriptionsData] = useState(null)
+    // for *.json transforming
+    const [newStatisticsData, setNewStatisticsData] = useState(null)
+    const [newPlayerData, setNewPlayerData] = useState(null)
+    const [newFieldScoresData, setNewFieldScoresData] = useState(null)
+    const [newAssigmentRankScoresData, setNewAssigmentRankScoresData] = useState(null)
+    const [newAssigmentTitleScoresData, setNewAssigmentTitleScoresData] = useState(null)
+    // for *.json without changes
+    const [newAboutData, setNewAboutData] = useState(null)
+    const [newDescriptionsData, setNewDescriptionsData] = useState(null)
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -41,55 +40,55 @@ export const DataLoader = () => {
                 setIsLoading(true)
 
                 const [
+                    responsePlayerJSON,
                     responseResultsJSON,
-                    responseImagesJSON,
-                    responseDescriptionsJSON,
                     responseAboutJSON,
-                    responsePlayerJSON
+                    responseDescriptionsJSON
                 ] = await Promise.all([
-                    fetch(`${process.env.PUBLIC_URL}/assets/results.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/images.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/about.json`),
                     fetch(`${process.env.PUBLIC_URL}/assets/player.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/scores.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/about.json`),
+                    fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`)
                 ])
 
                 const [
-                    resultsJSON,
-                    imagesJSON,
-                    descriptionsJSON,
+                    playerJSON,
+                    scoresJSON,
                     aboutJSON,
-                    playerJSON
+                    descriptionsJSON
                 ] = await Promise.all([
+                    responsePlayerJSON.json(),
                     responseResultsJSON.json(),
-                    responseImagesJSON.json(),
-                    responseDescriptionsJSON.json(),
                     responseAboutJSON.json(),
-                    responsePlayerJSON.json()
+                    responseDescriptionsJSON.json()
                 ])
 
                 if (isMounted) {
-                    setResultsData(resultsJSON)
-                    setImagesData(imagesJSON)
-                    setDescriptionsData(descriptionsJSON)
+                    setPlayerData(playerJSON)
+                    setScoresData(scoresJSON)
                     setAboutData(aboutJSON)
-                    setPlayer(playerJSON)
+                    setDescriptionsData(descriptionsJSON)
 
-                    const newDates = transformResultDataAllDates(resultsJSON)
-                    setNewDates(newDates)
-                    const newFields = transformResultDataNewFields(resultsJSON)
-                    setNewFields(newFields)
-                    const newRanks = transformResultDataRankAssigment(newFields)
-                    setNewRankAssignment(newRanks)
-                    const newTitles = transformResultDataTilteAssigment(newRanks)
-                    setNewTitlesAssigment(newTitles)
-                    const newStatistics = transformResultDataStatistics(resultsJSON)
-                    setNewSessionStatistics(newStatistics)
+                    // transform data set 01 - statistics
+                    const newStatisticsData = transformStatisticsData(scoresJSON)
+                    setNewStatisticsData(newStatisticsData)
 
-                    setNewAbout(aboutJSON)
+                    // transform data set 02 - player data
+                    const newFieldsPlayerData = transformPlayerDataNewFields(playerJSON)
+                    setNewPlayerData(newFieldsPlayerData)
 
-                    const newPlayerFields = transformPlayerNewFields(playerJSON)
-                    setNewPlayer(newPlayerFields)
+                    // transform data set 03 - scores data
+                    const newFieldScoresData = transformScoresDataNewFields(scoresJSON)
+                    setNewFieldScoresData(newFieldScoresData)
+                    const newAssigmentRankScoresData = transformScoresDataRankAssigmentPlace(newFieldScoresData)
+                    setNewAssigmentRankScoresData(newAssigmentRankScoresData)
+                    const newAssigmentTitleScoresData = transformScoresDataRankAssigmentTitle(newAssigmentRankScoresData)
+                    setNewAssigmentTitleScoresData(newAssigmentTitleScoresData)
+
+                    // data without changes 04
+                    setNewAboutData(aboutJSON)
+                    setNewDescriptionsData(descriptionsJSON)
+
                 }
             } catch (err) {
                 if (isMounted) {
@@ -114,30 +113,43 @@ export const DataLoader = () => {
     }, [])
 
     useEffect(() => {
-        if (resultsData !== null && !isLoading && !error) {
+        if (scoresData !== null && !isLoading && !error) {
+            console.log("[ data loader    ] - fetch :: player.json         ", playerData)
+            console.log("[ data loader    ] - fetch :: scores.json         ", scoresData)
+            console.log("[ data loader    ] - fetch :: about.json          ", aboutData)
+            console.log("[ data loader    ] - fetch :: descriptions.json   ", descriptionsData)
+            console.log("[ data loader    ] -   arr :: statistics new.field", "navigationDates", newStatisticsData[0])
+            console.log("[ data loader    ] -   arr :: statistics new.field", "totalSessions:", newStatisticsData[1], "totalRounds", newStatisticsData[2])
+            console.log("[ data loader    ] -   arr :: playerData new.field", newPlayerData)
+            console.log("[ data loader    ] -   arr :: scoresData new.field", newFieldScoresData)
+            console.log("[ data loader    ] -   arr :: scoresData new.rank ", newAssigmentRankScoresData)
+            console.log("[ data loader    ] -   arr :: scoresData new.title", newAssigmentTitleScoresData)
+            console.log("[ data loader    ] -  orig :: aboutData           ", newAboutData)
+            console.log("[ data loader    ] -  orig :: descriptionsData    ", newDescriptionsData)
 
-            console.log("[ data loader    ] - results.json           ", resultsData)
-            console.log("[ data loader    ] - player_data.json            ", imagesData)
-            console.log("[ data loader    ] - descriptions.json      ", descriptionsData)
-            console.log("[ data loader    ] - Arr newDates           ", newDates)
-            console.log("[ data loader    ] - Arr newFields          ", newFields)
-            console.log("[ data loader    ] - Arr newRankAssignment  ", newRankAssignment)
-            console.log("[ data loader    ] - Arr newTitlesAssigment ", newTitlesAssigment)
-            console.log("[ data loader    ] - Arr newStatistics      ", "totalSessions:", newSessionStatistics[0], "totalRounds", newSessionStatistics[1])
-            console.log("[ data loader    ] - about.json             ", newAbout)
-            console.log("[ data loader] - player.json            ", newPlayer)
-
-            dispatch(storePlayerDates(newDates))
-            dispatch(storePlayerResults(newTitlesAssigment))
-            dispatch(storePlayerData(newPlayer))
-            dispatch(storePlayerDescriptions(descriptionsData))
+            dispatch(storePlayerDates(newStatisticsData))
+            dispatch(storePlayerResults(newAssigmentTitleScoresData))
+            dispatch(storePlayerData(newPlayerData))
+            dispatch(storePlayerDescriptions(newDescriptionsData))
             dispatch(storeSetDataLoaded(true))
-            dispatch(storeSessionsStatistics("total_sessions", newSessionStatistics[0]))
-            dispatch(storeSessionsStatistics("total_rounds", newSessionStatistics[1]))
-            dispatch(storeAbout(newAbout))
-            //dispatch player
+            dispatch(storeAbout(newAboutData))
+
         }
-    }, [isLoading, newDates, resultsData, newPlayer, newFields, newRankAssignment, newTitlesAssigment, descriptionsData, dispatch, error, newSessionStatistics, newAbout, newPlayer])
+    }, [
+        isLoading,
+        scoresData,
+        newPlayerData,
+        newFieldScoresData,
+        newAssigmentRankScoresData,
+        newAssigmentTitleScoresData,
+        descriptionsData,
+        dispatch,
+        error,
+        newAboutData,
+        playerData,
+        aboutData,
+        newDescriptionsData,
+        newStatisticsData])
 
     if (error) return <div>Error: {error}</div>
     if (isLoading) return <div>Loading...</div>
