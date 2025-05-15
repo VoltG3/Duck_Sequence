@@ -6,20 +6,28 @@ import { InfoTemplateUnits } from "./info/info.template.units"
 import { InfoTemplateAwards } from "./info/info.template.awards"
 import { ButtonCloseOverlay } from "../btn/button.overlay.close"
 import { useSelector } from "react-redux"
+import {useContext, useEffect} from "react";
+import {DataContext} from "../../context/DataContext";
 
 export const OverlayInfo = () => {
+    const { descriptionsData : playerDescription } = useContext(DataContext)
     const targetPlayer = useSelector(state => state.target_player.target_player_id)
-    const targetDescription = useSelector(state => state.player_descriptions)
 
-    const hero = targetPlayer && targetDescription
-        ? targetDescription[targetPlayer]
-        : null
+    useEffect(() => {
+        console.log("=== playerDescriptions from DataContext ===");
+        console.log(playerDescription);
+        console.log("target player", targetPlayer)
+    }, [playerDescription, targetPlayer]);
+
+    const hero = playerDescription?.find(p => p.id === targetPlayer) || null;
 
     if (!targetPlayer || !hero) return null;
 
     const isVisible = targetPlayer !== ""
 
     if (!hero) return null
+
+    console.log("aasdasdssd", isVisible)
 
     return (
         <OverlayContainer $visible={ isVisible }>

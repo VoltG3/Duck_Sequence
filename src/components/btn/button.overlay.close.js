@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import {
-    storeTargetAbout,
+    storeActions,
+
     storeTargetAudio,
     storeTargetPlayer
 } from "../../redux/actions"
@@ -29,7 +30,9 @@ export const ButtonCloseOverlay = ({ closeTargetSection }) => {
         }
 
         if (closeTargetSection === "closeAboutSection") {
-            dispatch(storeTargetAbout(false))
+            dispatch(storeActions("visible_overlay_section_about", false))
+            dispatch(storeActions("visible_overlay_section_info", false))   // F
+
             dispatch(storeTargetAudio("play_audio_button", true))
             console.log("[ info     CLOSE ] - BTN target sect.  about", false)
         }

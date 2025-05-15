@@ -2,14 +2,18 @@ import { StyledOverlayContainer as OverlayContainer} from "./overlay.styles"
 import { StyledOverlay as Overlay } from "./overlay.styles"
 import { ButtonCloseOverlay } from "../btn/button.overlay.close"
 import { useSelector } from "react-redux"
+import {useContext} from "react";
+import {DataContext} from "../../context/DataContext";
 
 export const OverlayAbout = () => {
-    const targetAbout = useSelector(state => state.target_about)
+    const { aboutData } = useContext(DataContext)
+    const targetAbout = useSelector(state => state.actions.visible_overlay_section_about)
     const aboutContent = useSelector(state => state.about)
+
     const isVisible = targetAbout !== false
 
-    const statisticsTotalSessions = useSelector(state => state.sessions_statistics.total_sessions)
-    const statisticsTotalRounds = useSelector(state => state.sessions_statistics.total_rounds)
+    const statisticsTotalSessions = useSelector(state => state.statistics.statistics_total_sessions)
+    const statisticsTotalRounds = useSelector(state => state.statistics.statistics_total_rounds)
 
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
@@ -42,18 +46,20 @@ export const OverlayAbout = () => {
                        </p>
                    </div>
 
-                   <div className="about-section">
-                       {aboutContent && aboutContent.map((lineObj, index) => {
-                           const key = Object.keys(lineObj)[0]
-                           const text = lineObj[key]
 
+                   <div className="about-section">
+                       {Array.isArray(aboutData) && aboutData.map((lineObj, index) => {
+                           const text = Object.values(lineObj)[0];
                            return (
                                <p key={index} className="about-line">
                                    {text}
                                </p>
-                           )
+                           );
                        })}
+
                    </div>
+
+
                </div>
            </Overlay>
         </OverlayContainer>

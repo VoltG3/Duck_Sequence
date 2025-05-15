@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { storeTargetAbout, storeTargetAudio } from "../../redux/actions"
+import {storeActions, storeTargetAudio} from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
 const StyledBtnOpenOverlayAbout = styled.button`
@@ -12,7 +12,7 @@ export const ButtonOpenOverlayAbout = () => {
     const handleClick = () => {
         dispatch(storeTargetAudio("play_audio_button", true))
         dispatch(storeTargetAudio("play_audio_about", true))
-        dispatch(storeTargetAbout(true))
+        dispatch(storeActions("visible_overlay_section_about", true))
     }
 
     return (

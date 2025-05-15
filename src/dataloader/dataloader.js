@@ -4,8 +4,8 @@ import {
     storeSetDataLoaded,
     storeStatistics,
 
-    storePlayerDescriptions,
-    storeAbout, storePlayerData
+
+   storePlayerData
 } from "../redux/actions"
 
 import { transformPlayerDataNewFields, transformScoresDataNewFields } from "./dataloader.build.fields"
@@ -20,8 +20,8 @@ export const DataLoader = () => {
     // for onloaded *.json files
     const [playerData, setPlayerData] = useState(null)
     const [scoresData, setScoresData] = useState(null)
-    const [aboutData, setAboutData] = useState(null)
-    const [descriptionsData, setDescriptionsData] = useState(null)
+
+
     // for *.json transforming
     const [newCompleteStatisticsData, setNewCompleteStatisticsData] = useState(null)
 
@@ -32,7 +32,7 @@ export const DataLoader = () => {
     const [newAssigmentTitleScoresData, setNewAssigmentTitleScoresData] = useState(null)
     // for *.json without changes
     const [newAboutData, setNewAboutData] = useState(null)
-    const [newDescriptionsData, setNewDescriptionsData] = useState(null)
+
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -47,33 +47,24 @@ export const DataLoader = () => {
 
                 const [
                     responsePlayerJSON,
-                    responseResultsJSON,
-                    responseAboutJSON,
-                    responseDescriptionsJSON
+                    responseResultsJSON
                 ] = await Promise.all([
                     fetch(`${process.env.PUBLIC_URL}/assets/player.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/scores.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/about.json`),
-                    fetch(`${process.env.PUBLIC_URL}/assets/descriptions.json`)
+                    fetch(`${process.env.PUBLIC_URL}/assets/scores.json`)
                 ])
 
                 const [
                     playerJSON,
                     scoresJSON,
-                    aboutJSON,
-                    descriptionsJSON
+                    aboutJSON
                 ] = await Promise.all([
                     responsePlayerJSON.json(),
-                    responseResultsJSON.json(),
-                    responseAboutJSON.json(),
-                    responseDescriptionsJSON.json()
+                    responseResultsJSON.json()
                 ])
 
                 if (isMounted) {
                     setPlayerData(playerJSON)
                     setScoresData(scoresJSON)
-                    setAboutData(aboutJSON)
-                    setDescriptionsData(descriptionsJSON)
 
                     // data set 01 - assembly statistics data
                     const completeStatisticData = []
@@ -96,10 +87,6 @@ export const DataLoader = () => {
                     // transform data set 03 - player data
                     const newFieldsPlayerData = transformPlayerDataNewFields(playerJSON)
                     setNewPlayerData(newFieldsPlayerData)
-
-                    // data without changes 04
-                    setNewAboutData(aboutJSON)
-                    setNewDescriptionsData(descriptionsJSON)
 
 
 
@@ -130,8 +117,7 @@ export const DataLoader = () => {
         if (scoresData !== null && !isLoading && !error) {
             console.log("[ data loader    ] - fetch :: player.json         ", playerData)
             console.log("[ data loader    ] - fetch :: scores.json         ", scoresData)
-            console.log("[ data loader    ] - fetch :: about.json          ", aboutData)
-            console.log("[ data loader    ] - fetch :: descriptions.json   ", descriptionsData)
+
             console.log("[ data loader    ] -   arr :: statistics new.field", "navigationDates",newCompleteStatisticsData[0])
             console.log("[ data loader    ] -   arr :: statistics new.field", "totalSessions:", newCompleteStatisticsData[1], "totalRounds", newCompleteStatisticsData[2])
             console.log("[ data loader    ] -   arr :: statistics new.field", "scoresData", newFieldScoresData)
@@ -142,7 +128,7 @@ export const DataLoader = () => {
             console.log("[ data loader    ] -   arr :: playerData new.field", newPlayerData)
 
             console.log("[ data loader    ] -  orig :: aboutData           ", newAboutData)
-            console.log("[ data loader    ] -  orig :: descriptionsData    ", newDescriptionsData)
+
 
             dispatch(storeStatistics("statistics_navigation_dates", newCompleteStatisticsData[0]))
             dispatch(storeStatistics("statistics_total_sessions", newCompleteStatisticsData[1]))
@@ -150,9 +136,9 @@ export const DataLoader = () => {
             dispatch(storeStatistics("statistics_player_scores", newCompleteStatisticsData[3]))
 
             dispatch(storePlayerData(newPlayerData))
-            dispatch(storePlayerDescriptions(newDescriptionsData))
+
             dispatch(storeSetDataLoaded(true))
-            dispatch(storeAbout(newAboutData))
+
 
         }
     }, [
@@ -162,13 +148,13 @@ export const DataLoader = () => {
         newFieldScoresData,
         newAssigmentRankScoresData,
         newAssigmentTitleScoresData,
-        descriptionsData,
+
         dispatch,
         error,
         newAboutData,
         playerData,
-        aboutData,
-        newDescriptionsData,
+
+
         newCompleteStatisticsData])
 
     if (error) return <div>Error: {error}</div>

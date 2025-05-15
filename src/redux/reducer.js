@@ -1,14 +1,15 @@
 import {
     SET_DATA_LOADED,
     STATISTICS,
+    ACTIONS,
 
     PLAYER_RESULTS,
     PLAYER_DATA,
-    PLAYER_DESCRIPTIONS,
+
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES,  ABOUT
+    TARGET_STATES,  ABOUT
 } from './actionTypes'
 
 const initialState = {
@@ -18,6 +19,10 @@ const initialState = {
         statistics_total_sessions: "",
         statistics_total_rounds: "",
         statistics_player_scores: {}
+    },
+    actions: {
+        visible_overlay_section_about: false,
+        visible_overlay_section_info: false, // F
     },
 
 
@@ -72,7 +77,15 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
-
+        case ACTIONS:
+            //console.log("[ reducer        ] - ACTIONS                      ", "field:", action.payload.field, "value:", action.payload.value)
+            return {
+                ...state,
+                actions: {
+                    ...state.actions,
+                    [action.payload.field]: action.payload.value,
+                }
+            }
 
         case PLAYER_RESULTS:
             //console.log("[ reducer        ] - PLAYER_RESULTS         ", action.payload)
@@ -88,14 +101,6 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 player_data: action.payload
-            }
-
-        case PLAYER_DESCRIPTIONS:
-            //console.log("[ reducer        ] - PLAYER_DESCRIPTIONS    ", action.payload)
-
-            return {
-                ...state,
-                player_descriptions: action.payload
             }
 
         case TARGET_DATE:
@@ -127,14 +132,6 @@ export default function reducer(state = initialState, action) {
                     [action.payload.field]: action.payload.value,
                 }
             }
-
-        case TARGET_ABOUT:
-            //console.log("[ reducer        ] - TARGET_ABOUT           ", action.payload)
-
-        return {
-            ...state,
-            target_about: action.payload,
-        }
 
         case TARGET_STATES:
             //console.log("[ reducer        ] - TARGET_STATES          ", action.payload)

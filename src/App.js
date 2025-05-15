@@ -1,5 +1,5 @@
 import { GlobalStyles } from "./GlobalStyles"
-import { DataProvider } from "./datacontext/DataContext"
+import { DataProvider } from "./context/DataContext"
 import { DataLoader } from "./dataloader/dataloader"
 import { AudioController } from "./components/controller.audio"
 import { SectionHeader } from "./sections/section.header"

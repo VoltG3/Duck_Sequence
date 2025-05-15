@@ -1,14 +1,14 @@
 export const SET_DATA_LOADED = 'SET_DATA_LOADED'
 export const STATISTICS = 'STATISTICS'
-
+export const ACTIONS = 'ACTIONS'
 
 export const PLAYER_RESULTS = 'PLAYER_RESULTS'
 export const PLAYER_DATA = 'PLAYER_DATA'
-export const PLAYER_DESCRIPTIONS = 'PLAYER_DESCRIPTIONS'
+
 export const TARGET_DATE = 'TARGET_DATE'
 export const TARGET_PLAYER = 'TARGET_PLAYER'
 export const TARGET_AUDIO = 'TARGET_AUDIO'
-export const TARGET_ABOUT = 'TARGET_ABOUT'
+
 export const TARGET_STATES = 'TARGET_STATES'
 
 export const ABOUT = 'ABOUT'

@@ -4,11 +4,11 @@ import {
 
     PLAYER_RESULTS,
     PLAYER_DATA,
-    PLAYER_DESCRIPTIONS,
+
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES,  ABOUT
+    TARGET_STATES, ABOUT, ACTIONS
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -24,6 +24,13 @@ export const storeStatistics = (field, value) => {
     }
 }
 
+export const storeActions = (field, value) => {
+    console.log("[ dispatch   GET ] - actions                      ", "field:", field, "value:", value)
+    return {
+        type: ACTIONS,
+        payload: { field, value }
+    }
+}
 
 export const storePlayerResults = (player_results) => {
     console.log("[ dispatch   GET ] - newRankAssigment       ", player_results)
@@ -47,18 +54,7 @@ export const storePlayerData = (player_data) => {
     }
 }
 
-export const storePlayerDescriptions = (player_descriptions) => {
-    console.log("[ dispatch   GET ] - descriptionsData       ", player_descriptions)
 
-    const asObject = {}
-    player_descriptions.forEach(hero => {
-        asObject[hero.id] = hero
-    })
-    return {
-        type: PLAYER_DESCRIPTIONS,
-        payload: asObject
-    }
-}
 
 export const storeTargetDate = (target_date) => {
     console.log("[ dispatch   GET ] - target date ID         ", target_date)
@@ -87,14 +83,7 @@ export const storeTargetAudio = (field, value) => {
     }
 }
 
-export const storeTargetAbout = (target_about) => {
-    console.log("[ dispatch   GET ] - target section about   ", target_about)
 
-    return {
-        type: TARGET_ABOUT,
-        payload: target_about
-    }
-}
 
 export const storeTargetState = (field, value) => {
     console.log("[ dispatch   GET ] - BTN target state field ", field, "value", value)
