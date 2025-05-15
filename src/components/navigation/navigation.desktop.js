@@ -1,8 +1,8 @@
-import Logo from "./navigation.logo"
-import { NavigationDates } from "./navigation.dates"
-import { FakeNavigationDates } from "./navigation.dates.fake"
+import { NavigationDesktopDates } from "./navigation.desktop.dates"
+import { FakeNavigationDates } from "./navigation.desktop.dates.fake"
 import { ButtonOpenOverlayAbout } from "../btn/button.overlay.open.about"
 import { useSelector} from "react-redux"
+import {ButtonSettingsAudio} from "../btn/button.settings.audio";
 
 export const NavigationDesktop = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
@@ -19,7 +19,7 @@ export const NavigationDesktop = () => {
             paddingLeft: "calc(var(--space) * 2)",
             paddingRight: "calc(var(--space) * 2)",
         }}>
-            <Logo />
+            <p style={{ fontSize:"var(--font--size--header)" }}>Duck Sequence</p>
 
             <div style={{
                 flex: 1,
@@ -30,10 +30,21 @@ export const NavigationDesktop = () => {
                 paddingTop: "calc(var(--space) * 2)",
                 paddingLeft: "calc(var(--space) * 4)",
             }}>
-                {!isDataLoaded ? <FakeNavigationDates /> : <NavigationDates />}
+                {!isDataLoaded ? <FakeNavigationDates /> : <NavigationDesktopDates />}
             </div>
 
-            <ButtonOpenOverlayAbout />
+            <div style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                flexDirection: "row",
+                width: "auto",
+                height: "auto",
+                gap: "10px",
+            }}>
+                <ButtonSettingsAudio />
+                <ButtonOpenOverlayAbout />
+            </div>
         </div>
     )
 }

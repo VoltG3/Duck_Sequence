@@ -8,10 +8,25 @@ import SectionContent from "./sections/section.content"
 import SectionFooter from "./sections/section.footer"
 import { OverlayAbout }  from "./components/overlay/overlay.about"
 import { OverlayInfo } from "./components/overlay/overlay.info"
-import { useSelector } from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
+import {storeActions} from "./redux/actions";
 
 function App() {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
+    const isAudioAllowed = useSelector(state => state.actions.settings_allow_audio)
+    const dispatch = useDispatch()
+
+    const audioController = () => {
+        if (isAudioAllowed) {
+            return <AudioController />
+        } else {
+           // dispatch(storeActions("play_audio_button", false))
+           // dispatch(storeActions("play_audio_info", false))
+           // dispatch(storeActions("play_audio_about", false))
+
+            return null
+        }
+    }
 
     return (
        <DataProvider>

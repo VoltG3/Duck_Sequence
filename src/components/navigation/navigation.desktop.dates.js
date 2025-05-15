@@ -18,7 +18,7 @@ const SlidingBackground = styled(motion.div)`
     z-index: 3;
 `
 
-export const NavigationDates = () => {
+export const NavigationDesktopDates = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
     const sessionDates = useSelector(state => state.statistics.statistics_navigation_dates)
 

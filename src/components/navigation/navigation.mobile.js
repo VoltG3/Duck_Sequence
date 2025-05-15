@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useState } from "react"
 import { motion } from "framer-motion"
-import Logo from "./navigation.logo"
+
 
 const StyledNavigationMobile = styled.div`
     display: flex;
@@ -60,7 +60,7 @@ export const NavigationMobile = () => {
 
     return (
         <StyledNavigationMobile>
-            <Logo />
+            <p style={{ fontSize:"var(--font--size--header)" }}>Duck Sequence</p>
 
             <motion.div
                 className="menu"

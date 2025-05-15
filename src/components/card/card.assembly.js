@@ -119,11 +119,13 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
 
 
 
+            {/*
             <AnimationContainer>
                 <Animations animation={animation} />
             </AnimationContainer>
             <p>{ animation }</p>
             <p>{ id }</p>
+            */}
         </CardAssemblyContainer>
     )
 }

@@ -1,6 +1,9 @@
-import { NavigationController } from "../components/controller.navigation"
+import { useMediaQuery } from "../utils/useMediaQuery"
+import { NavigationDesktop } from "../components/navigation/navigation.desktop"
+import { NavigationMobile } from "../components/navigation/navigation.mobile"
 
 export const SectionHeader = () => {
+    const isMobile = useMediaQuery("(max-width: 768px)")
 
     return (
         <div style={{
@@ -10,14 +13,19 @@ export const SectionHeader = () => {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            width: "100%",
-            height: "auto",
+                width: "100%",
+                height: "auto",
             background: "var(--color--primary)",
             color: "white",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)",
             zIndex: "20"
         }}>
-            <NavigationController />
+            <>
+                { !isMobile
+                    ? <NavigationDesktop />
+                    : <NavigationMobile />
+                }
+            </>
         </div>
     )
 }

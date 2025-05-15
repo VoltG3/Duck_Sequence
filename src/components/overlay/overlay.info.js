@@ -32,7 +32,7 @@ export const OverlayInfo = () => {
             <Overlay>
                 <div className="innerOverlay">
                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", paddingBottom: "calc(var(--space) * 1)" }}>
-                        <InfoTemplateName playerId={ hero.id } playerSecondName={ hero.name } />
+                        {/*<InfoTemplateName playerId={ hero.id } playerSecondName={ hero.name } />*/}
                         <ButtonOverlayCloseInfo />
                     </div>
 
@@ -47,7 +47,7 @@ export const OverlayInfo = () => {
                     <InfoTemplateUnits unitsNames={ hero.units } unitsIcons={ hero.icons } />
                     <InfoTemplateText chapterHeader={"About"} chapterContent={ hero.about } />
                     <InfoTemplateText chapterHeader={"Fate"} chapterContent={ hero.fate} />
-                    <InfoTemplateAwards chapterHeader={"Awards"} chapterContent={ hero.icons[0]} />
+                    {/*<InfoTemplateAwards chapterHeader={"Awards"} chapterContent={ hero.icons[0]} />*/}
                 </div>
             </Overlay>
         </OverlayContainer>
