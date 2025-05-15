@@ -94,7 +94,7 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
                 }}
                 transition={{ duration: 0.7, ease: "easeInOut" }}
             >
-                <CardImage id={id} />
+                <CardImage targetPlayerId={ id } />
 
                 <div style={{
                     display: "flex",
@@ -110,7 +110,7 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
                         zIndex: isActive ? 10 : 1
                     }}>
                         <CardName rank={rank} title={title} name={name} />
-                        <ButtonOpenOverlayInfo id={id} name={name} rank={rank} title={title} count={count} />
+                        <ButtonOpenOverlayInfo id={ id } />
                     </div>
                 </div>
 

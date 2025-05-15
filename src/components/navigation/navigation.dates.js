@@ -40,7 +40,7 @@ export const NavigationDates = () => {
         }
     }, [activeIndex, isDataLoaded])
 
-    if (!isDataLoaded || !sessionDates || Object.keys(sessionDates).length === 0) {
+    if (!isDataLoaded || Object.keys(sessionDates).length === 0) {
         return <p>Loading dates…</p>
     }
 
@@ -67,7 +67,7 @@ export const NavigationDates = () => {
                     ref={el => (btnRefs.current[i] = el)}
                     onClick={() => setActiveIndex(i)}
                 >
-                    <ButtonDates date={ tab } />
+                    <ButtonDates targetDate={ tab } />
                 </div>
             ))}
         </StyledNavigationDates>

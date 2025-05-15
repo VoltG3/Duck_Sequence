@@ -3,13 +3,13 @@ import {
     STATISTICS,
     ACTIONS,
 
-    PLAYER_RESULTS,
+
     PLAYER_DATA,
 
-    TARGET_DATE,
-    TARGET_PLAYER,
-    TARGET_AUDIO,
-    TARGET_STATES,  ABOUT
+
+
+
+    TARGET_STATES
 } from './actionTypes'
 
 const initialState = {
@@ -22,7 +22,17 @@ const initialState = {
     },
     actions: {
         visible_overlay_section_about: false,
-        visible_overlay_section_info: false, // F
+        visible_overlay_section_info: false,
+        active_date: "default",
+        active_player: "",
+        play_audio_button: false,
+        play_audio_info: false,
+        play_audio_about: false,
+        settings_allow_audio: false,
+
+
+
+
     },
 
 
@@ -31,19 +41,8 @@ const initialState = {
     player_data: {},
     player_descriptions: {},
     target_date: "default",
-    target_player: {
-        target_player_id: "",
-        target_player_name: "",
-        target_player_rank: "",
-        target_player_title: "",
-        target_player_count: "",
-    },
-    audio: {
-        play_audio_button : false,
-        play_audio_info : false,
-        play_audio_about : false
-    },
-    target_about: false,
+
+
     target_state: {
         play_animation_level_up : false,
         play_animation_level_down : false,
@@ -51,11 +50,6 @@ const initialState = {
         sorting_cards: false,
         sorting_cards_next: false,
     },
-    sessions_statistics: {
-        total_sessions: "",
-        total_rounds: ""
-    },
-    about: {}
 }
 
 export default function reducer(state = initialState, action) {
@@ -78,7 +72,7 @@ export default function reducer(state = initialState, action) {
             }
 
         case ACTIONS:
-            //console.log("[ reducer        ] - ACTIONS                      ", "field:", action.payload.field, "value:", action.payload.value)
+            console.log("[ reducer        ] - ACTIONS                      ", "field:", action.payload.field, "value:", action.payload.value)
             return {
                 ...state,
                 actions: {
@@ -87,13 +81,7 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
-        case PLAYER_RESULTS:
-            //console.log("[ reducer        ] - PLAYER_RESULTS         ", action.payload)
 
-            return {
-                ...state,
-                player_results: action.payload
-            }
 
         case PLAYER_DATA:
             //console.log("[ reducer        ] - PLAYER_DATA          ", action.payload)
@@ -103,35 +91,10 @@ export default function reducer(state = initialState, action) {
                 player_data: action.payload
             }
 
-        case TARGET_DATE:
-            //console.log("[ reducer        ] - TARGET_DATE            ", action.payload)
 
-            return {
-                ...state,
-                target_date: action.payload
-            }
 
-        case TARGET_PLAYER:
-            //console.log("[ reducer        ] - TARGET_PLAYER          ", action.payload)
 
-            return {
-                ...state,
-                target_player: {
-                    ...state.target_player,
-                    [action.payload.field]: action.payload.value
-                }
-            }
 
-        case TARGET_AUDIO:
-            //console.log("[ reducer        ] - TARGET_AUDIO           ", action.payload)
-
-            return {
-                    ...state,
-                audio: {
-                    ...state.audio,
-                    [action.payload.field]: action.payload.value,
-                }
-            }
 
         case TARGET_STATES:
             //console.log("[ reducer        ] - TARGET_STATES          ", action.payload)
@@ -146,13 +109,7 @@ export default function reducer(state = initialState, action) {
 
 
 
-        case ABOUT:
-            //console.log("[ reducer        ] - PLAYER_DATES           ", action.payload)
 
-            return {
-                ...state,
-                about: action.payload
-            }
 
         default:
             return state

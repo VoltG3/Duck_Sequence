@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { storeTargetAudio, storeTargetDate } from "../../redux/actions"
+import {storeActions} from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
 const StyledButtonDates = styled.button`
@@ -20,15 +20,15 @@ const StyledButtonDates = styled.button`
     }
 `
 
-export const ButtonDates = ({ date }) => {
+export const ButtonDates = ({ targetDate }) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        dispatch(storeTargetAudio("play_audio_button", true))
-        dispatch(storeTargetDate(date))
+        dispatch(storeActions("play_audio_button", true))
+        dispatch(storeActions("active_date", targetDate))
     }
 
     return (
-        <StyledButtonDates onClick={() => handleClick() }><p>{ date }</p></StyledButtonDates>
+        <StyledButtonDates onClick={() => handleClick() }><p>{ targetDate }</p></StyledButtonDates>
     )
 }

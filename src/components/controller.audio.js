@@ -1,10 +1,10 @@
 import config from "../config"
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef } from "react"
-import { storeTargetAudio } from "../redux/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { storeActions } from "../redux/actions"
 
 export const AudioController = () => {
-    const activeAudio = useSelector(state => state.audio)
+    const activeAudio = useSelector(state => state.actions)
     const dispatch = useDispatch()
 
     const infoAudioRef = useRef(null)
@@ -20,7 +20,7 @@ export const AudioController = () => {
             infoAudioRef.current.currentTime = 0
         }
 
-        const newAudio = new Audio(config.audio.URL_obelisk_01)
+        const newAudio = new Audio(config.audio.URL_overlay_01)
         newAudio.play().catch(error =>
             console.log("[ audio INFO     ] - Audio playback error   ", error)
         )
@@ -33,7 +33,7 @@ export const AudioController = () => {
             aboutAudioRef.current.currentTime = 0
         }
 
-        const newAudio = new Audio(config.audio.URL_playcome_01)
+        const newAudio = new Audio(config.audio.URL_overlay_02)
         newAudio.play().catch(error =>
             console.log("[ audio ABOUT    ] - Audio playback error   ", error)
         )
@@ -47,7 +47,7 @@ export const AudioController = () => {
     const playAudioRepeat = (url) => {
         const audio = new Audio(url)
         audio.play().catch(error =>
-            console.log("[ audio          ] - Audio playback error   ", error)
+            console.log("Audio playback error   ", error)
         )
     }
 
@@ -56,17 +56,17 @@ export const AudioController = () => {
 
         if (activeAudio.play_audio_info === true) {
             playInfoAudio()
-            dispatch(storeTargetAudio("play_audio_info", false))
+            dispatch(storeActions("play_audio_info", false))
         }
 
         if (activeAudio.play_audio_about === true) {
             playAboutAudio()
-            dispatch(storeTargetAudio("play_audio_about", false))
+            dispatch(storeActions("play_audio_about", false))
         }
 
         if (activeAudio.play_audio_button === true) {
             playAudioRepeat(config.audio.URL_button_01)
-            dispatch(storeTargetAudio("play_audio_button", false))
+            dispatch(storeActions("play_audio_button", false))
         }
 
     }, [activeAudio, dispatch])

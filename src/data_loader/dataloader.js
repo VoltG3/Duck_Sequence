@@ -26,7 +26,7 @@ export const DataLoader = () => {
     const [newCompleteStatisticsData, setNewCompleteStatisticsData] = useState(null)
 
     //const [newStatisticsData, setNewStatisticsData] = useState(null)
-    const [newPlayerData, setNewPlayerData] = useState(null)
+
     const [newFieldScoresData, setNewFieldScoresData] = useState(null)
     const [newAssigmentRankScoresData, setNewAssigmentRankScoresData] = useState(null)
     const [newAssigmentTitleScoresData, setNewAssigmentTitleScoresData] = useState(null)
@@ -46,24 +46,18 @@ export const DataLoader = () => {
                 setIsLoading(true)
 
                 const [
-                    responsePlayerJSON,
                     responseResultsJSON
                 ] = await Promise.all([
-                    fetch(`${process.env.PUBLIC_URL}/assets/player.json`),
                     fetch(`${process.env.PUBLIC_URL}/assets/scores.json`)
                 ])
 
                 const [
-                    playerJSON,
-                    scoresJSON,
-                    aboutJSON
+                    scoresJSON
                 ] = await Promise.all([
-                    responsePlayerJSON.json(),
                     responseResultsJSON.json()
                 ])
 
                 if (isMounted) {
-                    setPlayerData(playerJSON)
                     setScoresData(scoresJSON)
 
                     // data set 01 - assembly statistics data
@@ -81,13 +75,6 @@ export const DataLoader = () => {
                     // *
                     completeStatisticData.push(newAssigmentTitleScoresData)
                     setNewCompleteStatisticsData(completeStatisticData)
-
-
-
-                    // transform data set 03 - player data
-                    const newFieldsPlayerData = transformPlayerDataNewFields(playerJSON)
-                    setNewPlayerData(newFieldsPlayerData)
-
 
 
                 }
@@ -115,7 +102,7 @@ export const DataLoader = () => {
 
     useEffect(() => {
         if (scoresData !== null && !isLoading && !error) {
-            console.log("[ data loader    ] - fetch :: player.json         ", playerData)
+            console.log("[ data loader    ] - fetch :: images.json         ", playerData)
             console.log("[ data loader    ] - fetch :: scores.json         ", scoresData)
 
             console.log("[ data loader    ] -   arr :: statistics new.field", "navigationDates",newCompleteStatisticsData[0])
@@ -125,7 +112,7 @@ export const DataLoader = () => {
             console.log("[ data loader    ] -   arr :: statistics new.title", newAssigmentTitleScoresData)
             console.log("[ data loader    ] - Array :: statistics COMPLETE ", newCompleteStatisticsData)
 
-            console.log("[ data loader    ] -   arr :: playerData new.field", newPlayerData)
+
 
             console.log("[ data loader    ] -  orig :: aboutData           ", newAboutData)
 
@@ -135,7 +122,7 @@ export const DataLoader = () => {
             dispatch(storeStatistics("statistics_total_rounds", newCompleteStatisticsData[2]))
             dispatch(storeStatistics("statistics_player_scores", newCompleteStatisticsData[3]))
 
-            dispatch(storePlayerData(newPlayerData))
+
 
             dispatch(storeSetDataLoaded(true))
 
@@ -144,7 +131,7 @@ export const DataLoader = () => {
     }, [
         isLoading,
         scoresData,
-        newPlayerData,
+
         newFieldScoresData,
         newAssigmentRankScoresData,
         newAssigmentTitleScoresData,

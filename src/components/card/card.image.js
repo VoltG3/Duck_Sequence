@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { useSelector } from "react-redux"
 import config from "../../config"
+import {useContext} from "react";
+import {DataContext} from "../../data_context/DataContext";
 
 const StyledCardImage = styled.img`
     max-width: 180px;
@@ -14,15 +16,18 @@ const StyledCardImage = styled.img`
     border-radius: 10px;
 `
 
-export const CardImage = ({ id }) => {
+export const CardImage = ({ targetPlayerId }) => {
+    const { imagesData } = useContext(DataContext)
     const isDataLoaded = useSelector(state => state.isDataLoaded)
-    const playerData = useSelector(state => state.player_data)
 
-    if (!isDataLoaded || typeof playerData !== "object" || Object.keys(playerData).length === 0) {
+    const selectedEntry = imagesData?.find(entry => entry.id === targetPlayerId)
+
+    if (!isDataLoaded) {
         return <p>Loading images</p>
     }
-    const selectedEntry = playerData[id]
-    const targetPlayerImage = selectedEntry
+
+
+    const targetPlayerImage = selectedEntry             // placeholderImg issue
         ? process.env.PUBLIC_URL + selectedEntry.img_url
         : config.default.URL_placeholder
 
@@ -30,7 +35,7 @@ export const CardImage = ({ id }) => {
         <div>
             <StyledCardImage
                 src={ targetPlayerImage }
-                alt={`${id}`}
+                alt={`${targetPlayerId}`}
             />
         </div>
     )

@@ -1,6 +1,6 @@
 import { GlobalStyles } from "./GlobalStyles"
-import { DataProvider } from "./context/DataContext"
-import { DataLoader } from "./dataloader/dataloader"
+import { DataProvider } from "./data_context/DataContext"
+import { DataLoader } from "./data_loader/dataloader"
 import { AudioController } from "./components/controller.audio"
 import { SectionHeader } from "./sections/section.header"
 import FakeSectionContent from "./sections/section.content.fake"

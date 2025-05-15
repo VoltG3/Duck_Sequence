@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {storeTargetAudio, storeTargetPlayer} from "../../redux/actions"
+import { storeActions } from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
 const StyledInfoButton = styled.div`
@@ -21,31 +21,19 @@ const StyledInfoButton = styled.div`
     }
 `
 
-export const ButtonOpenOverlayInfo = ({ id, rank, count, title, name }) => {
+export const ButtonOpenOverlayInfo = ({ id, rank }) => {
     const dispatch = useDispatch()
 
-    {/* FALSE VAR ?*/}
+    const handleClick = (id) => {
+        dispatch(storeActions("active_player", id))
 
-    const onHandle = (id) => {
-        console.log("[ card info  SET ] - BTN target player ID   ", id)
-        console.log("[ card info  SET ] - BTN target player name ", name)
-        console.log("[ card info  SET ] - BTN target player rank ", rank)
-        console.log("[ card info  SET ] - BTN target player title", title)
-        console.log("[ card info  SET ] - BTN target player count", count)
-        //console.log("[ card info  SET ] - BTN target audio      ", "active_info")
-
-        dispatch(storeTargetPlayer("target_player_id", id))
-        dispatch(storeTargetPlayer("target_player_name", name))
-        dispatch(storeTargetPlayer("target_player_rank", rank))
-        dispatch(storeTargetPlayer("target_player_title", title))
-        dispatch(storeTargetPlayer("target_player_count", count))
-        dispatch(storeTargetAudio("play_audio_button", true))
-        dispatch(storeTargetAudio("play_audio_info", true))
-
+        dispatch(storeActions("play_audio_button", true))
+        dispatch(storeActions("play_audio_info", true))
+        dispatch(storeActions("visible_overlay_section_info", true))
     }
 
     return (
-        <StyledInfoButton onClick={() => onHandle(id)} $rank={rank}>
+        <StyledInfoButton onClick={() => handleClick(id)} $rank={rank}>
             <p>More about this bird</p>
         </StyledInfoButton>
     )

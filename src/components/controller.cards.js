@@ -5,11 +5,10 @@ import { storeTargetState } from "../redux/actions"
 import { compareHeroCount } from "./compare.hero.count"
 
 export const CardController = () => {
-
     const isDataLoaded = useSelector(state => state.isDataLoaded)
-
     const playSessionResults = useSelector(state => state.statistics.statistics_player_scores)
-    const playSessionDate = useSelector(state => state.target_date)
+
+    const playSessionDate = useSelector(state => state.actions.active_date)
 
     const BUTTONActionSortingCards = useSelector(state => state.target_state.sorting_cards)
     const BUTTONActionSortingNext = useSelector(state => state.target_state.sorting_cards_next)

@@ -32,9 +32,9 @@ const config = {
         URL_crown_03: process.env.PUBLIC_URL + "/assets/img/crown_03.png",
     },
     audio : {
-        URL_obelisk_01: process.env.PUBLIC_URL + "/assets/audio/OBELISK.mp3",
         URL_button_01: process.env.PUBLIC_URL + "/assets/audio/BUTTON.mp3",
-        URL_playcome_01: process.env.PUBLIC_URL + "/assets/audio/PLAYCOME.mp3",
+        URL_overlay_01: process.env.PUBLIC_URL + "/assets/audio/OBELISK.mp3",
+        URL_overlay_02: process.env.PUBLIC_URL + "/assets/audio/PLAYCOME.mp3",
     },
     level_up : {
         URL_level_up_01: process.env.PUBLIC_URL + "/assets/img/level_up_01.png",
