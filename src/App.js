@@ -1,4 +1,5 @@
 import { GlobalStyles } from "./GlobalStyles"
+import { DataProvider } from "./datacontext/DataContext"
 import { DataLoader } from "./dataloader/dataloader"
 import { AudioController } from "./components/controller.audio"
 import { SectionHeader } from "./sections/section.header"
@@ -13,25 +14,27 @@ function App() {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
     return (
-        <div style={{
-            position: "relative",
-            display: "flex",
-            flexWrap: "wrap",
-            flexDirection: "column",
-                maxWidth: "100vw",
-                minHeight: "100vh",
-                width: "100%",
-                height: "100%",
-            zIndex: "1" }}>
-            <GlobalStyles />
-                <SectionHeader />
-                {!isDataLoaded ? <FakeSectionContent /> : <SectionContent /> }
-                <SectionFooter />
-            <DataLoader />
-            <OverlayAbout />
-            <OverlayInfo />
-            <AudioController />
-        </div>
+       <DataProvider>
+           <div style={{
+               position: "relative",
+               display: "flex",
+               flexWrap: "wrap",
+               flexDirection: "column",
+               maxWidth: "100vw",
+               minHeight: "100vh",
+               width: "100%",
+               height: "100%",
+               zIndex: "1" }}>
+               <GlobalStyles />
+               <SectionHeader />
+               {!isDataLoaded ? <FakeSectionContent /> : <SectionContent /> }
+               <SectionFooter />
+               <DataLoader />
+               <OverlayAbout />
+               <OverlayInfo />
+               <AudioController />
+           </div>
+       </DataProvider>
     )
 }
 {/*
