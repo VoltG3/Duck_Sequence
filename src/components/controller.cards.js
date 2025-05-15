@@ -8,7 +8,7 @@ export const CardController = () => {
 
     const isDataLoaded = useSelector(state => state.isDataLoaded)
 
-    const playSessionResults = useSelector(state => state.player_results)
+    const playSessionResults = useSelector(state => state.statistics.statistics_player_scores)
     const playSessionDate = useSelector(state => state.target_date)
 
     const BUTTONActionSortingCards = useSelector(state => state.target_state.sorting_cards)

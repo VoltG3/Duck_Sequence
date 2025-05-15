@@ -1,17 +1,26 @@
 import {
     SET_DATA_LOADED,
-    PLAYER_DATES,
+    STATISTICS,
+
     PLAYER_RESULTS,
     PLAYER_DATA,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS, ABOUT
+    TARGET_ABOUT, TARGET_STATES,  ABOUT
 } from './actionTypes'
 
 const initialState = {
     isDataLoaded: false,
+    statistics: {
+        statistics_navigation_dates: {},
+        statistics_total_sessions: "",
+        statistics_total_rounds: "",
+        statistics_player_scores: {}
+    },
+
+
     player_dates: {},
     player_results: {},
     player_data: {},
@@ -47,20 +56,23 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_DATA_LOADED:
-            //console.log("[ reducer        ] - SET_DATA_LOADED        ", action.payload)
-
+            //console.log("[ reducer        ] - SET_DATA_LOADED              ", action.payload)
             return {
                 ...state,
                 isDataLoaded: action.payload,
             }
 
-        case PLAYER_DATES:
-            //console.log("[ reducer        ] - PLAYER_DATES           ", action.payload)
-
+        case STATISTICS:
+            //console.log("[ reducer        ] - STATISTICS                   ", "field:", action.payload.field, "value:", action.payload.value)
             return {
                 ...state,
-                player_dates: action.payload
+                statistics: {
+                    ...state.statistics,
+                    [action.payload.field]: action.payload.value,
+                }
             }
+
+
 
         case PLAYER_RESULTS:
             //console.log("[ reducer        ] - PLAYER_RESULTS         ", action.payload)
@@ -135,15 +147,7 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
-        case SESSIONS_STATISTICS:
-            //console.log("[ reducer        ] - SESSIONS_STATISTICS    ", action.payload)
-            return {
-                ...state,
-                sessions_statistics: {
-                    ...state.sessions_statistics,
-                    [action.payload.field]: action.payload.value,
-                }
-            }
+
 
         case ABOUT:
             //console.log("[ reducer        ] - PLAYER_DATES           ", action.payload)

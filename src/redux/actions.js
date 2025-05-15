@@ -1,13 +1,14 @@
 import {
     SET_DATA_LOADED,
-    PLAYER_DATES,
+    STATISTICS,
+
     PLAYER_RESULTS,
     PLAYER_DATA,
     PLAYER_DESCRIPTIONS,
     TARGET_DATE,
     TARGET_PLAYER,
     TARGET_AUDIO,
-    TARGET_ABOUT, TARGET_STATES, SESSIONS_STATISTICS, ABOUT
+    TARGET_ABOUT, TARGET_STATES,  ABOUT
 } from "./actionTypes"
 
 export const storeSetDataLoaded = (isDataLoaded) => ({
@@ -15,14 +16,14 @@ export const storeSetDataLoaded = (isDataLoaded) => ({
     payload: isDataLoaded
 })
 
-export const storePlayerDates = (player_dates) => {
-    console.log("[ dispatch   GET ] - newDates               ", player_dates)
-
+export const storeStatistics = (field, value) => {
+    console.log("[ dispatch   GET ] - statistics                   ", "field:", field, "value:", value)
     return {
-        type: PLAYER_DATES,
-        payload: player_dates
+        type: STATISTICS,
+        payload: { field, value }
     }
 }
+
 
 export const storePlayerResults = (player_results) => {
     console.log("[ dispatch   GET ] - newRankAssigment       ", player_results)
@@ -104,14 +105,7 @@ export const storeTargetState = (field, value) => {
     }
 }
 
-export const storeSessionsStatistics = (field, value) => {
-    console.log("[ dispatch   GET ] - statistics              ", "field", field, "value", value)
 
-    return {
-        type: SESSIONS_STATISTICS,
-        payload: { field, value }
-    }
-}
 
 export const storeAbout = (about) => {
     console.log("[ dispatch   GET ] - About                ", about)

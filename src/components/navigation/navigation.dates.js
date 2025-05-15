@@ -20,7 +20,7 @@ const SlidingBackground = styled(motion.div)`
 
 export const NavigationDates = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
-    const sessionDates = useSelector(state => state.player_dates[0])
+    const sessionDates = useSelector(state => state.statistics.statistics_navigation_dates)
 
     const [activeIndex, setActiveIndex] = useState(0)
     const containerRef = useRef(null)

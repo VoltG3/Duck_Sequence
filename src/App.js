@@ -34,5 +34,17 @@ function App() {
         </div>
     )
 }
-
+{/*
+ const newStatisticsDataComplete = newStatisticsData.map((item, index) => {
+                        return {
+                            date: item,
+                            totalSessions: newStatisticsData[1],
+                            totalRounds: newStatisticsData[2],
+                            playerData: newFieldsPlayerData,
+                            scoresData: newFieldScoresData,
+                            rankAssigmentTitle: newAssigmentTitleScoresData,
+                            rankAssigmentPlace: newAssigmentRankScoresData,
+                        }
+                    })
+*/}
 export default App
