@@ -69,6 +69,7 @@ const CardContainer = styled(motion.div)`
 `
 
 export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
+    const isAnimationAllowed = useSelector(state => state.actions.settings_allow_animation)
 
     return (
         <CardAssemblyContainer>
@@ -118,14 +119,16 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
                 <CardPoints count={count} id={id} rank={rank} />
             </CardContainer>
 
+            {isAnimationAllowed ? (
+                <>
+                    <AnimationContainer>
+                        <Animations animation={animation} />
+                    </AnimationContainer>
+                    <p>{animation}</p>
+                    <p>{id}</p>
+                </>
+            ) : null}
 
-
-
-            <AnimationContainer>
-                <Animations animation={animation} />
-            </AnimationContainer>
-            <p>{ animation }</p>
-            <p>{ id }</p>
 
         </CardAssemblyContainer>
     )
