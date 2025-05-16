@@ -1,4 +1,16 @@
 
+export const getSelectedEntryByDate = (results, date) => {
+    return results.find(entry => entry.date === date)
+}
+
+export const getInitialCardsFromSession = (entry) => {
+    if (!Array.isArray(entry.heroes)) return []
+    return entry.heroes.map(hero => ({
+        id: hero.id,
+        count: parseInt(hero.count, 10) || 0
+    }))
+}
+
 export const compareHeroCount = (currentResults, previousResults, targetDate, prevDate) => {
     if (!Array.isArray(currentResults) || !Array.isArray(previousResults)) return null
 
@@ -29,4 +41,26 @@ export const compareHeroCount = (currentResults, previousResults, targetDate, pr
             animation: animationType
         }
     })
+}
+
+export const handleSessionDateChange = (
+    currentDate,
+    results,
+    prevDateRef,
+    prevResultsRef,
+    gradesRef
+) => {
+    if (currentDate !== prevDateRef.current) {
+        console.log("Different date, updating cards:", prevDateRef.current, "→", currentDate)
+
+        gradesRef.current = compareHeroCount(
+            results,
+            prevResultsRef.current,
+            currentDate,
+            prevDateRef.current
+        )
+
+        prevDateRef.current = currentDate
+        prevResultsRef.current = results
+    }
 }

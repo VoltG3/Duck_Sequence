@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { useSelector } from "react-redux"
-import config from "../../config"
+import config from "../../../config"
 import {useContext} from "react";
-import {DataContext} from "../../data_context/DataContext";
+import {DataContext} from "../../../data_context/DataContext";
 
 const StyledCardImage = styled.img`
     max-width: 180px;

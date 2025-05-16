@@ -1,4 +1,4 @@
-import { Card } from "./card/card"
+import { Card } from "./components/card"
 import { useSelector } from "react-redux"
 
 export const CardControllerStatic = () => {

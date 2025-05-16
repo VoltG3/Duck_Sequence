@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import config from "../../config"
+import config from "../../../config"
 import { useDispatch, useSelector } from "react-redux"
-import { storeTargetState } from "../../redux/actions"
+import { storeTargetState } from "../../../redux/actions"
 
 export const CardAnimations = ({ animation }) => {
 

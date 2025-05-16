@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import { motion } from "framer-motion"
-import config from "../../config"
+import config from "../../../config"
 
 import { CardCrown } from "./card.crown"
 import { CardImage } from "./card.image"
 import { CardName } from "./card.name"
 import { CardPoints } from "./card.points"
-import { ButtonOpenOverlayInfo } from "../btn/button.overlay.open.info"
+import { ButtonOpenOverlayInfo } from "../../btn/button.overlay.open.info"
 
 import { CardAnimations } from "./card.animations"
 import {useSelector} from "react-redux";
