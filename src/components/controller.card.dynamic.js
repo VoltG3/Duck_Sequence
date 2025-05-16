@@ -1,8 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
-import { CardAssembly } from "./card/card.assembly"
+import { Card } from "./card/card"
 import { useSelector, useDispatch } from "react-redux"
 import { storeTargetState } from "../redux/actions"
-import { getCompareHeroCount } from "../utils/compareHeroCount"
 import {getSortedCards, getTargetCardInfo, reorderCards} from "../utils/sortHelpers";
 import {getSelectedEntryByDate} from "../utils/getSeelctedEntryByDate";
 import {getInitialCardsFromSession} from "../utils/getInitialCardsFromSession";
@@ -11,7 +10,6 @@ import {handleSessionDateChange} from "../utils/sessionHelper";
 export const CardControllerDynamic = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
     const playSessionResults = useSelector(state => state.statistics.statistics_player_scores)
-
     const playSessionDate = useSelector(state => state.actions.active_date)
 
     const BUTTONActionSortingCards = useSelector(state => state.target_state.sorting_cards)
@@ -116,7 +114,7 @@ export const CardControllerDynamic = () => {
 
                 return (
                     <div key={card.id} className="card mb-4" style={{position: "relative"}}>
-                        <CardAssembly
+                        <Card
                             id={hero.id}
                             name={hero.name}
                             title={hero.title}

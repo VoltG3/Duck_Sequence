@@ -68,7 +68,7 @@ const CardContainer = styled(motion.div)`
     position: relative;
 `
 
-export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
+export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
     const isAnimationAllowed = useSelector(state => state.actions.settings_allow_animation)
 
     return (

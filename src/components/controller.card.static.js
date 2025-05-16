@@ -1,4 +1,4 @@
-import { CardAssembly } from "./card/card.assembly"
+import { Card } from "./card/card"
 import { useSelector } from "react-redux"
 
 export const CardControllerStatic = () => {
@@ -20,7 +20,7 @@ export const CardControllerStatic = () => {
         <>
             {currentDay.heroes.map((player, index) => (
                 <div key={`${player.id}-${index}`}>
-                    <CardAssembly
+                    <Card
                         id={player.id}
                         name={player.name}
                         title={player.title}
