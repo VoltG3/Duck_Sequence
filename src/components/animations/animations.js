@@ -6,6 +6,7 @@ import { storeTargetState } from "../../redux/actions"
 
 export const Animations = ({ animation }) => {
 
+
     const animationFrames = animation === "animation_level_up"
         ? Object.values(config.level_up)
         : animation === "animation_level_down"
@@ -19,6 +20,8 @@ export const Animations = ({ animation }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+
+
         if (playAnimation) {
             let index = 0
             setCurrentFrame(index)

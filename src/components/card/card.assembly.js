@@ -9,6 +9,8 @@ import { CardPoints } from "./card.points"
 import { ButtonOpenOverlayInfo } from "../btn/button.overlay.open.info"
 
 import { Animations } from "../animations/animations"
+import {useSelector} from "react-redux";
+import {useEffect} from "react";
 
 const CardAssemblyContainer = styled.div`
     position: relative;
@@ -67,7 +69,6 @@ const CardContainer = styled(motion.div)`
 `
 
 export const CardAssembly = ({ id, title, name, count, rank, animation, isActive }) => {
-    console.log("ANIMATION", animation)
 
     return (
         <CardAssemblyContainer>
@@ -119,13 +120,13 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
 
 
 
-            {/*
+
             <AnimationContainer>
                 <Animations animation={animation} />
             </AnimationContainer>
             <p>{ animation }</p>
             <p>{ id }</p>
-            */}
+
         </CardAssemblyContainer>
     )
 }

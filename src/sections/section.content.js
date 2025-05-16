@@ -1,6 +1,9 @@
-import { CardController } from "../components/controller.cards"
+import { CardControllerDynamic } from "../components/controller.cards.dynamic"
+import {useSelector} from "react-redux";
+import {CardControllerStatic} from "../components/controller.card.static";
 
 function SectionContent() {
+    const isAnimationAllowed = useSelector(state => state.actions.settings_allow_animation)
 
     return (
         <div style={{
@@ -22,7 +25,7 @@ function SectionContent() {
                 width: "auto",
                 height: "auto",
             }}>
-                <CardController />
+                {!isAnimationAllowed ? <CardControllerStatic /> : <CardControllerDynamic />}
             </div>
         </div>
     )

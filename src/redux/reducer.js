@@ -29,9 +29,7 @@ const initialState = {
         play_audio_info: false,
         play_audio_about: false,
         settings_allow_audio: false,
-
-
-
+        settings_allow_animation: false,
 
     },
 

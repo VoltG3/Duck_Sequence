@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { storeTargetState } from "../redux/actions"
 import { compareHeroCount } from "./compare.hero.count"
 
-export const CardController = () => {
+export const CardControllerDynamic = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
     const playSessionResults = useSelector(state => state.statistics.statistics_player_scores)
 
