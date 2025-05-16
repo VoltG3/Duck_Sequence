@@ -3,6 +3,7 @@ import { CardAssembly } from "./card/card.assembly"
 import { useSelector, useDispatch } from "react-redux"
 import { storeTargetState } from "../redux/actions"
 import { compareHeroCount } from "./compare.hero.count"
+import {getSortedCards, getTargetCardInfo, reorderCards} from "../utils/sortHelpers";
 
 export const CardControllerDynamic = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
@@ -25,29 +26,24 @@ export const CardControllerDynamic = () => {
 
     // Prepare sorting
     const handlePrepareSort = useCallback(() => {
-        const sorted = [...cards].sort((a, b) => b.count - a.count)
+        const sorted = getSortedCards(cards)
         setSortedCards(sorted)
         setCurrentStep(0)
-        console.log("Sorted data:", sorted)
+        //console.log("Sorted data:", sorted)
     }, [cards])
 
-    // Handle the next step (sorting)
     const handleNextStep = useCallback(() => {
         if (!sortedCards.length || currentStep >= sortedCards.length) return
 
-        const targetCard = sortedCards[currentStep]
-        const currentCardsCopy = [...cards]
-        const currentIndex = currentCardsCopy.findIndex(c => c.id === targetCard.id)
+        const { targetCard, currentIndex } = getTargetCardInfo(sortedCards, currentStep, cards)
 
         // If the card is not already in the correct position, move it
         if (currentIndex !== currentStep) {
             setActiveId(targetCard.id)
             console.log(`Moving card: ${targetCard.id} from position ${currentIndex} to ${currentStep}`)
 
-            currentCardsCopy.splice(currentIndex, 1)
-            currentCardsCopy.splice(currentStep, 0, targetCard)
-
-            setCards(currentCardsCopy)
+            const newCards = reorderCards(cards, currentIndex, currentStep)
+            setCards(newCards)
 
             // After the animation is complete, move on to the next step
             setTimeout(() => {
@@ -55,7 +51,6 @@ export const CardControllerDynamic = () => {
                 setCurrentStep(prev => prev + 1)
                 console.log("Movement animation complete, moving on to the next step...")
 
-                // Reset action flags to false after completion
                 dispatch(storeTargetState("sorting_cards", false))
                 dispatch(storeTargetState("sorting_cards_next", false))
             }, 800)
@@ -65,6 +60,7 @@ export const CardControllerDynamic = () => {
             console.log("Card is already in the right place, moving on to the next step...")
         }
     }, [sortedCards, currentStep, cards, dispatch])
+
 
     // Fetch and initialize data from player results
     useEffect(() => {

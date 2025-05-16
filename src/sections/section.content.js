@@ -1,4 +1,4 @@
-import { CardControllerDynamic } from "../components/controller.cards.dynamic"
+import { CardControllerDynamic } from "../components/controller.card.dynamic"
 import {useSelector} from "react-redux";
 import {CardControllerStatic} from "../components/controller.card.static";
 

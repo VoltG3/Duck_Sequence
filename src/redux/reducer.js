@@ -30,6 +30,9 @@ const initialState = {
         play_audio_about: false,
         settings_allow_audio: false,
         settings_allow_animation: false,
+            set_animation_type_level_up: false,
+            set_animation_type_level_down: false,
+            set_animation_type_level_equal: false,
 
     },
 

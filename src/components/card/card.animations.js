@@ -4,7 +4,7 @@ import config from "../../config"
 import { useDispatch, useSelector } from "react-redux"
 import { storeTargetState } from "../../redux/actions"
 
-export const Animations = ({ animation }) => {
+export const CardAnimations = ({ animation }) => {
 
 
     const animationFrames = animation === "animation_level_up"

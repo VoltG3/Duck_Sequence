@@ -8,7 +8,7 @@ import { CardName } from "./card.name"
 import { CardPoints } from "./card.points"
 import { ButtonOpenOverlayInfo } from "../btn/button.overlay.open.info"
 
-import { Animations } from "../animations/animations"
+import { CardAnimations } from "./card.animations"
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
 
@@ -122,7 +122,7 @@ export const CardAssembly = ({ id, title, name, count, rank, animation, isActive
             {isAnimationAllowed ? (
                 <>
                     <AnimationContainer>
-                        <Animations animation={animation} />
+                        <CardAnimations animation={animation} />
                     </AnimationContainer>
                     <p>{animation}</p>
                     <p>{id}</p>
