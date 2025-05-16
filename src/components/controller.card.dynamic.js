@@ -2,8 +2,11 @@ import { useEffect, useState, useCallback, useRef } from "react"
 import { CardAssembly } from "./card/card.assembly"
 import { useSelector, useDispatch } from "react-redux"
 import { storeTargetState } from "../redux/actions"
-import { compareHeroCount } from "./compare.hero.count"
+import { getCompareHeroCount } from "../utils/compareHeroCount"
 import {getSortedCards, getTargetCardInfo, reorderCards} from "../utils/sortHelpers";
+import {getSelectedEntryByDate} from "../utils/getSeelctedEntryByDate";
+import {getInitialCardsFromSession} from "../utils/getInitialCardsFromSession";
+import {handleSessionDateChange} from "../utils/sessionHelper";
 
 export const CardControllerDynamic = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
@@ -32,11 +35,11 @@ export const CardControllerDynamic = () => {
         //console.log("Sorted data:", sorted)
     }, [cards])
 
+    // move cards
     const handleNextStep = useCallback(() => {
         if (!sortedCards.length || currentStep >= sortedCards.length) return
 
         const { targetCard, currentIndex } = getTargetCardInfo(sortedCards, currentStep, cards)
-
         // If the card is not already in the correct position, move it
         if (currentIndex !== currentStep) {
             setActiveId(targetCard.id)
@@ -44,8 +47,7 @@ export const CardControllerDynamic = () => {
 
             const newCards = reorderCards(cards, currentIndex, currentStep)
             setCards(newCards)
-
-            // After the animation is complete, move on to the next step
+        // After the animation is complete, move on to the next step
             setTimeout(() => {
                 setActiveId(null)
                 setCurrentStep(prev => prev + 1)
@@ -66,39 +68,20 @@ export const CardControllerDynamic = () => {
     useEffect(() => {
         if (!isDataLoaded || !Array.isArray(playSessionResults)) return
 
-        const selectedEntryDate = playSessionResults.find(entry => entry.date === playSessionDate)
-        if (!selectedEntryDate || !Array.isArray(selectedEntryDate.heroes)) return
+        const selectedEntryDate = getSelectedEntryByDate(playSessionResults, playSessionDate)
+        if (!selectedEntryDate) return
 
-        const initialCards = selectedEntryDate.heroes.map(hero => ({
-            id: hero.id,
-            count: parseInt(hero.count, 10) || 0
-        }))
+        const initialCards = getInitialCardsFromSession(selectedEntryDate)
 
-        // COMPARE SESSION DATES & RESULTS
-        if (playSessionDate !== prevPlaySessionDateRef.current) {
-            console.log("Different date, updating cards: prevPlaySessionDate", prevPlaySessionDateRef.current, "currentPlaySessionDate", playSessionDate)
-
-
-
-
-
-            playSessionGradesRef.current = compareHeroCount(playSessionResults, prevPlaySessionResultsRef.current, playSessionDate, prevPlaySessionDateRef.current)
-            console.log("Hero count differences:", playSessionGradesRef.current)
-
-
-
-
-
-
-
-            prevPlaySessionDateRef.current = playSessionDate
-            prevPlaySessionResultsRef.current = playSessionResults
-            console.log("prevPlaySessionDateRef.current", prevPlaySessionResultsRef.current)
-
-        }
+        handleSessionDateChange(
+            playSessionDate,
+            playSessionResults,
+            prevPlaySessionDateRef,
+            prevPlaySessionResultsRef,
+            playSessionGradesRef
+        )
 
         setCards(initialCards)
-
     }, [isDataLoaded, playSessionResults, playSessionDate])
 
     // Trigger sorting when action flags are true
