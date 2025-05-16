@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/Duck_Sequence/static/js/main.c5169cec.js",
+    "main.js": "/Duck_Sequence/static/js/main.d1b7526d.js",
     "static/js/453.f3213d8d.chunk.js": "/Duck_Sequence/static/js/453.f3213d8d.chunk.js",
     "index.html": "/Duck_Sequence/index.html",
-    "main.c5169cec.js.map": "/Duck_Sequence/static/js/main.c5169cec.js.map",
+    "main.d1b7526d.js.map": "/Duck_Sequence/static/js/main.d1b7526d.js.map",
     "453.f3213d8d.chunk.js.map": "/Duck_Sequence/static/js/453.f3213d8d.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.c5169cec.js"
+    "static/js/main.d1b7526d.js"
   ]
 }
