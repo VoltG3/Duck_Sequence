@@ -128,7 +128,11 @@ export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
             {isAnimationAllowed ? (
                 <>
                     <AnimationContainer>
-                        <CardAnimations animation={animation} />
+                        <CardAnimations
+                            animation={animation}
+                            isActive={ isActive }
+                            id={ id }
+                        />
                     </AnimationContainer>
                     <p>{animation}</p>
                     <p>{id}</p>

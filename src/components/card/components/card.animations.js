@@ -4,7 +4,9 @@ import config from "../../../config"
 import { useDispatch, useSelector } from "react-redux"
 import { storeTargetState } from "../../../redux/actions"
 
-export const CardAnimations = ({ animation }) => {
+export const CardAnimations = ({ animation, isActive, id }) => {
+    const [currentFrame, setCurrentFrame] = useState(0)
+    const [isPlaying, setIsPlaying] = useState(false)
 
     const animationFrames = animation === "animation_level_up"
         ? Object.values(config.level_up)
@@ -12,31 +14,27 @@ export const CardAnimations = ({ animation }) => {
             ? Object.values(config.level_down)
             : Object.values(config.level_equal)
 
-
-    const [currentFrame, setCurrentFrame] = useState(0)
-
-    const playAnimation = useSelector(state => state.target_state.play_animation_level_down)
-    const dispatch = useDispatch()
-
     useEffect(() => {
+        if (!isActive || !animation) return
 
+        let index = 0
+        setCurrentFrame(0)
+        setIsPlaying(true)
 
-        if (playAnimation) {
-            let index = 0
+        const interval = setInterval(() => {
             setCurrentFrame(index)
-            const interval = setInterval(() => {
-                setCurrentFrame(index)
-                index++
+            index++
 
-                if (index >= animationFrames.length) {
-                    clearInterval(interval)
-                    dispatch(storeTargetState("play_animation_level_down", false))
-                }
-            }, 80)
+            if (index >= animationFrames.length) {
+                clearInterval(interval)
+                setIsPlaying(false)
+            }
+        }, 80)
 
-            return () => clearInterval(interval)
-        }
-    }, [playAnimation, dispatch, animation, animationFrames.length])
+        return () => clearInterval(interval)
+    }, [animation, isActive])
+
+    if (!isActive || !isPlaying) return null
 
     return (
         <motion.div
@@ -63,7 +61,7 @@ export const CardAnimations = ({ animation }) => {
                     }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.3 }}
                 />
             ))}
         </motion.div>

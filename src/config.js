@@ -37,6 +37,7 @@ const config = {
         URL_overlay_02: process.env.PUBLIC_URL + "/assets/audio/PLAYCOME.mp3",
     },
     level_up : {
+        URL_level_up_00: process.env.PUBLIC_URL + "/assets/img/empty.png",
         URL_level_up_01: process.env.PUBLIC_URL + "/assets/img/level_up_01.png",
         URL_level_up_02: process.env.PUBLIC_URL + "/assets/img/level_up_02.png",
         URL_level_up_03: process.env.PUBLIC_URL + "/assets/img/level_up_03.png",
@@ -58,8 +59,10 @@ const config = {
         URL_level_up_19: process.env.PUBLIC_URL + "/assets/img/level_up_19.png",
         URL_level_up_20: process.env.PUBLIC_URL + "/assets/img/level_up_20.png",
         URL_level_up_21: process.env.PUBLIC_URL + "/assets/img/level_up_21.png",
+        URL_level_up_22: process.env.PUBLIC_URL + "/assets/img/empty.png",
     },
     level_equal : {
+        URL_level_equal_00: process.env.PUBLIC_URL + "/assets/img/empty.png",
         URL_level_equal_01: process.env.PUBLIC_URL + "/assets/img/level_equal_01.png",
         URL_level_equal_02: process.env.PUBLIC_URL + "/assets/img/level_equal_02.png",
         URL_level_equal_03: process.env.PUBLIC_URL + "/assets/img/level_equal_03.png",
@@ -80,8 +83,10 @@ const config = {
         URL_level_equal_18: process.env.PUBLIC_URL + "/assets/img/level_equal_18.png",
         URL_level_equal_19: process.env.PUBLIC_URL + "/assets/img/level_equal_19.png",
         URL_level_equal_20: process.env.PUBLIC_URL + "/assets/img/level_equal_20.png",
+        URL_level_equal_21: process.env.PUBLIC_URL + "/assets/img/empty.png",
     },
     level_down : {
+        URL_level_down_00: process.env.PUBLIC_URL + "/assets/img/empty.png",
         URL_level_down_01: process.env.PUBLIC_URL + "/assets/img/level_down_01.png",
         URL_level_down_02: process.env.PUBLIC_URL + "/assets/img/level_down_02.png",
         URL_level_down_03: process.env.PUBLIC_URL + "/assets/img/level_down_03.png",
@@ -102,6 +107,7 @@ const config = {
         URL_level_down_18: process.env.PUBLIC_URL + "/assets/img/level_down_18.png",
         URL_level_down_19: process.env.PUBLIC_URL + "/assets/img/level_down_19.png",
         URL_level_down_20: process.env.PUBLIC_URL + "/assets/img/level_down_20.png",
+        URL_level_down_21: process.env.PUBLIC_URL + "/assets/img/empty.png",
     }
 }
 
