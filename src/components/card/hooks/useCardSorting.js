@@ -26,6 +26,7 @@ export const useCardSorting = () => {
     const playSessionGradesRef = useRef([])
 
     const hasMountedRef = useRef(false)
+    const [isAnimating, setIsAnimating] = useState(false)
 
     const handlePrepareSort = useCallback(() => {
         const sorted = getSortedCards(cards)
@@ -33,7 +34,7 @@ export const useCardSorting = () => {
         setCurrentStep(0)
     }, [cards])
 
-    const handleNextStep = useCallback(() => {
+    const handleNextStepManual = useCallback(() => {
         if (!sortedCards.length || currentStep >= sortedCards.length) return
 
         const { targetCard, currentIndex } = getTargetCardInfo(sortedCards, currentStep, cards)
@@ -55,6 +56,29 @@ export const useCardSorting = () => {
             setCurrentStep(prev => prev + 1)
         }
     }, [sortedCards, currentStep, cards, dispatch])
+
+    const handleNextStepAuto = useCallback(() => {
+        if (!sortedCards.length || currentStep >= sortedCards.length || isAnimating) return
+
+        const { targetCard, currentIndex } = getTargetCardInfo(sortedCards, currentStep, cards)
+
+        if (currentIndex !== currentStep) {
+            setIsAnimating(true)
+            setActiveId(targetCard.id)
+
+            const newCards = reorderCards(cards, currentIndex, currentStep)
+            setCards(newCards)
+
+            setTimeout(() => {
+                setActiveId(null)
+                setCurrentStep(prev => prev + 1)
+                setIsAnimating(false)
+            }, 800)
+        } else {
+            setCurrentStep(prev => prev + 1)
+        }
+    }, [sortedCards, currentStep, cards, isAnimating])
+
 
     // Fetch & setup initial cards
     useEffect(() => {
@@ -82,10 +106,20 @@ export const useCardSorting = () => {
     useEffect(() => {
         if (BUTTONActionSortingNext) {
             //handlePrepareSort()
-            handleNextStep()
+            handleNextStepManual()
             dispatch(storeTargetState("sorting_cards_next", false))
         }
-    }, [BUTTONActionSortingNext, handleNextStep, dispatch, handlePrepareSort])
+    }, [BUTTONActionSortingNext, handleNextStepManual, dispatch, handlePrepareSort])
+
+    useEffect(() => {
+        if (!isAnimating && sortedCards.length > 0 && currentStep < sortedCards.length) {
+            const timer = setTimeout(() => {
+                handleNextStepAuto()
+            }, 700)
+
+            return () => clearTimeout(timer)
+        }
+    }, [isAnimating, currentStep, sortedCards, handleNextStepAuto])
 
     return {
         isDataLoaded,
