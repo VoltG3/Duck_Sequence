@@ -112,7 +112,13 @@ export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
                         zIndex: isActive ? 10 : 1
                     }}>
                         <CardName rank={rank} title={title} name={name} />
-                        <ButtonOpenOverlayInfo id={ id } />
+                        <ButtonOpenOverlayInfo
+                            id={ id }
+                            rank={ rank }
+                            name={ name }
+                            title={ title }
+                            count={ count }
+                        />
                     </div>
                 </div>
 

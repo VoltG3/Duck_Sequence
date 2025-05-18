@@ -6,7 +6,6 @@ import { storeTargetState } from "../../../redux/actions"
 
 export const CardAnimations = ({ animation }) => {
 
-
     const animationFrames = animation === "animation_level_up"
         ? Object.values(config.level_up)
         : animation === "animation_level_down"

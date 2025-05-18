@@ -3,13 +3,11 @@ import { useDispatch } from "react-redux"
 import {
     storeSetDataLoaded,
     storeStatistics,
-
-
-   storePlayerData
 } from "../redux/actions"
 
-import { transformPlayerDataNewFields, transformScoresDataNewFields } from "./dataloader.build.fields"
-import { transformScoresDataRankAssigmentPlace, transformScoresDataRankAssigmentTitle } from "./dataloader.build.ranks"
+import { transformScoresDataNewFields } from "./dataloader.build.fields"
+import { transformScoresDataRankAssigment } from "./dataloader.build.ranks"
+import { transformScoresDataRankAssigmentTitles } from "./dataloader.build.titles"
 import {
     transformDataExtractDates,
     transformDataSumCount,
@@ -20,20 +18,13 @@ export const DataLoader = () => {
     // for onloaded *.json files
     const [playerData, setPlayerData] = useState(null)
     const [scoresData, setScoresData] = useState(null)
-
-
     // for *.json transforming
     const [newCompleteStatisticsData, setNewCompleteStatisticsData] = useState(null)
-
-    //const [newStatisticsData, setNewStatisticsData] = useState(null)
-
     const [newFieldScoresData, setNewFieldScoresData] = useState(null)
     const [newAssigmentRankScoresData, setNewAssigmentRankScoresData] = useState(null)
     const [newAssigmentTitleScoresData, setNewAssigmentTitleScoresData] = useState(null)
     // for *.json without changes
     const [newAboutData, setNewAboutData] = useState(null)
-
-
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
@@ -68,11 +59,13 @@ export const DataLoader = () => {
 
                         const newFieldScoresData = transformScoresDataNewFields(scoresJSON)
                         setNewFieldScoresData(newFieldScoresData)
-                        const newAssigmentRankScoresData = transformScoresDataRankAssigmentPlace(newFieldScoresData)
+
+                        const newAssigmentRankScoresData = transformScoresDataRankAssigment(newFieldScoresData)
                         setNewAssigmentRankScoresData(newAssigmentRankScoresData)
-                        const newAssigmentTitleScoresData = transformScoresDataRankAssigmentTitle(newAssigmentRankScoresData)
+
+                        const newAssigmentTitleScoresData = transformScoresDataRankAssigmentTitles(newAssigmentRankScoresData)
                         setNewAssigmentTitleScoresData(newAssigmentTitleScoresData)
-                    // *
+
                     completeStatisticData.push(newAssigmentTitleScoresData)
                     setNewCompleteStatisticsData(completeStatisticData)
 
@@ -104,26 +97,18 @@ export const DataLoader = () => {
         if (scoresData !== null && !isLoading && !error) {
             console.log("[ data loader    ] - fetch :: images.json         ", playerData)
             console.log("[ data loader    ] - fetch :: scores.json         ", scoresData)
-
             console.log("[ data loader    ] -   arr :: statistics new.field", "navigationDates",newCompleteStatisticsData[0])
             console.log("[ data loader    ] -   arr :: statistics new.field", "totalSessions:", newCompleteStatisticsData[1], "totalRounds", newCompleteStatisticsData[2])
             console.log("[ data loader    ] -   arr :: statistics new.field", "scoresData", newFieldScoresData)
             console.log("[ data loader    ] -   arr :: statistics new.rank ", newAssigmentRankScoresData)
             console.log("[ data loader    ] -   arr :: statistics new.title", newAssigmentTitleScoresData)
             console.log("[ data loader    ] - Array :: statistics COMPLETE ", newCompleteStatisticsData)
-
-
-
             console.log("[ data loader    ] -  orig :: aboutData           ", newAboutData)
-
 
             dispatch(storeStatistics("statistics_navigation_dates", newCompleteStatisticsData[0]))
             dispatch(storeStatistics("statistics_total_sessions", newCompleteStatisticsData[1]))
             dispatch(storeStatistics("statistics_total_rounds", newCompleteStatisticsData[2]))
             dispatch(storeStatistics("statistics_player_scores", newCompleteStatisticsData[3]))
-
-
-
             dispatch(storeSetDataLoaded(true))
 
 
@@ -131,17 +116,13 @@ export const DataLoader = () => {
     }, [
         isLoading,
         scoresData,
-
         newFieldScoresData,
         newAssigmentRankScoresData,
         newAssigmentTitleScoresData,
-
         dispatch,
         error,
         newAboutData,
         playerData,
-
-
         newCompleteStatisticsData])
 
     if (error) return <div>Error: {error}</div>

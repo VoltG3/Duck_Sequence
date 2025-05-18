@@ -24,7 +24,7 @@ const initialState = {
         visible_overlay_section_about: false,
         visible_overlay_section_info: false,
         active_date: "default",
-        active_player: "",
+            active_player: "",
         play_audio_button: false,
         play_audio_info: false,
         play_audio_about: false,
@@ -33,6 +33,12 @@ const initialState = {
             set_animation_type_level_up: false,
             set_animation_type_level_down: false,
             set_animation_type_level_equal: false,
+
+        info_target_player_id: "",
+        info_target_player_rank: "",
+        info_target_player_name: "",
+        info_target_player_title: "",
+        info_target_player_count: ""
 
     },
 

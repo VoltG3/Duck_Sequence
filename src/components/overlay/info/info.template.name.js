@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux"
 
-export const InfoTemplateName = ({ playerId, playerSecondName }) => {
-    const targetPlayerName = useSelector(state => state.target_player.target_player_name)
-    const targetPlayerRank = useSelector(state => state.target_player.target_player_rank)
-    const targetPlayerTitle = useSelector(state => state.target_player.target_player_title)
+export const InfoTemplateName = ({ playerSecondName }) => {
+    const targetPlayerId = useSelector(state => state.actions.info_target_player_id)
+    const targetPlayerRank = useSelector(state => state.actions.info_target_player_rank)
+    const targetPlayerName = useSelector(state => state.actions.info_target_player_name)
+    const targetPlayerTitle = useSelector(state => state.actions.info_target_player_title)
 
     const getPrefix = () => {
-        switch(playerId) {
+        switch(targetPlayerId) {
             case "hero_01": return "le"
             case "hero_02": return "von"
             case "hero_03": return "le"
@@ -45,7 +46,7 @@ export const InfoTemplateName = ({ playerId, playerSecondName }) => {
                         targetPlayerRank === "3rd" ? "var(--range--color--03)" :
                                                      "var(--range--color--04)"
                 }}>
-                    { getPrefix(playerId) }{" "}
+                    { getPrefix(targetPlayerId) }{" "}
                 </span>
 
                 { playerSecondName }
