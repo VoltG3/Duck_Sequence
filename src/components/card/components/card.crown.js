@@ -22,7 +22,7 @@ export const CardCrown = ({ rank }) => {
         <div>
             <StyledCardCrown
                 src={getCrown(rank)}
-                alt={"crown"}
+                alt={""}
             />
 
             {/* <p>rank { rank }</p> 1st 2nd 3rd*/}

@@ -19,7 +19,7 @@ const CardAssemblyContainer = styled.div`
     width: auto;  
     height: auto;
     display: inline-block;
-    border: solid 1px black;
+   
     
     // 210 x 402
 `
@@ -134,8 +134,7 @@ export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
                             id={ id }
                         />
                     </AnimationContainer>
-                    <p>{animation}</p>
-                    <p>{id}</p>
+
                 </>
             ) : null}
 
