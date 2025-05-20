@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { useSelector } from "react-redux"
 import config from "../../../config"
-import {useContext} from "react";
-import {DataContext} from "../../../data_context/DataContext";
+import { useContext } from "react";
+import { DataContext } from "../../../data_context/DataContext"
 
 const StyledCardImage = styled.img`
     max-width: 180px;
@@ -27,7 +27,7 @@ export const CardImage = ({ targetPlayerId }) => {
     }
 
 
-    const targetPlayerImage = selectedEntry             // placeholderImg issue
+    const targetPlayerImage = selectedEntry             // placeholder immage issue
         ? process.env.PUBLIC_URL + selectedEntry.img_url
         : config.default.URL_placeholder
 

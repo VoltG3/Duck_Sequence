@@ -28,7 +28,6 @@ export const StyledButtonSettings = styled.div`
         justify-content: center;
         cursor: pointer;
         user-select: none;
-        //border-radius: 6px;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 

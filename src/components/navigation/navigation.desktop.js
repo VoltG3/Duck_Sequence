@@ -2,8 +2,8 @@ import { NavigationDesktopDates } from "./navigation.desktop.dates"
 import { FakeNavigationDates } from "./navigation.desktop.dates.fake"
 import { ButtonOpenOverlayAbout } from "../btn/button.overlay.open.about"
 import { useSelector} from "react-redux"
-import {ButtonSettingsAudio} from "../btn/button.settings.audio";
-import {ButtonSettingsAnimation} from "../btn/button.settings.animation";
+import { ButtonSettingsAudio } from "../btn/button.settings.audio"
+import { ButtonSettingsAnimation } from "../btn/button.settings.animation"
 
 export const NavigationDesktop = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)

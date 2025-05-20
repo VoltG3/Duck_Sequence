@@ -34,7 +34,7 @@ export const transformScoresDataRankAssigment = (data) => {
         return data.map(entry => {
             const { date, heroes } = entry
 
-            // Exclude 'three_times_first' from top 3 calculation
+            // Exclude 'three_times_first' from the top 3 calculation
             const eligibleHeroes = heroes.filter(h => h.rank !== "three_times_first")
             const counts = eligibleHeroes.map(h => parseInt(h.count, 10))
             const uniqueCounts = [...new Set(counts)].sort((a, b) => b - a)
@@ -78,7 +78,7 @@ export const transformScoresDataRankAssigment = (data) => {
     }
 
 
-    // ✅ Processing sequence:
+    // Processing sequence:
     const scoredFirst = scoredRanks(data)                // Assign initial 1st/2nd/3rd ranks
     const withStreak = rankThreeTimesFirst(scoredFirst)  // Replace with 'three_times_first' if 3 consecutive 1st
     const reScored = scoredRanks(withStreak)             // Recalculate ranks excluding 'three_times_first'

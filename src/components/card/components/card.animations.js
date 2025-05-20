@@ -1,10 +1,8 @@
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import config from "../../../config"
-import { useDispatch, useSelector } from "react-redux"
-import { storeTargetState } from "../../../redux/actions"
 
-export const CardAnimations = ({ animation, isActive, id }) => {
+export const CardAnimations = ({ animation, isActive }) => {
     const [currentFrame, setCurrentFrame] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false)
 

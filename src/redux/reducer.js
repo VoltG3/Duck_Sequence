@@ -41,15 +41,6 @@ const initialState = {
         info_target_player_count: ""
 
     },
-
-
-    player_dates: {},
-    player_results: {},
-    player_data: {},
-    player_descriptions: {},
-    target_date: "default",
-
-
     target_state: {
         play_animation_level_up : false,
         play_animation_level_down : false,
@@ -79,7 +70,7 @@ export default function reducer(state = initialState, action) {
             }
 
         case ACTIONS:
-            console.log("[ reducer        ] - ACTIONS                      ", "field:", action.payload.field, "value:", action.payload.value)
+            //console.log("[ reducer        ] - ACTIONS                      ", "field:", action.payload.field, "value:", action.payload.value)
             return {
                 ...state,
                 actions: {
@@ -87,21 +78,6 @@ export default function reducer(state = initialState, action) {
                     [action.payload.field]: action.payload.value,
                 }
             }
-
-
-
-        case PLAYER_DATA:
-            //console.log("[ reducer        ] - PLAYER_DATA          ", action.payload)
-
-            return {
-                ...state,
-                player_data: action.payload
-            }
-
-
-
-
-
 
         case TARGET_STATES:
             //console.log("[ reducer        ] - TARGET_STATES          ", action.payload)
@@ -113,10 +89,6 @@ export default function reducer(state = initialState, action) {
                     [action.payload.field]: action.payload.value,
                 }
             }
-
-
-
-
 
         default:
             return state

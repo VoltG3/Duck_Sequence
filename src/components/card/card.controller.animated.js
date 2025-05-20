@@ -38,7 +38,7 @@ export const CardControllerDynamic = () => {
                             title={hero.title}
                             count={hero.count}
                             rank={hero.rank}
-                            animation={animationEntry?.animation} // <-- Šeit tiek nosūtīta tikai 'animation' vērtība
+                            animation={animationEntry?.animation} // <-- animation value forwarding
                             isActive={card.id === activeId}
                         />
                     </div>

@@ -6,8 +6,8 @@ import { ButtonOverlayCloseInfo } from "../btn/button.overlay.close.info"
 import { useSelector } from "react-redux"
 import { useContext } from "react";
 import { DataContext } from "../../data_context/DataContext"
-import {InfoTemplateName} from "./info/info.template.name";
-import {InfoTemplateAwards} from "./info/info.template.awards";
+import { InfoTemplateName } from "./info/info.template.name"
+import { InfoTemplateAwards } from "./info/info.template.awards"
 
 
 export const OverlayInfo = () => {

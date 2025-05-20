@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {storeActions} from "../../redux/actions"
+import { storeActions } from "../../redux/actions"
 import { useDispatch } from "react-redux"
 
 const StyledButtonDates = styled.button`

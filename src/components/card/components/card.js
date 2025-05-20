@@ -1,27 +1,21 @@
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import config from "../../../config"
-
 import { CardCrown } from "./card.crown"
 import { CardImage } from "./card.image"
 import { CardName } from "./card.name"
 import { CardPoints } from "./card.points"
 import { ButtonOpenOverlayInfo } from "../../btn/button.overlay.open.info"
-
 import { CardAnimations } from "./card.animations"
-import {useSelector} from "react-redux";
-import {useEffect} from "react";
+import { useSelector } from "react-redux";
 
 const CardAssemblyContainer = styled.div`
     position: relative;
-    //max-width: 180px;
-    //max-height: 300px;
     width: auto;  
     height: auto;
     display: inline-block;
-   
     
-    // 210 x 402
+    // actual card size ca. 210 x 402
 `
 
 const AnimationContainer = styled.div`
@@ -33,7 +27,6 @@ const AnimationContainer = styled.div`
     z-index: 50;
     pointer-events: none;
     background-color: transparent;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,8 +46,8 @@ const CardContainer = styled(motion.div)`
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    //width: 180px;
-    //aspect-ratio: 5 / 7;
+    // width: 180px;
+    // aspect-ratio: 5 / 7;
     // 210 x 402
     margin: 10px;
     
@@ -138,6 +131,10 @@ export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
                 </>
             ) : null}
 
+            {/*
+            <p>{ animation }</p>
+            <p>{ id }</p>
+            */}
 
         </CardAssemblyContainer>
     )

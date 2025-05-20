@@ -68,10 +68,11 @@ export const NavigationMobile = () => {
                 animate={{ x: isOpen ? 0 : "100%" }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-                <a href="/public">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
-                <a href="/contact">Contact</a>
+                <p>Missing button About</p>
+                <a href="/public">01.04.2025</a>
+                <a href="/public">02.04.2025</a>
+                <a href="/public">03.04.2025</a>
+                <a href="/public">04.04.2025</a>
             </motion.div>
 
             <button onClick={ toggleMenu } className="burger-icon"><p>☰</p></button>

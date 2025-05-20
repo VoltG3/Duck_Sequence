@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import {storeTargetState} from "../redux/actions";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux"
+import { storeTargetState } from "../redux/actions"
 
 const StyledFooter = styled.div`
     display: flex;
@@ -24,6 +24,13 @@ export default function SectionFooter() {
 
     return (
         <StyledFooter>
+            {/*
+            <button onClick={() => dispatch(storeTargetState("play_animation_level_equal", true)) }>level_equal</button>
+            <button onClick={() => dispatch(storeTargetState("play_animation_level_down", true)) }>level_down</button>
+            <button onClick={() => dispatch(storeTargetState("play_animation_level_up", true)) }>level_up</button>
+            <button onClick={() => dispatch(storeTargetState("sorting_cards", true)) }>FIRST sort</button>
+            <button onClick={() => dispatch(storeTargetState("sorting_cards_next", true)) }>THEN next animaton</button>
+            */}
 
             <p>Self-Sabotage <b><i style={{ color: "yellow" }}>team</i></b>  © 2025 CodeHode</p>
         </StyledFooter>

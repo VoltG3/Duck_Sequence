@@ -2,10 +2,6 @@ import {
     SET_DATA_LOADED,
     STATISTICS,
     ACTIONS,
-
-    PLAYER_DATA,
-
-
     TARGET_STATES,
 } from "./actionTypes"
 
@@ -30,24 +26,6 @@ export const storeActions = (field, value) => {
     }
 }
 
-
-
-
-
-export const storePlayerData = (player_data) => {
-    console.log("[ dispatch   GET ] - palyerData             ", player_data)
-
-    const asObject = {}
-    player_data.forEach(hero => {
-        asObject[hero.id] = hero
-    })
-    return {
-        type: PLAYER_DATA,
-        payload: asObject
-    }
-}
-
-
 export const storeTargetState = (field, value) => {
     console.log("[ dispatch   GET ] - BTN target state field ", field, "value", value)
 
@@ -56,4 +34,3 @@ export const storeTargetState = (field, value) => {
         payload: { field, value }
     }
 }
-
