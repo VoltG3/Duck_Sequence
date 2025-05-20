@@ -4,6 +4,7 @@ import { ButtonOverlayCloseAbout } from "../btn/button.overlay.close.about"
 import { useContext } from "react"
 import { DataContext } from "../../data_context/DataContext"
 import { useSelector } from "react-redux"
+import config from "../../config"
 
 export const OverlayAbout = () => {
     const isDataLoaded = useSelector(state => state.isDataLoaded)
@@ -49,6 +50,33 @@ export const OverlayAbout = () => {
                                </p>
                            )
                        })}
+                   </div>
+
+                   <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", paddingBottom: "calc(var(--space) * 1)" }}>
+                       <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center", width:"auto", height: "auto", }}>
+                           <p>Level Top Up</p>
+                           <img style={{ width:"auto", height: "auto" }} src={config.level_top_up.URL_level_top_up_15} alt="top level up" />
+                       </div>
+
+                       <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center", width:"auto", height: "auto", }}>
+                           <p>Level Up</p>
+                           <img style={{ width:"auto", height: "auto" }} src={config.level_up.URL_level_up_15} alt="top level up" />
+                       </div>
+
+                       <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center", width:"auto", height: "auto", }}>
+                           <p>Level Equal</p>
+                           <img style={{ width:"70px", height: "auto" }} src={config.level_equal.URL_level_equal_15} alt="top level up" />
+                       </div>
+
+                       <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center", width:"auto", height: "auto", }}>
+                           <p>Level Down</p>
+                           <img style={{ width:"auto", height: "auto" }} src={config.level_down.URL_level_down_14} alt="top level up" />
+                       </div>
+
+                       <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center", width:"auto", height: "auto", }}>
+                           <p>Level Top Down</p>
+                           <img style={{ width:"80px", height: "auto" }} src={config.level_top_down.URL_level_top_down_18} alt="top level up" />
+                       </div>
                    </div>
 
                    <div style={{ display: "flex", flexDirection: "row", width:"auto", height: "auto", }}>
