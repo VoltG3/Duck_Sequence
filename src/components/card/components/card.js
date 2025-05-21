@@ -18,7 +18,7 @@ const CardAssemblyContainer = styled.div`
     // actual card size ca. 210 x 402
 `
 
-const AnimationContainer = styled.div`
+const AnimationContainer = styled(motion.div)`
     position: absolute;
     top: 0;
     left: 0;
@@ -72,7 +72,7 @@ export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
                     scale: isActive ? 1.1 : 1,
                     y: isActive ? -30 : 0,
                 }}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
+                transition={{duration: 0.7, ease: "easeInOut"}}
             >
                 {rank !== "" && <CardCrown rank={rank} />}
             </CrownContainer>
@@ -120,7 +120,14 @@ export const Card = ({ id, title, name, count, rank, animation, isActive }) => {
 
             {isAnimationAllowed ? (
                 <>
-                    <AnimationContainer>
+                    <AnimationContainer
+                        layout
+                        animate={{
+                            scale: isActive ? 1.1 : 1,
+                            y: isActive ? -30 : 0,
+                        }}
+                        transition={{duration: 0.7, ease: "easeInOut"}}
+                    >
                         <CardAnimations
                             animation={animation}
                             isActive={ isActive }

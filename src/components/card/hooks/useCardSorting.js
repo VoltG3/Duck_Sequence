@@ -34,6 +34,7 @@ export const useCardSorting = () => {
         setCurrentStep(0)
     }, [cards])
 
+    // Need it ?
     const handleNextStepManual = useCallback(() => {
         if (!sortedCards.length || currentStep >= sortedCards.length) return
 
@@ -63,6 +64,7 @@ export const useCardSorting = () => {
         const { targetCard, currentIndex } = getTargetCardInfo(sortedCards, currentStep, cards)
 
         if (currentIndex !== currentStep) {
+
             setIsAnimating(true)
             setActiveId(targetCard.id)
 
